@@ -1,0 +1,8 @@
+<div class="text-center"  >
+<!--  <img src="{{productList.productImages.URL}}">-->
+  <div *ngFor="let file of productList.productImages" class="mx-auto">
+    <img [src]='file.url' width="100px" height="100px" class="mx-auto" >
+  </div>
+  <p>RM{{productList.product_price}}</p>
+  <p>{{productList.product_category}}</p>
+</div>

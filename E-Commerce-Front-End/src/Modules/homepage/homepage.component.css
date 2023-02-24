@@ -1,0 +1,24 @@
+nz-select {
+  width: 300px;
+}
+
+[nz-carousel-content] {
+  text-align: center;
+  height: 250px;
+  line-height: 160px;
+  background: #364d79;
+  color: #fff;
+  overflow: hidden;
+}
+
+h3 {
+  color: #fff;
+  margin-bottom: 0;
+  user-select: none;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
