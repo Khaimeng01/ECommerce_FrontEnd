@@ -1,0 +1,77 @@
+<div class="h-5/6">
+  <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 " >
+    <div class="grid grid-cols-2 pt-4">
+      <div class=" col-span-1">
+        <div class="text-center mx-auto">
+          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" >
+
+            <!--  Username-->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username" class="text-left">Username</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+                <input nz-input formControlName="username" id="username" placeholder="{{customerDatabase._order_Seller_Username}}"/>
+              </nz-form-control>
+            </nz-form-item>
+
+
+            <!--  PhoneNumber-->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" class="text-left" nzRequired>Phone Number</nz-form-label>
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                [nzValidateStatus]="validateForm.controls['phoneNumber']"
+                nzErrorTip="Please input your phone number!"
+              >
+                <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                  <ng-template #addOnBeforeTemplate>
+                    <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                      <nz-option nzLabel="+60" nzValue="+60"></nz-option>
+                    </nz-select>
+                  </ng-template>
+                  <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+
+            <!--  //Website-->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address" class="text-left">Address</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+                <input nz-input formControlName="address" id="address" />
+              </nz-form-control>
+            </nz-form-item>
+
+
+            <nz-form-item nz-row class="register-area">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6" class="text-right">
+                <button nz-button nzType="primary">Register</button>
+              </nz-form-control>
+            </nz-form-item>
+
+          </form>
+        </div>
+      </div>
+      <div class="grid grid-row-6">
+        <nz-table #basicTable [nzData]="listOfData" [nzFrontPagination]="false">
+          <thead>
+          <tr>
+            <th>No</th>
+            <th>Quantity</th>
+            <th>Product Name</th>
+            <th>Total</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr >
+            <td>1</td>
+            <td>{{orderDetails.quantity}}</td>
+            <td>{{orderDetails.productName}}</td>
+            <td>{{orderDetails.total}}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
+</div>

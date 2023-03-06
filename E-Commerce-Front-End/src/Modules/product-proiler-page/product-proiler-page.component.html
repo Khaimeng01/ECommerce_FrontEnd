@@ -1,0 +1,47 @@
+<div class="overflow-auto pb-4  ">
+  <nz-page-header
+    class="site-page-header"
+    (nzBack)="onBack()"
+    nzBackIcon
+    nzTitle="Title"
+    nzSubtitle="This is a subtitle"
+  ></nz-page-header>
+  <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 overflow-auto h-[31rem]" >
+    <div class="grid grid-cols-2 pt-4">
+      <div class="w-96 h-96 col-span-1">
+        <nz-carousel [nzEffect]="effect">
+          <div nz-carousel-content *ngFor="let index of product[0].productImages">
+            <img [src]='index.url' width="100px" height="100px" class="mx-auto" >
+          </div>
+        </nz-carousel>
+      </div>
+      <div class="grid grid-row-6">
+        <div>
+
+          <p class="text-3xl font-mono font-semibold pb-2">{{product[0].product_name}}</p>
+          <p class="text-base font-light font-sans antialiased">{{product[0].product_description}}</p>
+        </div>
+        <p class="text-2xl font-medium">{{"$"+product[0].product_price}}</p>
+        <p>Product Quanity Counter</p>
+        <div>
+          <button nz-button nzType="primary" (click)="redirectToCheckOut()">Buy now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="mx-auto grid grid-cols-6">-->
+
+<!--  <div class="col-span-1"></div>-->
+<!--  <div class="w-96 h-96 col-span-2">-->
+<!--    <nz-carousel [nzEffect]="effect">-->
+<!--      <div nz-carousel-content *ngFor="let index of array">-->
+<!--        <h3>{{ index }}</h3>-->
+<!--      </div>-->
+<!--    </nz-carousel>-->
+<!--  </div>-->
+<!--  <div class="col-span-3">-->
+
+<!--  </div>-->
+<!--</div>-->

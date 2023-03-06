@@ -4,6 +4,7 @@ import {DataService} from "../../service/data.service";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {first} from "rxjs";
 import {loginCustomer} from "../../classes/loginCustomer";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,38 +17,50 @@ export class LoginComponent implements OnInit {
   public a2!:string;
   private isPresent!:boolean;
   validateForm!: FormGroup;
-  switchValue = false;
+  switchValue:number = 0;
 
-  async submitForm(){
+  submitForm(){
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
-      this.dataService.getLoginDetails(this.validateForm.value.userName,this.validateForm.value.password).subscribe(
-        (response:any)=>{
-          // this.a1 = response;
-          this.a2=response;
-          // console.log(this.a1);
-          console.log(this.a2);
-          if(this.a2.match("Authenticated User")) {
-            console.log("Past_1");
-            // return Promise.resolve(true);
-          }else{
-            // return Promise.resolve(false);
-            // return false;
+      if(this.switchValue==0){
+        this.dataService.getLoginDetails(this.validateForm.value.userName,this.validateForm.value.password).subscribe(
+          (response:any)=>{
+            this.a2=response;
+            if(this.a2.match("Authenticated User")) {
+              console.log("Past_1");
+              sessionStorage.setItem('username',this.validateForm.value.userName);
+              sessionStorage.setItem('role',"Buyer");
+              this.router.navigate(['/homepage'])
+            }else{
+              // return Promise.resolve(false);
+              // return false;
+            }
+          },(error:HttpErrorResponse)=>{
+            alert(error.message);
+            console.log(error.message);
           }
-        },(error:HttpErrorResponse)=>{
-          alert(error.message);
-          console.log(error.message);
-        }
-      )
+        )
+      }else{
+        this.dataService.getSellerLoginDetails(this.validateForm.value.userName,this.validateForm.value.password).subscribe(
+          (response:any)=>{
+            this.a2=response;
+            console.log(this.a2);
+            if(this.a2.match("Authenticated User")) {
+              console.log("Past_1");
+              sessionStorage.setItem('username',this.validateForm.value.userName);
+              sessionStorage.setItem('role',"Seller");
+              this.router.navigate(['/productProfilePage'])
+              return Promise.resolve(true);
+            }else{
+              return Promise.resolve(false);
+            }
+          },(error:HttpErrorResponse)=>{
+            alert(error.message);
+            console.log(error.message);
+          }
+        )
+      }
 
-      // const rankPromise = await this.getLoginDetails(this.validateForm.value.userName,this.validateForm.value.password);
-      //
-      // // const rank  = await rankPromise
-      // if(rankPromise){
-      //   console.log("Past");
-      // }else{
-      //   console.log("Fail");
-      // }
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -59,9 +72,7 @@ export class LoginComponent implements OnInit {
     return true;
   }
 
-
-
-  constructor(private fb: FormBuilder,private dataService:DataService) { }
+  constructor(private fb: FormBuilder,private dataService:DataService,private router:Router) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -73,26 +84,54 @@ export class LoginComponent implements OnInit {
 
   }
 
-  public  getLoginDetails(username:string,password:string):boolean{
-    this.dataService.getLoginDetails(username,password).subscribe(
-      (response:any)=>{
-       // this.a1 = response;
-       this.a2=response;
-       // console.log(this.a1);
-        console.log(this.a2);
-        if(this.a2.match("Authenticated User")) {
-          console.log("Past_1");
-          return Promise.resolve(true);
-        }else{
-          return Promise.resolve(false);
-          // return false;
-        }
-      },(error:HttpErrorResponse)=>{
-        alert(error.message);
-        console.log(error.message);
-      }
-    )
-    return false;
+  // public  getLoginDetails(username:string,password:string):boolean{
+  //
+  //   if(this.switchValue=0){
+  //     this.dataService.getLoginDetails(username,password).subscribe(
+  //       (response:any)=>{
+  //         this.a2=response;
+  //         console.log(this.a2);
+  //         if(this.a2.match("Authenticated User")) {
+  //           console.log("Past_1");
+  //           sessionStorage.setItem('username',username);
+  //           sessionStorage.setItem('role',"Buyer");
+  //           this.router.navigate(['/productProfilePage'])
+  //           return Promise.resolve(true);
+  //         }else{
+  //           return Promise.resolve(false);
+  //         }
+  //       },(error:HttpErrorResponse)=>{
+  //         alert(error.message);
+  //         console.log(error.message);
+  //       }
+  //     )
+  //   }else{
+  //     this.dataService.getSellerLoginDetails(username, password).subscribe(
+  //       (response:any)=>{
+  //         this.a2=response;
+  //         console.log(this.a2);
+  //         if(this.a2.match("Authenticated User")) {
+  //           console.log("Past_1");
+  //           sessionStorage.setItem('username',username);
+  //           sessionStorage.setItem('role',"Seller");
+  //           this.router.navigate(['/productProfilePage'])
+  //           return Promise.resolve(true);
+  //         }else{
+  //           return Promise.resolve(false);
+  //         }
+  //       },(error:HttpErrorResponse)=>{
+  //         alert(error.message);
+  //         console.log(error.message);
+  //       }
+  //     )
+  //   }
+  //   return false;
+  // }
+
+  options = ['Buyer', 'Selller'];
+  handleIndexChange(e: number): void {
+    console.log(e);
+    this.switchValue=e;
   }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import {DomSanitizer} from "@angular/platform-browser";
-import {ProductsDetails} from "../classes/productsDetails";
+import {ProductsDetails, ProductsDetails2} from "../classes/productsDetails";
 import {FileHandle} from "../classes/fileHandle";
 
 @Injectable({
@@ -12,7 +12,7 @@ export class imageProcessingService{
 
   constructor(private sanitizer:DomSanitizer) { }
 
-  public createImages(product:ProductsDetails){
+  public createImages(product:ProductsDetails2){
     const productImages:any[] = product.productImages;
 
     const productImagesToFileHandle:FileHandle[]=[];

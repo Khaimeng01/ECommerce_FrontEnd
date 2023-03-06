@@ -51,3 +51,11 @@ nz-footer {
   margin: auto;
   padding-bottom: 10px;
 }
+
+code-box-demo {
+  overflow-x: auto;
+}
+
+.code-box-demo .ant-segmented {
+  margin-bottom: 10px;
+}

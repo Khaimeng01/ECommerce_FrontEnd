@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from "../../service/product.service";
-import {ProductsDetails} from "../../classes/productsDetails";
+import {ProductsDetails, ProductsDetails2} from "../../classes/productsDetails";
 import {map} from "rxjs";
 import {imageProcessingService} from "../../service/imageProcessingService";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-homepage',
@@ -11,18 +12,23 @@ import {imageProcessingService} from "../../service/imageProcessingService";
 })
 export class ProductHomepageComponent implements OnInit {
 
-  product!:ProductsDetails[]
+  product!:ProductsDetails2[]
+  test!:any[];
 
-  constructor(private productService:ProductService,private imageProcessingService:imageProcessingService) { }
+  constructor(private productService:ProductService,
+              private imageProcessingService:imageProcessingService,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.productService.getProducts()
       .pipe(
-        map((x:ProductsDetails[],i)=> x.map((product:ProductsDetails)=> this.imageProcessingService.createImages(product))))
-      .subscribe((response:ProductsDetails[])=>
+        map((x:ProductsDetails2[],i)=> x.map((product:ProductsDetails2)=> this.imageProcessingService.createImages(product))))
+      .subscribe((response:ProductsDetails2[])=>
       {
+        console.log(response)
         this.product= response;
-        console.log(this.product);
+        this.test=response;
+
       }
     )
   }
@@ -39,5 +45,11 @@ export class ProductHomepageComponent implements OnInit {
     { label: 'Price: Low to High', value: 'Price: Low to High' },
     { label: 'Price: High to Low', value: 'Price: High to Low' },
   ];
+
+  productProfilePage(product_ID: bigint){
+    console.log(product_ID);
+    this.router.navigate(['/productProfilePage'])
+    // this.router.navigate('/123', { state: { product_ID: product_ID } });
+  }
 
 }

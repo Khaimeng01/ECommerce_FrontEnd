@@ -1,0 +1,23 @@
+[nz-carousel-content] {
+  text-align: center;
+  height: 80px;
+  width:40px;
+  line-height: 160px;
+  background: #364d79;
+  color: #fff;
+  overflow: hidden;
+}
+
+h3 {
+  color: #fff;
+  margin-bottom: 0;
+  user-select: none;
+}
+
+.center {
+  margin: auto;
+  width: 70%;
+  /*height:80%;*/
+  border: 3px orangered;
+  /*padding: 10px;*/
+}

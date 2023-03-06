@@ -22,6 +22,12 @@ export class DataService {
     return this.http.get<any>('http://localhost:8081/api/a1/get25');
   }
 
+  public getSellerLoginDetails(userName:string,password:string):Observable<any>{
+    let params = new HttpParams().append('seller_username',userName);
+    params=params.append('seller_password"',password);
+    return this.http.get('http://localhost:8081/api/cs/dataman/get25',{params,responseType:'text'});
+  }
+
   public registerCustomer(customerDetails:loginCustomer):Observable<any>{
     const headers = { 'content-type': 'application/json'}
     console.log(customerDetails);

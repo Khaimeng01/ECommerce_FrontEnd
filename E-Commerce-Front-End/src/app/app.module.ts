@@ -29,6 +29,13 @@ import { RegisterProductComponent } from '../Modules/register-product/register-p
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
 import {NzRadioModule} from "ng-zorro-antd/radio";
+import { ProductProilerPageComponent } from '../Modules/product-proiler-page/product-proiler-page.component';
+import {NzPageHeaderModule} from "ng-zorro-antd/page-header";
+import { CheckOutPageComponent } from '../Modules/check-out-page/check-out-page.component';
+import {NzSegmentedModule} from "ng-zorro-antd/segmented";
+import {NzTableModule} from "ng-zorro-antd/table";
+import { HeaderComponent } from '../Modules/header&footer/header/header.component';
+import { FooterComponent } from '../Modules/header&footer/footer/footer.component';
 
 
 
@@ -43,28 +50,35 @@ registerLocaleData(en);
     ProductBoxComponent,
     ProductHomepageComponent,
     RegisterProductComponent,
+    ProductProilerPageComponent,
+    CheckOutPageComponent,
+    HeaderComponent,
+    FooterComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    NzLayoutModule,
-    NzGridModule,
-    NzInputModule,
-    ReactiveFormsModule,
-    NzButtonModule,
-    NzFormModule,
-    NzSelectModule,
-    NzCheckboxModule,
-    NzCardModule,
-    NzCarouselModule,
-    NzDividerModule,
-    NzSwitchModule,
-    NzRadioModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        NzLayoutModule,
+        NzGridModule,
+        NzInputModule,
+        ReactiveFormsModule,
+        NzButtonModule,
+        NzFormModule,
+        NzSelectModule,
+        NzCheckboxModule,
+        NzCardModule,
+        NzCarouselModule,
+        NzDividerModule,
+        NzSwitchModule,
+        NzRadioModule,
+        NzPageHeaderModule,
+        NzSegmentedModule,
+        NzTableModule,
+    ],
   providers: [{ provide: NZ_I18N, useValue: en_US },DataService],
   bootstrap: [AppComponent]
 })

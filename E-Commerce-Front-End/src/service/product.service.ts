@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {loginCustomer} from "../classes/loginCustomer";
-import {ProductsDetails} from "../classes/productsDetails";
+import {ProductsDetails, ProductsDetails2} from "../classes/productsDetails";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,13 @@ export class ProductService {
     return this.http.post<any>('http://localhost:8081/api/products/addNewProduct',product);
   }
 
-  public getProducts():Observable<ProductsDetails[]>{
-    return this.http.get<ProductsDetails[]>('http://localhost:8081/api/products/getAllProducts');
+  public getProducts():Observable<ProductsDetails2[]>{
+    return this.http.get<ProductsDetails2[]>('http://localhost:8081/api/products/getAllProducts');
+  }
+
+  public getSpecifcProduct(productId:bigint):Observable<ProductsDetails2[]>{
+    let params = new HttpParams().append('id_product',productId.toString());
+     return this.http.get<ProductsDetails2[]>('http://localhost:8081/api/products/getProduct',{params});
   }
 
 }
