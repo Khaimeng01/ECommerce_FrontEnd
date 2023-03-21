@@ -1,5 +1,5 @@
 
-<div class="">
+<div class="py-6 ">
   <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 " >
     <div class="grid grid-cols-2 ">
 
@@ -8,11 +8,11 @@
         <img src="../../assets/images/pexels-cottonbro-studio-5076516.jpg" class="max-w-[23rem] 2xl:max-w-[25.1rem] overflow-hidden  " >
       </div>
 
-      <div class="grid grid-rows-5 justify-around items-end">
-        <div class="row-span-3 pt-24">
+      <div class="grid grid-rows-3 content-center max-h-[32rem]  ">
+        <div class="row-span-1 ">
 
           <!--        Switch-->
-          <div class="text-right pb-4 ">
+          <div class="text-right py-4 pr-4  ">
             <!--          <nz-switch [(ngModel)]="switchValue" ></nz-switch>-->
             <nz-segmented [nzOptions]="options" (nzValueChange)="handleIndexChange($event)"></nz-segmented>
           </div>
@@ -49,9 +49,8 @@
             </div>
 
             <div class="text-center text-bold">
-              <a routerLink="/register" class="text-center">Don't have an Account? Sign Up Now!</a>
+              <a routerLink="/register" class="text-center">Don't have an Account? Sign Up Now !</a>
             </div>
-
 
           </form>
         </div>

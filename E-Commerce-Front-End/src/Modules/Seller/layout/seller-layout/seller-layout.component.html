@@ -1,0 +1,54 @@
+<div class="">
+  <nz-layout class="">
+    <nz-sider nzCollapsible nzWidth="200px" [nzTrigger]="null">
+      <!--    <div class="logo"></div>-->
+      <ul nz-menu nzTheme="dark" nzMode="inline">
+        <li nz-menu-item>
+          <span nz-icon nzType="user" class="pr-2"></span>
+          <a routerLink="accountManagement">Account Management</a>
+        </li>
+        <li nz-menu-item>
+          <span nz-icon nzType="shopping-cart" class="pr-2"></span>
+          <a routerLink="sellerOrderHistory">View Order</a>
+        </li>
+        <li nz-submenu nzOpen nzTitle="Manage Product" nzIcon="dropbox" nzTheme="outline">
+          <ul>
+            <li nz-menu-item nzSelected>
+              <a routerLink="registerProductComponent">
+                Add Product
+              </a>
+            </li>
+            <li nz-menu-item>
+              <a>
+                Edit Product Details
+              </a>
+            </li>
+            <li nz-menu-item>
+              <a>
+                Delete Product
+              </a>
+            </li>
+            <li nz-menu-item>
+              <a routerLink="sellerProductTableView">
+                View Product Table
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout>
+      <nz-header class="bg-[#f0f2f5]"></nz-header>
+      <nz-content>
+        <nz-breadcrumb>
+          <!--        <nz-breadcrumb-item>User</nz-breadcrumb-item>-->
+          <!--        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>-->
+        </nz-breadcrumb>
+        <div class="inner-content w-3/4 mx-auto ">
+          <router-outlet></router-outlet>
+        </div>
+      </nz-content>
+      <nz-footer></nz-footer>
+    </nz-layout>
+  </nz-layout>
+</div>

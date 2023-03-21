@@ -1,109 +1,90 @@
 <header>
-  <div class="navbar-light bg-teal-300  " *ngIf="!loggedIn">
+  <div class="navbar-light bg-teal-300  ">
     <div class="mx-4 ">
       <nav class="navbar navbar-expand-lg navbar-light  bg-teal-300 grid grid-cols-12">
 
         <!--        Logo-->
-        <a class="navbar-brand " href="#">CryptoCart</a>
+        <ng-container *ngIf="userAccountSession.userRole === 'Buyer' || !loggedIn; else sellerLayout">
+          <a class="navbar-brand " href="#">CryptoCart</a>
 
-        <!--        Products-->
-        <a class=" col-span-9" href="productHomepage">Products</a>
+          <!--        Products-->
+          <a class="col-span-9" href="productHomepage">Products</a>
+        </ng-container>
 
-        <!--        AboutUs-->
+        <ng-container *ngIf="!loggedIn; else LoggedIn">
+          <a routerLink="/login">
+            <span class="material-symbols-outlined text-3xl">account_circle</span>
+          </a>
+        </ng-container>
 
-        <!--    <a class="navbar-brand " href="#">Login</a>-->
-        <a routerLink="/login">
-          <span class="material-symbols-outlined text-3xl">account_circle</span>
-        </a>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ">
-            <div>
-              <li class="nav-item active mr-auto">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-              </li>
-            </div>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-
-            <li class="nav-item">
-              <p>awa</p>
-            </li>
-          </ul>
-        </div>
       </nav>
     </div>
   </div>
-
-  <div class="navbar-light bg-teal-300 " *ngIf="loggedIn" >
-    <div class="mx-4 ">
-      <nav class="navbar navbar-expand-lg navbar-light  bg-teal-300 grid grid-cols-12">
-
-        <!--        Logo-->
-        <a class="navbar-brand " href="#">CryptoCart</a>
-
-        <!--        Products-->
-        <a class=" col-span-9" href="productHomepage">Products</a>
-
-        <!--        AboutUs-->
-
-        <!--    <a class="navbar-brand " href="#">Login</a>-->
-        <a routerLink="/login">
-<!--          <span class="material-symbols-outlined text-3xl">account_circle</span>-->
-          <p>{{userAccountSession.username}}</p>
-        </a>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ">
-            <div>
-              <li class="nav-item active mr-auto">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-              </li>
-            </div>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-
-            <li class="nav-item">
-              <p>awa</p>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </div>
-
 </header>
+
+<ng-template #LoggedIn>
+  <a nz-dropdown [nzDropdownMenu]="menu">
+    <p>{{userAccountSession.username}}</p>
+  </a>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+      <ng-container *ngIf="userAccountSession.userRole === 'Buyer'">
+        <li nz-menu-item>
+          <a [routerLink]="['profileManagementLayout', 'accountManagement']">Account Management</a>
+        </li>
+
+        <li nz-menu-item>
+          <a [routerLink]="['profileManagementLayout','pastOrderHistory']">
+            Past Order History
+          </a>
+        </li>
+      </ng-container>
+
+<!--      <li nz-menu-item>3rd menu item</li>-->
+
+      <li nz-menu-item nzDanger>
+        <a (click)="loggedOut()">Log out</a>
+      </li>
+    </ul>
+  </nz-dropdown-menu>
+</ng-template>
+
+<ng-template #sellerLayout>
+  <a class="navbar-brand " href="sellerLayout">CryptoCart</a>
+  <a class=" col-span-9" href="productHomepage">Test 1</a>
+</ng-template>
+
+
+
+<!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--  <ul class="navbar-nav ">-->
+<!--    <div>-->
+<!--      <li class="nav-item active mr-auto">-->
+<!--        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+<!--      </li>-->
+<!--    </div>-->
+
+<!--    <li class="nav-item">-->
+<!--      <a class="nav-link" href="#">Link</a>-->
+<!--    </li>-->
+<!--    <li class="nav-item dropdown">-->
+<!--      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--        Dropdown-->
+<!--      </a>-->
+<!--      <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--        <a class="dropdown-item" href="#">Action</a>-->
+<!--        <a class="dropdown-item" href="#">Another action</a>-->
+<!--        <div class="dropdown-divider"></div>-->
+<!--        <a class="dropdown-item" href="#">Something else here</a>-->
+<!--      </div>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item">-->
+<!--      <a class="nav-link disabled" href="#">Disabled</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item">-->
+<!--      <p>awa</p>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</div>-->

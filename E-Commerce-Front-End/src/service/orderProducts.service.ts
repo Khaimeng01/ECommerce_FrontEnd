@@ -27,12 +27,12 @@ export class OrderProductsService {
 
   public getOrderBuyerDetails(customer_username:string):Observable<any>{
     let params = new HttpParams().append('customer_username',customer_username);
-    return this.http.get<any>('http://localhost:8081/api/order/get',{params});
+    return this.http.get<any>('http://localhost:8081/api/order/getBuyer',{params});
   }
 
   public registerCustomerOrder(orderDetails:orderDetailsToAPI):Observable<any>{
     const body=JSON.stringify(orderDetails);
-    return this.http.post('http://localhost:8081/api/cs/dataman/post',orderDetails);
+    return this.http.post('http://localhost:8081/api/order/post',orderDetails);
   }
 
 

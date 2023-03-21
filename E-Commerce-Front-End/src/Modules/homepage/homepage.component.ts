@@ -6,6 +6,7 @@ import {ProductsDetails} from "../../classes/productsDetails";
 import {ProductService} from "../../service/product.service";
 import {FileHandle} from "../../classes/fileHandle";
 import {DomSanitizer} from "@angular/platform-browser";
+import {TransactionService} from "../../service/transaction.service";
 
 @Component({
   selector: 'app-homepage',
@@ -36,7 +37,7 @@ export class HomepageComponent implements OnInit {
     return formData;
   }
 
-  constructor(private fb: FormBuilder,private productService:ProductService,private sanitizer:DomSanitizer) {}
+  constructor(private fb: FormBuilder,private productService:ProductService,private sanitizer:DomSanitizer,private service:TransactionService) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -61,6 +62,17 @@ export class HomepageComponent implements OnInit {
 
   array = [1, 2, 3, 4];
 
+  private formData = { addressTo: '', amount: '', keyword: '', message: '' };
 
+  task1() {
+    this.service.connectWallet()
+  }
 
+  task2() {
+    this.formData.addressTo="0xB80ef9e783F06DADDE4d1bbd7B461D1c288250F1";
+    this.formData.amount="0.000001";
+    this.formData.keyword="test";
+    this.formData.message="test";
+    this.service.sendTransaction(this.formData);
+  }
 }

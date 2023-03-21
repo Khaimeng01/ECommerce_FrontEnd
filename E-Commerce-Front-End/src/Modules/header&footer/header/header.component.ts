@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
   userAccountSession:any={
     username:"",
     userRole:""
@@ -16,9 +17,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     if(sessionStorage.getItem('username')!=null){
-      console.log("First"+this.loggedIn);
       this.loggedIn = true;
-      console.log("After"+this.loggedIn);
       this.userAccountSession.username= sessionStorage.getItem('username');
       this.userAccountSession.userRole= sessionStorage.getItem('role');
     }else{
@@ -26,4 +25,21 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  loggedOut() {
+    sessionStorage.clear();
+    this.loggedIn = false;
+    this.router.navigateByUrl('/homepage', { skipLocationChange: false, replaceUrl: true }).then(() => {
+      window.location.reload();
+    });
+  }
+
+  async checkAccountStatus(): Promise<void>{
+    if(sessionStorage.getItem('username')!=null){
+      this.loggedIn = true;
+      this.userAccountSession.username= sessionStorage.getItem('username');
+      this.userAccountSession.userRole= sessionStorage.getItem('role');
+    }else{
+      this.loggedIn = false;
+    }
+  }
 }

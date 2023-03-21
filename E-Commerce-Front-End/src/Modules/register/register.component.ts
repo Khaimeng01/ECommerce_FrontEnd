@@ -11,11 +11,47 @@ import {DataService} from "../../service/data.service";
 })
 export class RegisterComponent implements OnInit {
 
-  validateForm!: FormGroup;
-  captchaTooltipIcon: NzFormTooltipIcon = {
-    type: 'info-circle',
-    theme: 'twotone'
-  };
+    validateForm!: FormGroup;
+    sellerValidateForm!: FormGroup;
+    captchaTooltipIcon: NzFormTooltipIcon = {
+      type: 'info-circle',
+      theme: 'twotone'
+    };
+    switchValue:number=1;
+
+
+
+  constructor(private fb: FormBuilder,private dataService:DataService) {}
+
+  ngOnInit(): void {
+    if(this.switchValue == 0){
+      this.validateForm = this.fb.group({
+        username: [null, [Validators.required]],
+        email: [null, [Validators.email, Validators.required]],
+        password: [null, [Validators.required]],
+        phoneNumberPrefix: ['+86'],
+        phoneNumber: [null, [Validators.required]],
+        address: [null, [Validators.required]],
+        agree: [false]
+      });
+    }else{
+      this.sellerValidateForm = this.fb.group({
+        sellerUsername: [null, [Validators.required]],
+        sellerEmail: [null, [Validators.email, Validators.required]],
+        sellerPassword: [null, [Validators.required]],
+        sellerPhoneNumberPrefix: ['+86'],
+        sellerPhoneNumber: [null, [Validators.required]],
+        sellerAddress: [null, [Validators.required]],
+        sellerWalletAddress:[null,[Validators.required]],
+        sellerAgree: [false]
+      });
+    }
+  }
+  options = ['Buyer', 'Seller'];
+  handleIndexChange(e: number): void {
+    console.log(e);
+    this.switchValue=e;
+  }
 
   submitForm(): void {
     if (this.validateForm.valid) {
@@ -35,8 +71,6 @@ export class RegisterComponent implements OnInit {
         {console.warn(object_name)}
       )
 
-
-
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -45,36 +79,6 @@ export class RegisterComponent implements OnInit {
         }
       });
     }
-  }
-
-  // updateConfirmValidator(): void {
-  //   /** wait for refresh value */
-  //   Promise.resolve().then(() => this.validateForm.controls['checkPassword'].updateValueAndValidity());
-  // }
-  //
-  // confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
-  //   if (!control.value) {
-  //     return { required: true };
-  //   } else if (control.value !== this.validateForm.controls['password'].value) {
-  //     return { confirm: true, error: true };
-  //   }
-  //   return {};
-  // };
-
-
-
-  constructor(private fb: FormBuilder,private dataService:DataService) {}
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
-      email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      address: [null, [Validators.required]],
-      agree: [false]
-    });
   }
 
 }

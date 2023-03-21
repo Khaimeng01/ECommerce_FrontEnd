@@ -1,0 +1,159 @@
+<div>
+  <nz-page-header
+    class="site-page-header" (nzBack)="onBack()" nzBackIcon nzTitle="Account Settings"
+  ></nz-page-header>
+  <hr>
+  <div class="pt-4 grid grid-rows-2 gap-y-2">
+    <h1 class="text-xl">User Information</h1>
+    <p>Here you can edit your account Information for yourself.The changes will be display</p>
+  </div>
+  <div *ngIf="userAccountSession.userRole=='Buyer'; else sellerForm" class="pt-4">
+  <form nz-form [formGroup]="buyerValidateForm" (ngSubmit)="submitForm()" [nzLayout] ="'vertical'" >
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username" class="text-left">Username</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+        <input nz-input formControlName="username" id="username" class="w-96"  />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email" class="text-left">E-mail</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <input nz-input formControlName="email" id="email" class="w-96" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" class="text-left" nzRequired>Password</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+        <input
+          nz-input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="w-96"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" class="text-left" nzRequired>Phone Number</nz-form-label>
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        [nzValidateStatus]="buyerValidateForm.controls['phoneNumber']"
+        nzErrorTip="Please input your phone number!"
+
+      >
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+          <ng-template #addOnBeforeTemplate>
+            <nz-select formControlName="phoneNumberPrefix" class="phone-select w-80" >
+              <nz-option class="test w-80" nzLabel="+60" nzValue="+86"></nz-option>
+            </nz-select>
+          </ng-template>
+          <input class="w-80" formControlName="phoneNumber" id="'phoneNumber'" nz-input  />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address" class="text-left">Address</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+        <input nz-input formControlName="address" id="address" class="w-96" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6" class="text-left">
+        <button nz-button nzType="primary">Edit Details</button>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+</div>
+
+<!--  <div *ngIf="!userAccountSession.userRole == 'Buyer'">-->
+<!--    -->
+<!--  </div>-->
+</div>
+
+<ng-template #sellerForm>
+  <form  nz-form [formGroup]="sellerValidateForm" (ngSubmit)="sellerSubmitForm()" [nzLayout] ="'vertical'" >
+
+    <!--  Username-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerUsername" class="text-left">Username</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+        <input nz-input formControlName="sellerUsername" id="sellerUsername" class="w-80" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <!--  //Email-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerEmail" class="text-left">E-mail</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <input nz-input formControlName="sellerEmail" id="sellerEmail" class="w-80" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <!--  //Password-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPassword" class="text-left" nzRequired>Password</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+        <input
+          nz-input
+          type="password"
+          id="sellerPassword"
+          formControlName="sellerPassword"
+          class="w-80"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <!--  PhoneNumber-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPhoneNumber" class="text-left" nzRequired>Phone Number</nz-form-label>
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        [nzValidateStatus]="sellerValidateForm.controls['sellerPhoneNumber']"
+        nzErrorTip="Please input your phone number!"
+
+      >
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+          <ng-template #addOnBeforeTemplate>
+            <nz-select formControlName="sellerPhoneNumberPrefix" class="phone-select ">
+              <nz-option nzLabel="+60" nzValue="+86"></nz-option>
+            </nz-select>
+          </ng-template>
+          <input class="w-80" formControlName="sellerPhoneNumber" id="'sellerPhoneNumber'" nz-input  />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!--  //Address-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerAddress" class="text-left">Address</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+        <input nz-input formControlName="sellerAddress" id="sellerAddress" class="w-80" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerWalletAddress" class="text-left">Wallet Address</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Wallet Address">
+        <input nz-input formControlName="sellerWalletAddress" id="sellerWalletAddress" class="w-80" />
+      </nz-form-control>
+    </nz-form-item>
+
+
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6" class="text-right">
+        <button nz-button nzType="primary">Register</button>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+</ng-template>

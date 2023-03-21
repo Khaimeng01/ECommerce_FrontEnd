@@ -9,6 +9,21 @@ import {ProductProilerPageComponent} from "../Modules/product-proiler-page/produ
 import {CheckOutPageComponent} from "../Modules/check-out-page/check-out-page.component";
 import {AuthGuardGuard} from "../guards/auth-guard.guard";
 
+import {ProfileManagementLayoutComponent} from "../Modules/profile-management-layout/profile-management-layout.component";
+import {
+  ProfileAccountManagementComponent
+} from "../Modules/profile/profile-account-management/profile-account-management.component";
+import {
+  ProfilePastOrderHistoryComponent
+} from "../Modules/profile-past-order-history/profile-past-order-history.component";
+import {SellerLayoutComponent} from "../Modules/Seller/layout/seller-layout/seller-layout.component";
+import {SellerHomepageComponent} from "../Modules/Seller/seller-homepage/seller-homepage.component";
+import {
+  SellerProductTableViewComponent
+} from "../Modules/Seller/seller-product-table-view/seller-product-table-view.component";
+import {SellerOrderHistoryComponent} from "../Modules/Seller/seller-order-history/seller-order-history.component";
+
+
 const routes: Routes = [
   // {path:'',redirectTo:'/',pathMatch:'full'}
   {path:'',redirectTo:'/homepage',pathMatch:'full'},
@@ -16,9 +31,25 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'homepage',component:HomepageComponent},
   {path:'productHomepage',component:ProductHomepageComponent},
-  {path:'registerProductComponent',component:RegisterProductComponent},
   {path:'productProfilePage/:id',component:ProductProilerPageComponent},
-  {path:'checkOutPage',component:CheckOutPageComponent}
+  {path:'registerProductComponent',component:RegisterProductComponent},
+  {path:'checkOutPage',component:CheckOutPageComponent},
+  {path:'profileManagementLayout',component:ProfileManagementLayoutComponent,
+  children:[
+    { path:'accountManagement',component:ProfileAccountManagementComponent},
+    {path:'pastOrderHistory',component:ProfilePastOrderHistoryComponent}
+  ]},
+  {path: 'sellerLayout', component: SellerLayoutComponent,
+   children:[
+     {path:'sellerHomepage',component:SellerHomepageComponent},
+     {path:'accountManagement',component:ProfileAccountManagementComponent},
+     {path:'registerProductComponent',component:RegisterProductComponent},
+     {path:'sellerProductTableView',component: SellerProductTableViewComponent},
+     {path:'sellerOrderHistory',component: SellerOrderHistoryComponent},
+     {path:'',component: SellerHomepageComponent},
+   ]
+  }
+
 ];
 
 @NgModule({

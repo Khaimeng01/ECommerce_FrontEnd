@@ -30,4 +30,15 @@ export class ProductService {
      return this.http.get<ProductsDetails2[]>('http://localhost:8081/api/products/getProduct',{params});
   }
 
+  public getSpecificProductFromSeller(sellerName:string):Observable<ProductsDetails2[]>{
+    let params = new HttpParams().append('product_owner',sellerName);
+    return  this.http.get<ProductsDetails2[]>('http://localhost:8081/api/products/getProduct/FS',{params});
+  }
+
+  public deleteProduct(id_product:bigint):Observable<any>{
+    let params = new HttpParams().append('id_product',id_product.toString());
+    return  this.http.delete('http://localhost:8081/api/products/deleteProduct',{params,responseType:'text'});
+
+  }
+
 }

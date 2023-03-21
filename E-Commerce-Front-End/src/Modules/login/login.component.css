@@ -59,3 +59,7 @@ code-box-demo {
 .code-box-demo .ant-segmented {
   margin-bottom: 10px;
 }
+
+[nz-button] {
+  margin-right: 8px;
+}

@@ -4,6 +4,7 @@ import {ProductsDetails, ProductsDetails2} from "../../classes/productsDetails";
 import {map} from "rxjs";
 import {imageProcessingService} from "../../service/imageProcessingService";
 import {Router} from "@angular/router";
+import {TransactionService} from "../../service/transaction.service";
 
 @Component({
   selector: 'app-product-homepage',
@@ -17,7 +18,8 @@ export class ProductHomepageComponent implements OnInit {
 
   constructor(private productService:ProductService,
               private imageProcessingService:imageProcessingService,
-              private router:Router) { }
+              private router:Router,
+              private transcationService:TransactionService) { }
 
   ngOnInit(): void {
     this.productService.getProducts()
@@ -52,4 +54,7 @@ export class ProductHomepageComponent implements OnInit {
     // this.router.navigate('/123', { state: { product_ID: product_ID } });
   }
 
+  button1() {
+    this.transcationService.printOut();
+  }
 }

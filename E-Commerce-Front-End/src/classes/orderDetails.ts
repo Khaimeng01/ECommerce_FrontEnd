@@ -6,24 +6,52 @@ export class  orderBuyerDetails{
 }
 
 export class  orderDetails{
-  public product_Id!:bigint;
+  public product_id!:bigint;
   public productName!: string;
   public orderSellerUsername!:string;
   public quantity!: number;
   public productPrice!:number;
   public total!: number;
+  public orderSellerAddress!:string;
 }
 
 export class orderDetailsToAPI{
-  private product_Id!:number
-  private order_productquantity!:number
-  private priceamount!:number
-  private order_buyer_username!:string
-  private order_seller_username!:string
-  private order_delivery_address!:string
-  private order_buyer_contact_number!:string
-  private order_description!:string
-  private order_status!:string
+  public product_id!:bigint;
+  public order_date!:Date;
+  public order_productquantity!:number
+  public order_priceamount!:number
+  public order_buyer_username!:string
+  public order_seller_username!:string
+  public order_delivery_address!:string
+  public order_buyer_contact_number!:string
+  public order_description!:string
+  public order_status!:string
+  public order_transaction_record!:string
+}
+
+export class customer_orderPastHistory{
+
+  public id_order!:number;
+  public order_date!:Date;
+  public product_id!:bigint;
+  public order_priceamount!:number
+  public order_seller_username!:string
+  public order_description!:string
+  public order_status!:string
+  public order_transaction_record!:string
+}
+
+export class seller_orderHistory{
+
+  public id_order!:number;
+  public order_date!:Date;
+  public product_id!:bigint;
+  public order_priceamount!:number
+  public order_seller_username!:string
+  public order_description!:string
+  public order_status!:string
+  public order_transaction_record!:string
+  public  order_buyer_username!:string
 }
 
 

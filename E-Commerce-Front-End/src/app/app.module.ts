@@ -36,6 +36,23 @@ import {NzSegmentedModule} from "ng-zorro-antd/segmented";
 import {NzTableModule} from "ng-zorro-antd/table";
 import { HeaderComponent } from '../Modules/header&footer/header/header.component';
 import { FooterComponent } from '../Modules/header&footer/footer/footer.component';
+import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
+import {NzMenuModule} from "ng-zorro-antd/menu";
+import {NzIconModule} from "ng-zorro-antd/icon";
+import { ProfileManagementLayoutComponent } from '../Modules/profile-management-layout/profile-management-layout.component';
+import { ProfileAccountManagementComponent } from '../Modules/profile/profile-account-management/profile-account-management.component';
+import { ProfilePastOrderHistoryComponent } from '../Modules/profile-past-order-history/profile-past-order-history.component';
+import {NzDropDownModule} from "ng-zorro-antd/dropdown";
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { SellerLayoutComponent } from '../Modules/Seller/layout/seller-layout/seller-layout.component';
+import { SellerHomepageComponent } from '../Modules/Seller/seller-homepage/seller-homepage.component';
+import {NzStatisticModule} from "ng-zorro-antd/statistic";
+import {NzUploadModule} from "ng-zorro-antd/upload";
+import { SellerProductTableViewComponent } from '../Modules/Seller/seller-product-table-view/seller-product-table-view.component';
+import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
+import {NzResultModule} from "ng-zorro-antd/result";
+import { SellerOrderHistoryComponent } from '../Modules/Seller/seller-order-history/seller-order-history.component';
 
 
 
@@ -54,6 +71,13 @@ registerLocaleData(en);
     CheckOutPageComponent,
     HeaderComponent,
     FooterComponent,
+    ProfileManagementLayoutComponent,
+    ProfileAccountManagementComponent,
+    ProfilePastOrderHistoryComponent,
+    SellerLayoutComponent,
+    SellerHomepageComponent,
+    SellerProductTableViewComponent,
+    SellerOrderHistoryComponent,
 
   ],
     imports: [
@@ -78,8 +102,17 @@ registerLocaleData(en);
         NzPageHeaderModule,
         NzSegmentedModule,
         NzTableModule,
+        NzBreadCrumbModule,
+        NzMenuModule,
+        NzIconModule,
+        NzDropDownModule,
+        NzMessageModule,
+        NzStatisticModule,
+        NzUploadModule,
+        NzPopconfirmModule,
+        NzResultModule,
     ],
-  providers: [{ provide: NZ_I18N, useValue: en_US },DataService],
+  providers: [{ provide: NZ_I18N, useValue: en_US },DataService,NzMessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

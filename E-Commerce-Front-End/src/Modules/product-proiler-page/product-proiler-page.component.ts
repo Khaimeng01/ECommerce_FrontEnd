@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router'
 import {ProductService} from "../../service/product.service";
 import {map} from "rxjs";
@@ -20,12 +20,13 @@ export class ProductProilerPageComponent implements OnInit {
   id!:any;
   product!:ProductsDetails2[]
   orderDetails:orderDetails={
-    product_Id:BigInt('9007199254740991'),
+    product_id:BigInt('9007199254740991'),
     productName:"",
     orderSellerUsername:"",
-    quantity: 0,
+    quantity: 1,
     productPrice:0,
-    total: 0
+    total: 0,
+    orderSellerAddress:"0xB80ef9e783F06DADDE4d1bbd7B461D1c288250F1"
   }
 
   ngOnInit(): void {
@@ -55,11 +56,10 @@ export class ProductProilerPageComponent implements OnInit {
 
   redirectToCheckOut() {
     this.dataEvent.emit("Tester");
-    this.orderDetails.product_Id = this.product[0].id_product;
+    this.orderDetails.product_id = this.product[0].id_product;
     this.orderDetails.productName =this.product[0].product_name;
     this.orderDetails.orderSellerUsername=this.product[0].product_owner;
     this.orderDetails.productPrice = this.product[0].product_price;
-    this.orderDetails.quantity = 1
     this.orderDetails.total = this.orderDetails.quantity*this.product[0].product_price
     this.orderProductService.sendOrderDetails(this.orderDetails);
     this.router.navigate(['/checkOutPage'])
@@ -69,4 +69,20 @@ export class ProductProilerPageComponent implements OnInit {
     //   this.router.navigate(['/login'])
     // }
   }
+
+
+
+  increaseCount() {
+    this.orderDetails.quantity = this.orderDetails.quantity+1;
+  }
+
+  decreaseCount() {
+    if(this.orderDetails.quantity>=2){
+      this.orderDetails.quantity = this.orderDetails.quantity-1;
+    }else{
+      console.log("ERROR");
+    }
+  }
+
+
 }
