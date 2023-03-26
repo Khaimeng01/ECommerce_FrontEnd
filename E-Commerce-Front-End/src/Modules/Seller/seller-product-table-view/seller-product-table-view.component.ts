@@ -6,6 +6,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {ProductsDetails, ProductsDetails2} from "../../../classes/productsDetails";
 import {concatMap} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 interface ItemData {
   id: number;
   name: string;
@@ -141,7 +142,46 @@ export class SellerProductTableViewComponent implements OnInit {
     )
   }
 
-  constructor(private productService:ProductService,private nzMessageService:NzMessageService) {}
+  constructor(private productService:ProductService,private router: Router) {}
+
+  listOfColumn = [
+    {
+      title: 'Product ID',
+      compare: (a:ProductsDetails2 , b: ProductsDetails2) => Number(a.id_product) - Number(b.id_product),
+      priority: false
+    },
+    {
+      title: 'ProductName',
+      compare: (a:ProductsDetails2 , b: ProductsDetails2) => a.product_name.localeCompare(b.product_name),
+      priority: false
+    },
+    {
+      title: 'Product Category',
+      compare: (a: ProductsDetails2, b: ProductsDetails2) => a.product_category.localeCompare(b.product_category),
+      priority: 1
+    },
+    {
+      title: 'Product Price',
+      compare: (a: ProductsDetails2, b: ProductsDetails2) => a.product_price - b.product_price,
+      priority: 2
+    },
+    {
+      title: 'Product Quantity',
+      compare: (a: ProductsDetails2, b: ProductsDetails2) => a.product_quantity - b.product_quantity,
+      priority: 3
+    },
+    // {
+    //   title: 'Action',
+    //   compare: (a: ProductsDetails2, b: ProductsDetails2) => a.product_quantity - b.product_quantity,
+    //   priority: 4
+    // }
+
+  ];
 
 
+  redirectToEdit(i: number) {
+    let productId = this.product[i].id_product;
+    this.router.navigate(['sellerLayout/sellerEditProduct'],
+      { queryParams: { productId: productId }});
+  }
 }

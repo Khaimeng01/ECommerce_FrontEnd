@@ -38,7 +38,14 @@ export class ProductService {
   public deleteProduct(id_product:bigint):Observable<any>{
     let params = new HttpParams().append('id_product',id_product.toString());
     return  this.http.delete('http://localhost:8081/api/products/deleteProduct',{params,responseType:'text'});
-
   }
+
+  public editProduct(product: FormData, id_product: bigint): Observable<any> {
+    console.log("Test_4");
+    let params = new HttpParams().append('id_product', id_product.toString());
+    console.log("Test_5");
+    return this.http.put('http://localhost:8081/api/products/put', product, { params, responseType: 'text' });
+  }
+
 
 }

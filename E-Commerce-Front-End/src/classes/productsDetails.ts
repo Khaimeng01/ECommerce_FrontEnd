@@ -4,7 +4,7 @@ export interface ProductsDetails{
   product_name:string,
   product_owner:string| null,
   product_price: number,
-  product_quantity:string
+  product_quantity:number
   product_category:string,
   product_description:string,
   productImages:FileHandle[]
@@ -15,7 +15,7 @@ export interface ProductsDetails2{
   product_name:string,
   product_owner:string,
   product_price: number,
-  product_quantity:string
+  product_quantity:number
   product_category:string,
   product_description:string,
   productImages:FileHandle[]

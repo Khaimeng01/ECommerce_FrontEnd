@@ -23,11 +23,14 @@ export class LoginComponent implements OnInit {
   public navigationExtras: NavigationExtras = {
     skipLocationChange: false
   };
-  options = ['Buyer', 'Selller'];
+  options = ['Buyer', 'Seller'];
 
 
 
-  constructor(private fb: FormBuilder,private dataService:DataService,private router:Router,private message: NzMessageService) { }
+  constructor(private fb: FormBuilder,
+              private dataService:DataService,
+              private router:Router,
+              private message: NzMessageService) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -49,20 +52,26 @@ export class LoginComponent implements OnInit {
       console.log('submit', this.switchValue);
       if(this.switchValue==0){
         this.dataService.getLoginDetails(this.validateForm.value.userName,this.validateForm.value.password).subscribe(
-          (response:any)=>{
-            this.a2=response;
-            if(this.a2.match("Authenticated User")) {
+          (response:any)=> {
+            this.a2 = response;
+            if (this.a2.match("Authenticated User")) {
               console.log("Past_1");
-              sessionStorage.setItem('username',this.validateForm.value.userName);
-              sessionStorage.setItem('role',"Buyer");
-              this.router.navigateByUrl('/homepage', { skipLocationChange: false, replaceUrl: true }).then(() => {
+              sessionStorage.setItem('username', this.validateForm.value.userName);
+              sessionStorage.setItem('role', "Buyer");
+              this.router.navigateByUrl('/homepage', {skipLocationChange: false, replaceUrl: true}).then(() => {
                 window.location.reload();
               });
               return Promise.resolve(true);
-            }else{
-              this.message.create(this.type, `The Username / Password is Incorrect`);
-              return Promise.resolve(false);
             }
+            if (this.a2.match("Incorrect Password")) {
+              this.message.error('Incorrect Password');
+              return Promise.resolve(true);
+            }
+            if (this.a2.match("No user is found with this Username")) {
+              this.message.error('No user is found with this Username');
+              return Promise.resolve(true);
+            }
+            return Promise.resolve(true);
           },(error:HttpErrorResponse)=>{
             alert(error.message);
             console.log(error.message);
@@ -101,4 +110,11 @@ export class LoginComponent implements OnInit {
     return true;
   }
 
+  redirectToRegister() {
+    if(this.switchValue==0){
+      this.router.navigate(['register']);
+    }else{
+      this.router.navigate(['sellerRegisterAccount']);
+    }
+  }
 }

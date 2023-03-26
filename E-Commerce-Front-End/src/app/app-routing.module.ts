@@ -22,6 +22,10 @@ import {
   SellerProductTableViewComponent
 } from "../Modules/Seller/seller-product-table-view/seller-product-table-view.component";
 import {SellerOrderHistoryComponent} from "../Modules/Seller/seller-order-history/seller-order-history.component";
+import {SellerEditProductComponent} from "../Modules/Seller/seller-edit-product/seller-edit-product.component";
+import {
+  SellerRegisterAccountComponent
+} from "../Modules/Seller/seller-register-account/seller-register-account.component";
 
 
 const routes: Routes = [
@@ -34,6 +38,7 @@ const routes: Routes = [
   {path:'productProfilePage/:id',component:ProductProilerPageComponent},
   {path:'registerProductComponent',component:RegisterProductComponent},
   {path:'checkOutPage',component:CheckOutPageComponent},
+  {path:'sellerRegisterAccount',component:SellerRegisterAccountComponent},
   {path:'profileManagementLayout',component:ProfileManagementLayoutComponent,
   children:[
     { path:'accountManagement',component:ProfileAccountManagementComponent},
@@ -44,8 +49,9 @@ const routes: Routes = [
      {path:'sellerHomepage',component:SellerHomepageComponent},
      {path:'accountManagement',component:ProfileAccountManagementComponent},
      {path:'registerProductComponent',component:RegisterProductComponent},
-     {path:'sellerProductTableView',component: SellerProductTableViewComponent},
      {path:'sellerOrderHistory',component: SellerOrderHistoryComponent},
+     {path:'sellerProductTableView',component: SellerProductTableViewComponent},
+     {path:"sellerEditProduct",component: SellerEditProductComponent},
      {path:'',component: SellerHomepageComponent},
    ]
   }

@@ -12,46 +12,23 @@ import {DataService} from "../../service/data.service";
 export class RegisterComponent implements OnInit {
 
     validateForm!: FormGroup;
-    sellerValidateForm!: FormGroup;
-    captchaTooltipIcon: NzFormTooltipIcon = {
-      type: 'info-circle',
-      theme: 'twotone'
-    };
-    switchValue:number=1;
-
 
 
   constructor(private fb: FormBuilder,private dataService:DataService) {}
 
   ngOnInit(): void {
-    if(this.switchValue == 0){
       this.validateForm = this.fb.group({
         username: [null, [Validators.required]],
         email: [null, [Validators.email, Validators.required]],
         password: [null, [Validators.required]],
-        phoneNumberPrefix: ['+86'],
+        phoneNumberPrefix: ['+60'],
         phoneNumber: [null, [Validators.required]],
         address: [null, [Validators.required]],
         agree: [false]
       });
-    }else{
-      this.sellerValidateForm = this.fb.group({
-        sellerUsername: [null, [Validators.required]],
-        sellerEmail: [null, [Validators.email, Validators.required]],
-        sellerPassword: [null, [Validators.required]],
-        sellerPhoneNumberPrefix: ['+86'],
-        sellerPhoneNumber: [null, [Validators.required]],
-        sellerAddress: [null, [Validators.required]],
-        sellerWalletAddress:[null,[Validators.required]],
-        sellerAgree: [false]
-      });
     }
-  }
-  options = ['Buyer', 'Seller'];
-  handleIndexChange(e: number): void {
-    console.log(e);
-    this.switchValue=e;
-  }
+
+
 
   submitForm(): void {
     if (this.validateForm.valid) {
@@ -63,7 +40,7 @@ export class RegisterComponent implements OnInit {
         customer_password:this.validateForm.value.password,
         customer_email:this.validateForm.value.email,
         customer_address:this.validateForm.value.address,
-        customer_phonenumber:this.validateForm.value.phoneNumber
+        customer_phonenumber:(this.validateForm.value.phoneNumberPrefix+this.validateForm.value.phoneNumber)
       }
       console.log(object_name);
 
@@ -80,5 +57,7 @@ export class RegisterComponent implements OnInit {
       });
     }
   }
+
+
 
 }

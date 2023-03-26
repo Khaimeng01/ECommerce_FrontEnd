@@ -12,9 +12,18 @@
         </ng-container>
 
         <ng-container *ngIf="!loggedIn; else LoggedIn">
-          <a routerLink="/login">
-            <span class="material-symbols-outlined text-3xl">account_circle</span>
-          </a>
+          <div class="grid grid-cols-2">
+            <a routerLink="/login" class="text-center">
+              Login
+            </a>
+            <a routerLink="register" class="text-center">
+              Register
+            </a>
+          </div>
+<!--          <a routerLink="/login">-->
+<!--            <span class="material-symbols-outlined text-3xl">account_circle</span>-->
+<!--          </a>-->
+
         </ng-container>
 
       </nav>

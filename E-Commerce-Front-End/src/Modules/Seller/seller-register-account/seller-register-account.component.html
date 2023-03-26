@@ -1,0 +1,114 @@
+<div class="py-6">
+  <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 " >
+    <div class="grid grid-cols-4 ">
+
+      <!--    Images-->
+      <div class=" overflow-hidden rounded-l-lg rounded-bl-lg col-span-2">
+        <!--        <img src="../../assets/images/pexels-cottonbro-studio-5076516.jpg" class="max-w-[23rem] 2xl:max-w-[25.1rem] overflow-hidden  " >-->
+      </div>
+
+      <div class="grid grid-rows-3 content-center max-h-[50rem] col-span-2  pl-10 ">
+        <div class="row-span-1 ">
+
+          <div class="pt-3 pb-8">
+            <h1>Get Started</h1>
+            <br>
+            <p>Create your account now</p>
+          </div>
+
+          <div>
+            <form  nz-form [formGroup]="sellerValidateForm" (ngSubmit)="submitForm()" [nzLayout] ="'vertical'" >
+
+              <!--  Username-->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerUsername" class="text-left">Username</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+                  <input nz-input formControlName="sellerUsername" id="sellerUsername" class="w-80" />
+                </nz-form-control>
+              </nz-form-item>
+
+              <!--  //Email-->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerEmail" class="text-left">E-mail</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <input nz-input formControlName="sellerEmail" id="sellerEmail" class="w-80" />
+                </nz-form-control>
+              </nz-form-item>
+
+              <!--  //Password-->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPassword" class="text-left" nzRequired>Password</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+                  <input
+                    nz-input
+                    type="password"
+                    id="sellerPassword"
+                    formControlName="sellerPassword"
+                    class="w-80"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+
+              <!--  PhoneNumber-->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPhoneNumber" class="text-left" nzRequired>Phone Number</nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  [nzValidateStatus]="sellerValidateForm.controls['sellerPhoneNumber']"
+                  nzErrorTip="Please input your phone number!"
+                >
+                  <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                    <ng-template #addOnBeforeTemplate>
+                      <nz-select formControlName="sellerPhoneNumberPrefix" class="phoneNumber w-32">
+                        <nz-option nzLabel="+60" nzValue="+60" class="w-32"></nz-option>
+                      </nz-select>
+                    </ng-template>
+                    <input class="phoneNumber_Input" formControlName="sellerPhoneNumber" id="'sellerPhoneNumber'" nz-input  />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+
+              <!--  //Address-->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerAddress" class="text-left">Address</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+                  <input nz-input formControlName="sellerAddress" id="sellerAddress" class="w-80" />
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerWalletAddress" class="text-left">Wallet Address</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Wallet Address">
+                  <input nz-input formControlName="sellerWalletAddress" id="sellerWalletAddress" class="w-80" />
+                </nz-form-control>
+              </nz-form-item>
+
+
+              <nz-form-item nz-row class="register-area">
+                <nz-form-control [nzSpan]="14" >
+                  <label nz-checkbox formControlName="sellerAgree">
+                  <span class="text-left">
+                    I have read the<a>agreement</a>
+                  </span>
+                  </label>
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item nz-row class="register-area">
+                <nz-form-control [nzSpan]="14" [nzOffset]="3" class="text-right">
+                  <button nz-button nzType="primary" class="w-32">Register</button>
+                </nz-form-control>
+              </nz-form-item>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

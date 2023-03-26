@@ -1,37 +1,54 @@
 <div>
-  <div class="rounded-lg">
+  <div class="rounded-lg ">
 
-    <div class="pb-4">
-      <h1 class="text-xl">View Order History</h1>
-      <p>Here you can view all your order history for your account</p>
+    <div class="grid grid-rows-2 gap-y-2">
+      <h1 class="text-2xl">View Order History</h1>
+      <p class="text-sm">Here you can view all your order history for your account</p>
     </div>
 
-    <nz-table #basicTable [nzData]="seller_orderPastList" class="rounded-lg">
+    <nz-divider></nz-divider>
+
+    <nz-table #sortTable [nzData]="seller_orderPastList" class="rounded-lg">
       <thead>
-      <tr class="text-center">
-        <th>Order ID</th>
-        <th>Order Date</th>
-        <th>Product ID</th>
-        <th>Order Total</th>
-        <th>Buyer Username</th>
-        <th>Seller Username</th>
-        <th>Order Description</th>
-        <th>Order Status</th>
-        <th>Transaction Link</th>
+      <tr class="text-center" >
+        <th *ngFor="let column of listOfColumn"
+            [nzSortFn]="column.compare" [nzSortPriority]="column.priority"
+            class="bg-slate-700"
+            >
+          {{ column.title }}
+        </th>
+        <th >
+          Order Description
+        </th>
+        <th>
+          Order Status
+        </th>
+        <th>
+          Transaction Link
+        </th>
+<!--        <th>Order ID</th>-->
+<!--        <th>Order Date</th>-->
+<!--        <th>Product ID</th>-->
+<!--        <th>Order Total</th>-->
+<!--        <th>Buyer Username</th>-->
+<!--        <th>Seller Username</th>-->
+<!--        <th>Order Description</th>-->
+<!--        <th>Order Status</th>-->
+<!--        <th>Transaction Link</th>-->
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let data of seller_orderPastList " class="text-left">
+      <tr *ngFor="let data of sortTable.data" class="text-left">
         <td>{{data.id_order}}</td>
         <td>{{data.order_date}}</td>
-        <td>{{ data.order_priceamount}}</td>
         <td>{{ data.product_id}}</td>
+        <td>{{ data.order_priceamount}}</td>
         <td>{{data.order_buyer_username}}</td>
         <td>{{ data.order_seller_username}}</td>
         <td>{{ data.order_description}}</td>
         <td>{{ data.order_status}}</td>
         <td>
-          <a (click)="openWebsite(data.order_transaction_record)">
+          <a (click)="openWebsite(data.order_transaction_record)" class="hover:text-sky-400">
             Click Here
           </a>
         </td>

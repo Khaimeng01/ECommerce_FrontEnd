@@ -53,7 +53,11 @@ import { SellerProductTableViewComponent } from '../Modules/Seller/seller-produc
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
 import {NzResultModule} from "ng-zorro-antd/result";
 import { SellerOrderHistoryComponent } from '../Modules/Seller/seller-order-history/seller-order-history.component';
-
+import { SellerEditProductComponent } from '../Modules/Seller/seller-edit-product/seller-edit-product.component';
+import { SellerRegisterAccountComponent } from '../Modules/Seller/seller-register-account/seller-register-account.component';
+import {NzCalendarModule} from "ng-zorro-antd/calendar";
+import {NzAlertModule} from "ng-zorro-antd/alert";
+import {LazyLoadImageModule} from 'ng-lazyload-image'
 
 
 registerLocaleData(en);
@@ -78,40 +82,44 @@ registerLocaleData(en);
     SellerHomepageComponent,
     SellerProductTableViewComponent,
     SellerOrderHistoryComponent,
-
+    SellerEditProductComponent,
+    SellerRegisterAccountComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        NzLayoutModule,
-        NzGridModule,
-        NzInputModule,
-        ReactiveFormsModule,
-        NzButtonModule,
-        NzFormModule,
-        NzSelectModule,
-        NzCheckboxModule,
-        NzCardModule,
-        NzCarouselModule,
-        NzDividerModule,
-        NzSwitchModule,
-        NzRadioModule,
-        NzPageHeaderModule,
-        NzSegmentedModule,
-        NzTableModule,
-        NzBreadCrumbModule,
-        NzMenuModule,
-        NzIconModule,
-        NzDropDownModule,
-        NzMessageModule,
-        NzStatisticModule,
-        NzUploadModule,
-        NzPopconfirmModule,
-        NzResultModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NzLayoutModule,
+    NzGridModule,
+    NzInputModule,
+    ReactiveFormsModule,
+    NzButtonModule,
+    NzFormModule,
+    NzSelectModule,
+    NzCheckboxModule,
+    NzCardModule,
+    NzCarouselModule,
+    NzDividerModule,
+    NzSwitchModule,
+    NzRadioModule,
+    NzPageHeaderModule,
+    NzSegmentedModule,
+    NzTableModule,
+    NzBreadCrumbModule,
+    NzMenuModule,
+    NzIconModule,
+    NzDropDownModule,
+    NzMessageModule,
+    NzStatisticModule,
+    NzUploadModule,
+    NzPopconfirmModule,
+    NzResultModule,
+    NzCalendarModule,
+    NzAlertModule,
+    LazyLoadImageModule
+  ],
   providers: [{ provide: NZ_I18N, useValue: en_US },DataService,NzMessageService],
   bootstrap: [AppComponent]
 })

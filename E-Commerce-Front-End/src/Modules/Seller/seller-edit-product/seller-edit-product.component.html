@@ -1,0 +1,126 @@
+<div class="grid grid-cols-2  ">
+  <div class="w-[32rem]">
+
+    <div class="">
+      <nz-page-header
+        class="pageHeader"
+        (nzBack)="onBack()"
+        nzBackIcon
+        nzTitle="Edit Products"
+      >
+      </nz-page-header>
+      <p>Here you can add new product for your account</p>
+    </div>
+
+    <nz-divider></nz-divider>
+
+<!--    <div class="pb-4">-->
+<!--&lt;!&ndash;      <h1 class="text-xl">Edit Product </h1>&ndash;&gt;-->
+<!--      <p>Here you can add new product for your account</p>-->
+<!--      <hr>-->
+<!--    </div>-->
+
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+      <!--  ProductName-->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productName" class="text-left">Product Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input product Name">
+          <input nz-input formControlName="productName" id="productName" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <!--    Product_Price-->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productPrice" class="text-left">Product Price</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid ProductPrice!">
+          <input nz-input formControlName="productPrice" id="productPrice" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <!--  //Product_Quantuty-->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productQuantity" class="text-left">Product Quantity</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+          <input nz-input formControlName="productQuantity" id="productQuantity" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!--        Product_Category-->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productCategory" class="text-left">Product Category</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input ">
+          <nz-select formControlName="productCategory" [nzOptions]="categoriesOption" class="" ></nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!--        Product_Description-->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productDesc" class="text-left">Description</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Description">
+          <nz-textarea-count [nzMaxCharacterCount]="2000">
+            <textarea formControlName="productDesc" nz-input rows="2" placeholder="write any thing" id="productDesc"></textarea>
+          </nz-textarea-count>
+
+          <!--            <input nz-input formControlName="productDesc" id="productDesc" />-->
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6" class="text-right">
+          <button nz-button nzType="primary" class="text-right">Register</button>
+        </nz-form-control>
+      </nz-form-item>
+
+    </form>
+  </div>
+
+  <div class="grid grid-rows-2">
+
+    <div class="text-center ">
+      <!--              <input type="file" multiple value="select" #selectFile-->
+      <!--                     (change)="onFileSelected($event)">-->
+      <nz-upload
+        nzType="drag"
+        [nzMultiple]="true"
+        (nzChange)="onFileSelected($event)"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="beforeUpload"
+      >
+        <p class="ant-upload-drag-icon">
+          <span nz-icon nzType="inbox"></span>
+        </p>
+        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+        <p class="ant-upload-hint">
+          Support for a single or bulk upload. Only png,jpeg,jpg is accepted
+        </p>
+      </nz-upload>
+    </div>
+
+
+    <div class="grid grid-row-4  h-14 pt-3 gap-y-2.5">
+      <div *ngFor="let file of editedProduct.productImages; let i = index;" class="">
+        <div class="grid grid-cols-3">
+          <div></div>
+          <div class="text-center">
+            <a [href]="file.url" target="_blank" class="text-center">{{file.file.name}}</a>
+            <!--              <a>{{file.file.name}}</a>-->
+            <!--              <p class="text-center">{{file.file.name}}</p>-->
+          </div>
+          <div class="text-center">
+            <span nz-icon nzType="delete" nzTheme="outline" (click)="deleteImage(i)" class="cursor-pointer hover:text-red-700" ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--      <div class="grid-flow-col" *ngFor="let file of product.productImages">-->
+    <!--        <div class="">-->
+    <!--          <img [src]="file.url">-->
+    <!--        </div>-->
+    <!--      </div>-->
+  </div>
+
+</div>

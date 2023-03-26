@@ -1,0 +1,14 @@
+.center {
+  margin: auto;
+  width: 50%;
+  height:auto;
+  padding: 10px;
+}
+
+.phoneNumber{
+  width:100px
+}
+
+.phoneNumber_Input{
+  width:220px
+}

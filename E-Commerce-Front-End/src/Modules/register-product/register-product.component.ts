@@ -21,7 +21,7 @@ export class RegisterProductComponent implements OnInit {
   product:ProductsDetails={
     product_name:"",
     product_owner:"",
-    product_quantity:"",
+    product_quantity:0,
     product_price:0,
     product_category:"",
     product_description:"",
@@ -42,36 +42,50 @@ export class RegisterProductComponent implements OnInit {
   acceptedFileTypes: string = 'image/jpeg,image/png';
   private numFilesUploaded = 0;
 
-  constructor(private fb: FormBuilder,private productService:ProductService,private sanitizer:DomSanitizer,private messageService: NzMessageService) {}
+  constructor(private fb: FormBuilder,private productService:ProductService,private sanitizer:DomSanitizer,
+              private messageService: NzMessageService) {}
 
   ngOnInit(): void {
     this.product.product_owner=sessionStorage.getItem('username');
     this.registerProductStatus=false;
     this.validateForm = this.fb.group({
       productName: [null, [Validators.required]],
-      productPrice: [null, [Validators.required]],
-      productQuantity: [null, [Validators.required]],
+      productPrice: [null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+      productQuantity: [null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
       productCategory: [null, [Validators.required]],
       productDesc: [null, [Validators.required]],
     });
+    // this.validateForm = this.fb.group({
+    //   productName: [null, [Validators.required]],
+    //   productPrice: [null, [Validators.required]],
+    //   productQuantity: [null, [Validators.required]],
+    //   productCategory: [null, [Validators.required]],
+    //   productDesc: [null, [Validators.required]],
+    // });
   }
 
 
   submitForm(): void {
     console.log("Test_0");
     if (this.validateForm.valid) {
-      console.log("Test_1"+this.validateForm.value.productCategory);
-      this.product.product_name = this.validateForm.value.productName;
-      this.product.product_quantity = this.validateForm.value.productQuantity;
-      this.product.product_price = this.validateForm.value.productPrice;
-      this.product.product_category = this.validateForm.value.productCategory;
-      this.product.product_description= this.validateForm.value.productDesc;
-      const productFormData = this.prepareFormData(this.product)
-      this.productService.addProducts(productFormData).subscribe((productFormData)=>
-        {console.warn(productFormData)}
-      )
-      this.registerProductStatus=true;
+      if(this.numFilesUploaded == 0){
+        this.messageService.error('There is no Images for this Product');
+      }else{
+        console.log("Test_1"+this.validateForm.value.productCategory);
+        this.product.product_name = this.validateForm.value.productName;
+        this.product.product_quantity = this.validateForm.value.productQuantity;
+        this.product.product_price = this.validateForm.value.productPrice;
+        this.product.product_category = this.validateForm.value.productCategory;
+        this.product.product_description= this.validateForm.value.productDesc;
+        const productFormData = this.prepareFormData(this.product)
+        // this.productService.addProducts(productFormData).subscribe((productFormData)=>
+        //   {console.warn(productFormData)}
+        // )
+        // this.registerProductStatus=true;
+      }
     } else {
+      console.log("Failure");
+      this.messageService.error('Some of the product is not filled');
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();

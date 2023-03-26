@@ -4,6 +4,10 @@
       <!--    <div class="logo"></div>-->
       <ul nz-menu nzTheme="dark" nzMode="inline">
         <li nz-menu-item>
+          <span nz-icon nzType="home" class="pr-2"></span>
+          <a routerLink="sellerHomepage">Homepage</a>
+        </li>
+        <li nz-menu-item>
           <span nz-icon nzType="user" class="pr-2"></span>
           <a routerLink="accountManagement">Account Management</a>
         </li>
@@ -44,7 +48,7 @@
           <!--        <nz-breadcrumb-item>User</nz-breadcrumb-item>-->
           <!--        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>-->
         </nz-breadcrumb>
-        <div class="inner-content w-3/4 mx-auto ">
+        <div class="inner-content w-4/5 mx-auto rounded-lg ">
           <router-outlet></router-outlet>
         </div>
       </nz-content>
@@ -52,3 +56,5 @@
     </nz-layout>
   </nz-layout>
 </div>
+
+<!--<div class="inner-content w-3/4 mx-auto ">-->

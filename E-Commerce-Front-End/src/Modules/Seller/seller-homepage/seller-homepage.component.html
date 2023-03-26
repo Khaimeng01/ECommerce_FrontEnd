@@ -1,29 +1,49 @@
-<p>seller-homepage works!</p>
-<!--<div style="background: #ECECEC; padding: 30px;">-->
-<!--  <nz-row [nzGutter]="16">-->
-<!--    <nz-col [nzSpan]="12">-->
-<!--      <nz-card>-->
-<!--        <nz-statistic-->
-<!--          [nzValue]="(11.28 | number: '1.0-2')!"-->
-<!--          [nzTitle]="'Active'"-->
-<!--          [nzPrefix]="prefixTplOne"-->
-<!--          [nzSuffix]="'%'"-->
-<!--          [nzValueStyle]="{ color: '#3F8600' }"-->
-<!--        ></nz-statistic>-->
-<!--        <ng-template #prefixTplOne><span nz-icon nzType="arrow-up"></span></ng-template>-->
-<!--      </nz-card>-->
-<!--    </nz-col>-->
-<!--    <nz-col [nzSpan]="12">-->
-<!--      <nz-card>-->
-<!--        <nz-statistic-->
-<!--          [nzValue]="(9.3 | number: '1.0-2')!"-->
-<!--          [nzTitle]="'Idle'"-->
-<!--          [nzPrefix]="prefixTplTwo"-->
-<!--          [nzSuffix]="'%'"-->
-<!--          [nzValueStyle]="{ color: '#CF1322' }"-->
-<!--        ></nz-statistic>-->
-<!--        <ng-template #prefixTplTwo><span nz-icon nzType="arrow-down"></span></ng-template>-->
-<!--      </nz-card>-->
-<!--    </nz-col>-->
-<!--  </nz-row>-->
-<!--</div>-->
+<div class="rounded-lg">
+  <div>
+    <h1 class="text-3xl">Welcome {{userAccountSession.username}}</h1>
+  </div>
+
+  <nz-divider></nz-divider>
+
+  <div style="background: #fffdfd; padding: 30px;">
+    <nz-row [nzGutter]="16">
+      <nz-col [nzSpan]="12">
+        <nz-card class="rounded-lg  shadow-md shadow-cyan-500/50">
+          <nz-statistic
+            [nzValue]="(numberOfSales| number: '1.0-2')!"
+            [nzTitle]="'Number of Sales'"
+            [nzPrefix]="prefixTplOne"
+            [nzValueStyle]="{ color: '#3F8600' }"
+          ></nz-statistic>
+          <ng-template #prefixTplOne>
+            <span nz-icon nzType="rise" nzTheme="outline" class="display: block"></span>
+          </ng-template>
+        </nz-card>
+      </nz-col>
+      <nz-col [nzSpan]="12">
+        <nz-card class="rounded-lg shadow-cyan-500/50 shadow-md">
+          <nz-statistic
+            [nzValue]="(salesProfit| number: '1.0-2')!"
+            [nzTitle]="'Profit of this month'"
+            [nzPrefix]="prefixTplOne2"
+            [nzSuffix]="'ETH'"
+            [nzValueStyle]="{ color: '#3F8600' }"
+          ></nz-statistic>
+          <ng-template #prefixTplOne2>
+            <span nz-icon nzType="dollar-circle" nzTheme="outline" class="display: block"></span>
+          </ng-template>
+        </nz-card>
+      </nz-col>
+    </nz-row>
+  </div>
+
+  <nz-divider></nz-divider>
+
+  <app-seller-product-table-view></app-seller-product-table-view>
+
+<!--  <div>-->
+<!--    <nz-alert nzMessage="Your selected date: {{ selectedValue | date: 'yyyy-MM-dd' }}"></nz-alert>-->
+<!--    <nz-calendar [(ngModel)]="selectedValue" (nzSelectChange)="selectChange($event)"></nz-calendar>-->
+<!--  </div>-->
+
+</div>

@@ -2,10 +2,12 @@
 <div class="grid grid-cols-2  "*ngIf="!registerProductStatus">
     <div class="w-[32rem]">
 
-      <div class="pb-4">
-        <h1 class="text-xl">Add a New Product </h1>
-        <p>Here you can add new product for your account</p>
+      <div class="grid grid-rows-2 gap-y-2">
+        <h1 class="text-2xl">Add a New Product </h1>
+        <p class="text-sm">Here you can add new product for your account</p>
       </div>
+
+      <nz-divider></nz-divider>
 
       <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
@@ -104,7 +106,7 @@
 <!--              <p class="text-center">{{file.file.name}}</p>-->
             </div>
             <div class="text-center">
-              <span nz-icon nzType="delete" nzTheme="outline" (click)="deleteImage(i)" class="cursor-pointer" ></span>
+              <span nz-icon nzType="delete" nzTheme="outline" (click)="deleteImage(i)" class="cursor-pointer hover:text-red-700" ></span>
             </div>
           </div>
         </div>

@@ -12,6 +12,8 @@ import {editSellerInfo, seller} from "../../../classes/sellerClasses";
 })
 export class ProfileAccountManagementComponent implements OnInit {
 
+  editProfileStatus=false;
+
   userAccountSession:any={
     username:"",
     userRole:""
@@ -25,6 +27,7 @@ export class ProfileAccountManagementComponent implements OnInit {
 
 
   async ngOnInit(): Promise<void> {
+    this.editProfileStatus=false;
     await this.obtainCustomerUsername_Role();
     await this.obtainCustomerPersonalInformation(this.userAccountSession.username);
     console.log("TEST_2")
@@ -33,21 +36,18 @@ export class ProfileAccountManagementComponent implements OnInit {
       email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
       phoneNumberPrefix: ['+60'],
-      phoneNumber: [null, [Validators.required]],
+      phoneNumber: [null, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]],
       address: [null, [Validators.required]],
     });
     this.sellerValidateForm = this.fb.group({
       sellerUsername: [null, [Validators.required]],
       sellerEmail: [null, [Validators.email, Validators.required]],
       sellerPassword: [null, [Validators.required]],
-      sellerPhoneNumberPrefix: ['+86'],
-      sellerPhoneNumber: [null, [Validators.required]],
+      sellerPhoneNumberPrefix: ['+60'],
+      sellerPhoneNumber: [null, [Validators.required,, Validators.pattern(/^[1-9]\d*$/)]],
       sellerAddress: [null, [Validators.required]],
       sellerWalletAddress:[null,[Validators.required]],
     });
-    console.log("TEST_3")
-
-
   }
 
   public async obtainCustomerPersonalInformation(username:string){
@@ -77,7 +77,7 @@ export class ProfileAccountManagementComponent implements OnInit {
             sellerUsername: this.sellerPersonalInformation[0].seller_username,
             sellerEmail: this.sellerPersonalInformation[0].seller_email,
             sellerPassword: this.sellerPersonalInformation[0].seller_password,
-            sellerPhoneNumberPrefix: ['+86'],
+            sellerPhoneNumberPrefix:['+60'],
             sellerPhoneNumber: this.sellerPersonalInformation[0].seller_phonenumber,
             sellerAddress: this.sellerPersonalInformation[0].seller_address,
             sellerWalletAddress:this.sellerPersonalInformation[0].seller_accountdetails
@@ -101,6 +101,9 @@ export class ProfileAccountManagementComponent implements OnInit {
   }
 
   submitForm(): void {
+
+    if(this.buyerValidateForm.valid){
+      console.log("SUCCESS")
       var editCustomerDetails:loginCustomer2={
         customer_username:this.buyerValidateForm.value.username,
         customer_password:this.buyerValidateForm.value.password,
@@ -108,23 +111,33 @@ export class ProfileAccountManagementComponent implements OnInit {
         customer_address:this.buyerValidateForm.value.address,
         customer_phonenumber:this.buyerValidateForm.value.phoneNumber
       }
-      this.buyerService.editDetails(editCustomerDetails,this.userAccountSession.username).subscribe();
+      // this.buyerService.editDetails(editCustomerDetails,this.userAccountSession.username).subscribe();
+    }else{
+      console.log("FAIL")
+    }
+
 
   }
 
-  //   username:this.buyerPersonalInformation[0].customer_username,
-  //
-
 
   sellerSubmitForm() {
-    var editSellerDetails:editSellerInfo={
-      seller_username:this.sellerValidateForm.value.sellerUsername,
-      seller_password:this.sellerValidateForm.value.sellerPassword,
-      seller_address:this.sellerValidateForm.value.sellerAddress,
-      seller_email:this.sellerValidateForm.value.sellerEmail ,
-      seller_phonenumber:this.sellerValidateForm.value.sellerPhoneNumber,
-      seller_accountdetails:this.sellerValidateForm.value.sellerWalletAddress
+    console.log("PRINT OUT THIS"+this.sellerValidateForm.value.sellerWalletAddress);
+    console.log("PRINT OUT THIS 2"+this.sellerValidateForm.value.sellerUsername);
+
+    if (this.sellerValidateForm.valid) {
+      console.log("Inside");
+      var editSellerDetails:editSellerInfo={
+        seller_username:this.sellerValidateForm.value.sellerUsername,
+        seller_password:this.sellerValidateForm.value.sellerPassword,
+        seller_address:this.sellerValidateForm.value.sellerAddress,
+        seller_email:this.sellerValidateForm.value.sellerEmail,
+        seller_phonenumber:this.sellerValidateForm.value.sellerPhoneNumberPrefix+this.sellerValidateForm.value.sellerPhoneNumber,
+        seller_accountdetails:this.sellerValidateForm.value.sellerWalletAddress
+      }
+      this.sellerService.editSellerPersonalInformation(editSellerDetails,this.userAccountSession.username).subscribe();
+      this.editProfileStatus=true;
+    }else{
+      console.log("Failing");
     }
-    this.sellerService.editSellerPersonalInformation(editSellerDetails,this.userAccountSession.username).subscribe();
   }
 }

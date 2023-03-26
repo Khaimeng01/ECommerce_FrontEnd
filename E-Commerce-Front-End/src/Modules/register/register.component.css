@@ -10,6 +10,15 @@
   margin-bottom: 8px;
 }
 
+.phoneNumber{
+  width:100px
+}
+
+.phoneNumber_Input{
+  width:220px
+}
+
+
 .center {
   margin: auto;
   width: 50%;
