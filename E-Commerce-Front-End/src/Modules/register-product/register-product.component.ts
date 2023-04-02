@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {ProductsDetails} from "../../classes/productsDetails";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../service/product.service";
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {FileHandle} from "../../classes/fileHandle";
 import {NzUploadFile, NzUploadXHRArgs} from "ng-zorro-antd/upload";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Observable, Subscription} from 'rxjs';
 import { of } from 'rxjs';
+import {Router} from "@angular/router";
+import {Decimal} from "decimal.js";
+import {NzImage, NzImagePreviewOptions, NzImageService} from "ng-zorro-antd/image";
 
 @Component({
   selector: 'app-register-product',
@@ -17,12 +20,12 @@ import { of } from 'rxjs';
 export class RegisterProductComponent implements OnInit {
 
   registerProductStatus=false;
-
+  price: Decimal = new Decimal(0.001);
   product:ProductsDetails={
     product_name:"",
     product_owner:"",
     product_quantity:0,
-    product_price:0,
+    product_price:this.price,
     product_category:"",
     product_description:"",
     productImages:[]
@@ -43,25 +46,19 @@ export class RegisterProductComponent implements OnInit {
   private numFilesUploaded = 0;
 
   constructor(private fb: FormBuilder,private productService:ProductService,private sanitizer:DomSanitizer,
-              private messageService: NzMessageService) {}
+              private messageService: NzMessageService,private router: Router,private nzImageService: NzImageService,) {}
 
   ngOnInit(): void {
     this.product.product_owner=sessionStorage.getItem('username');
     this.registerProductStatus=false;
     this.validateForm = this.fb.group({
       productName: [null, [Validators.required]],
-      productPrice: [null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+      productPrice: [null, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      // productPrice: [null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
       productQuantity: [null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
       productCategory: [null, [Validators.required]],
       productDesc: [null, [Validators.required]],
     });
-    // this.validateForm = this.fb.group({
-    //   productName: [null, [Validators.required]],
-    //   productPrice: [null, [Validators.required]],
-    //   productQuantity: [null, [Validators.required]],
-    //   productCategory: [null, [Validators.required]],
-    //   productDesc: [null, [Validators.required]],
-    // });
   }
 
 
@@ -78,10 +75,10 @@ export class RegisterProductComponent implements OnInit {
         this.product.product_category = this.validateForm.value.productCategory;
         this.product.product_description= this.validateForm.value.productDesc;
         const productFormData = this.prepareFormData(this.product)
-        // this.productService.addProducts(productFormData).subscribe((productFormData)=>
-        //   {console.warn(productFormData)}
-        // )
-        // this.registerProductStatus=true;
+        this.productService.addProducts(productFormData).subscribe((productFormData)=>
+          {console.warn(productFormData)}
+        )
+        this.registerProductStatus=true;
       }
     } else {
       console.log("Failure");
@@ -199,6 +196,25 @@ export class RegisterProductComponent implements OnInit {
   //   }
   //   return isAllowedExtension;
   // }
+
+
+  redirectToProductTable() {
+    this.router.navigate(['sellerLayout/sellerProductTableView']);
+  }
+
+  // onClick(product: ProductsDetails): void {
+  //   const images = product.productImages.map((image) => {
+  //     return {
+  //       src: this.sanitizer.bypassSecurityTrustUrl(<string>image.url).toString(),
+  //       width: '200px',
+  //       height: '200px',
+  //       alt: product.product_name
+  //     };
+  //   });
+  //   this.nzImageService.preview(images, { nzZoom: 1.5, nzRotate: 0 });
+  // }
+
+
 
 
 }

@@ -57,8 +57,12 @@ import { SellerEditProductComponent } from '../Modules/Seller/seller-edit-produc
 import { SellerRegisterAccountComponent } from '../Modules/Seller/seller-register-account/seller-register-account.component';
 import {NzCalendarModule} from "ng-zorro-antd/calendar";
 import {NzAlertModule} from "ng-zorro-antd/alert";
-import {LazyLoadImageModule} from 'ng-lazyload-image'
-
+import {LazyLoadImageModule} from 'ng-lazyload-image';
+import { ContactUsComponent } from '../Modules/contact-us/contact-us.component'
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
+import {NzSpinModule} from "ng-zorro-antd/spin";
+import { NzImageService } from 'ng-zorro-antd/image';
 
 registerLocaleData(en);
 
@@ -83,7 +87,8 @@ registerLocaleData(en);
     SellerProductTableViewComponent,
     SellerOrderHistoryComponent,
     SellerEditProductComponent,
-    SellerRegisterAccountComponent
+    SellerRegisterAccountComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
@@ -118,9 +123,12 @@ registerLocaleData(en);
     NzResultModule,
     NzCalendarModule,
     NzAlertModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    NzNotificationModule,
+    NzSkeletonModule,
+    NzSpinModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US },DataService,NzMessageService],
+  providers: [{ provide: NZ_I18N, useValue: en_US },DataService,NzMessageService,NzImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

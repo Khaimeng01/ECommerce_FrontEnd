@@ -1,0 +1,11 @@
+.custom-card {
+  width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.custom-card img {
+  object-fit: cover;
+}

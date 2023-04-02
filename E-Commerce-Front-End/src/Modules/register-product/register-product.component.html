@@ -129,7 +129,8 @@
   >
     <div nz-result-extra>
       <button nz-button nzType="primary" (click)="registerProductStatus=false;">Register New Product</button>
-      <button nz-button [routerLink]="'sellerProductTableView'" >View Product Table</button>
+<!--      <button nz-button [routerLink]="'sellerProductTableView'" >View Product Table</button>-->
+      <button nz-button (click)="redirectToProductTable()" >View Product Table</button>
     </div>
   </nz-result>
 </div>

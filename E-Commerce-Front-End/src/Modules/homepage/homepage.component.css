@@ -22,3 +22,30 @@ h3 {
   bottom: 0;
   width: 100%;
 }
+
+.center {
+  margin: auto;
+  width: 50%;
+  height:64%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.secondLayer{
+  margin: auto;
+  width: 70%;
+  /*height:60%;*/
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 16px;
+}
+
+.grid-item {
+  text-align: center;
+}

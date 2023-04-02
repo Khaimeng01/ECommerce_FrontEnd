@@ -1,60 +1,82 @@
-<div class="h-5/6">
+<div class="h-5/6 py-4" *ngIf="!checkOutStatus && !checkOutStatus_2">
   <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 " >
-    <div class="grid grid-cols-2 pt-4">
-      <div class=" col-span-1">
-        <div class="text-center mx-auto">
-          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" >
+    <div class="grid grid-cols-2 pt-4 ">
+      <div class=" col-span-1 parent">
 
-            <!--  Username-->
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username" class="text-left">Username</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
-                <input nz-input formControlName="username" id="username" placeholder="{{customerDatabase.order_Buyer_Username }}"/>
-              </nz-form-control>
-            </nz-form-item>
-
-
-            <!--  PhoneNumber-->
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" class="text-left" nzRequired>Phone Number</nz-form-label>
-              <nz-form-control
-                [nzSm]="14"
-                [nzXs]="24"
-                [nzValidateStatus]="validateForm.controls['phoneNumber']"
-                nzErrorTip="Please input your phone number!"
-              >
-                <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-                  <ng-template #addOnBeforeTemplate>
-                    <nz-select formControlName="phoneNumberPrefix" class="phone-select">
-                      <nz-option nzLabel="+60" nzValue="+60"></nz-option>
-                    </nz-select>
-                  </ng-template>
-                  <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
-
-            <!--  //Website-->
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address" class="text-left">Address</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
-                <input nz-input formControlName="address" id="address" />
-              </nz-form-control>
-            </nz-form-item>
-
-
-            <nz-form-item nz-row class="register-area">
-              <nz-form-control [nzSpan]="14" [nzOffset]="6" class="text-right">
-                <button  nz-button nzType="primary">Register</button>
-<!--                <button *ngIf="!walletStatus" nz-button nzType="primary" (click)="connectToMetamask()">Connect to Metamask</button>-->
-              </nz-form-control>
-            </nz-form-item>
-
-          </form>
+        <div>
+          <nz-page-header
+            class="site-page-header"
+            (nzBack)="onBack()"
+            nzBackIcon
+            nzTitle="Back"
+          ></nz-page-header>
         </div>
+
+        <div class="grid grid-rows-2 gap-y-2 mx-auto center_2 pb-3">
+          <h1 class="text-2xl">Confirm your order details</h1>
+          <p class="text-sm">Here you can double confirm your order details</p>
+        </div>
+
+
+        <div class="mx-auto rounded-lg">
+          <div class="center_2 mx-auto rounded-lg ">
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()"
+                  [nzLayout]="'vertical'">
+
+              <!--  Username-->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username" class="text-left text-2xl  font-medium" style="font-size: 20px;">
+                  Username
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+                  <input nz-input formControlName="username" class="w-[19rem]" id="username" placeholder="{{customerDatabase.order_Buyer_Username }}"/>
+                </nz-form-control>
+              </nz-form-item>
+
+
+              <!--  PhoneNumber-->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" class="text-left font-medium" nzRequired>Phone Number</nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  [nzValidateStatus]="validateForm.controls['phoneNumber']"
+                  nzErrorTip="Please input your phone number!"
+                >
+                  <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                    <ng-template #addOnBeforeTemplate>
+                      <nz-select formControlName="phoneNumberPrefix" class="phoneNumber w-32">
+                        <nz-option nzLabel="+60" nzValue="+60" class="w-32"></nz-option>
+                      </nz-select>
+                    </ng-template>
+                    <input class="phoneNumber_Input"  formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+
+              <!--  //Website-->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address" class="text-left font-medium">Address</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
+                  <input nz-input formControlName="address" class="w-[19rem]" id="address" />
+                </nz-form-control>
+              </nz-form-item>
+
+
+              <nz-form-item nz-row class="register-area">
+                <nz-form-control [nzSpan]="14" [nzOffset]="8" class="text-right">
+                  <button  nz-button nzType="primary" class="rounded-full">Buy Now</button>
+                  <!--                <button *ngIf="!walletStatus" nz-button nzType="primary" (click)="connectToMetamask()">Connect to Metamask</button>-->
+                </nz-form-control>
+              </nz-form-item>
+
+            </form>
+          </div>
+        </div>
+
       </div>
       <div class="grid grid-row-6">
-        <nz-table #basicTable  [nzFrontPagination]="false">
+        <nz-table [nzFrontPagination]="false" [nzData]="listOfData" class="pt-4">
           <thead>
           <tr>
             <th>No</th>
@@ -64,15 +86,44 @@
           </tr>
           </thead>
           <tbody>
-          <tr >
-            <td>1</td>
-            <td>{{orderDetails.quantity}}</td>
-            <td>{{orderDetails.productName}}</td>
-            <td>{{orderDetails.total}}</td>
+          <tr *ngFor="let item of listOfData ; let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.productName}}</td>
+            <td>{{item.total}}</td>
           </tr>
+<!--          <tr >-->
+<!--            <td>1</td>-->
+<!--            <td>{{orderDetails.quantity}}</td>-->
+<!--            <td>{{orderDetails.productName}}</td>-->
+<!--            <td>{{orderDetails.total}}</td>-->
+<!--          </tr>-->
           </tbody>
         </nz-table>
       </div>
     </div>
   </div>
 </div>
+
+<div *ngIf="checkOutStatus" class="h-5/6 py-4" style="display: flex; align-items: center;justify-content: center">
+  <div class="my-auto">
+    <nz-result
+      nzStatus="success"
+      nzTitle="Successfully Edited your details for your Account"
+      nzSubTitle="Changes can be viewed at Profile Management Component me time to showcase"
+    >
+      <div nz-result-extra>
+        <button nz-button [routerLink]="'/productHomepage'" >View Product Table</button>
+      </div>
+    </nz-result>
+  </div>
+</div>
+
+
+<div *ngIf="checkOutStatus_2" class="h-5/6 py-4" style="display: flex; align-items: center;justify-content: center">
+  <div class="my-auto">
+    <nz-spin nzSimple></nz-spin>
+  </div>
+</div>
+
+

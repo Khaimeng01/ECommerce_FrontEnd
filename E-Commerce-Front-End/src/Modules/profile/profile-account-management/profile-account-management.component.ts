@@ -44,7 +44,7 @@ export class ProfileAccountManagementComponent implements OnInit {
       sellerEmail: [null, [Validators.email, Validators.required]],
       sellerPassword: [null, [Validators.required]],
       sellerPhoneNumberPrefix: ['+60'],
-      sellerPhoneNumber: [null, [Validators.required,, Validators.pattern(/^[1-9]\d*$/)]],
+      sellerPhoneNumber: [null, [Validators.required]],
       sellerAddress: [null, [Validators.required]],
       sellerWalletAddress:[null,[Validators.required]],
     });
@@ -111,7 +111,8 @@ export class ProfileAccountManagementComponent implements OnInit {
         customer_address:this.buyerValidateForm.value.address,
         customer_phonenumber:this.buyerValidateForm.value.phoneNumber
       }
-      // this.buyerService.editDetails(editCustomerDetails,this.userAccountSession.username).subscribe();
+      sessionStorage.setItem('username', editCustomerDetails.customer_username);
+      this.buyerService.editDetails(editCustomerDetails,this.userAccountSession.username).subscribe();
     }else{
       console.log("FAIL")
     }
@@ -131,10 +132,11 @@ export class ProfileAccountManagementComponent implements OnInit {
         seller_password:this.sellerValidateForm.value.sellerPassword,
         seller_address:this.sellerValidateForm.value.sellerAddress,
         seller_email:this.sellerValidateForm.value.sellerEmail,
-        seller_phonenumber:this.sellerValidateForm.value.sellerPhoneNumberPrefix+this.sellerValidateForm.value.sellerPhoneNumber,
+        seller_phonenumber:this.sellerValidateForm.value.sellerPhoneNumber,
         seller_accountdetails:this.sellerValidateForm.value.sellerWalletAddress
       }
-      this.sellerService.editSellerPersonalInformation(editSellerDetails,this.userAccountSession.username).subscribe();
+      sessionStorage.setItem('username', editSellerDetails.seller_username);
+      this.sellerService.editSellerPersonalInformation(editSellerDetails,editSellerDetails.seller_username).subscribe();
       this.editProfileStatus=true;
     }else{
       console.log("Failing");

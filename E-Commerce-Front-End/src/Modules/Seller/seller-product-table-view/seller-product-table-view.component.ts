@@ -162,7 +162,7 @@ export class SellerProductTableViewComponent implements OnInit {
     },
     {
       title: 'Product Price',
-      compare: (a: ProductsDetails2, b: ProductsDetails2) => a.product_price - b.product_price,
+      compare: (a: ProductsDetails2, b: ProductsDetails2) => a.product_price.cmp(b.product_price),
       priority: 2
     },
     {

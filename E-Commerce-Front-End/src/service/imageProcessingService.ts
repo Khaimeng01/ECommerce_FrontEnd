@@ -19,9 +19,9 @@ export class imageProcessingService{
 
     for(let i =0;i< productImages.length;i++){
       const imagesFileData = productImages[i];
-      const imageBlob = this.dataURItoBlob(imagesFileData.picByte,imagesFileData.type);
+      const imageBlob = this.dataURItoBlob(imagesFileData.image_model_pic_byte,imagesFileData.image_model_image_type);
 
-      const imageFile = new File([imageBlob],imagesFileData.name,{type:imagesFileData.type});
+      const imageFile = new File([imageBlob],imagesFileData.image_model_name,{type:imagesFileData.image_model_image_type});
 
       const finalFileHandle:FileHandle={
         file:imageFile,

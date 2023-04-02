@@ -9,6 +9,7 @@ import {FileHandle} from "../../../classes/fileHandle";
 import {DomSanitizer} from "@angular/platform-browser";
 import {NzUploadFile} from "ng-zorro-antd/upload";
 import {NzMessageService} from "ng-zorro-antd/message";
+import { Decimal } from 'decimal.js';
 
 @Component({
   selector: 'app-seller-edit-product',
@@ -21,11 +22,12 @@ export class SellerEditProductComponent implements OnInit {
   product!:ProductsDetails2[]
   test!:any[];
   validateForm!: FormGroup;
+  price: Decimal = new Decimal(0.001);
   editedProduct:ProductsDetails={
     product_name:"",
     product_owner:"",
     product_quantity:0,
-    product_price:0,
+    product_price:this.price,
     product_category:"",
     product_description:"",
     productImages:[]

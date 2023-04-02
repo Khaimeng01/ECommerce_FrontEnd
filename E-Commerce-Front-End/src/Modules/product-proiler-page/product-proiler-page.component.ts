@@ -7,7 +7,15 @@ import {imageProcessingService} from "../../service/imageProcessingService";
 import { EventEmitter, Output } from '@angular/core';
 import {OrderProductsService} from "../../service/orderProducts.service";
 import {orderBuyerDetails, orderDetails} from "../../classes/orderDetails";
+import {NzNotificationService} from "ng-zorro-antd/notification";
+import {Decimal} from "decimal.js";
+import {NzMessageService} from "ng-zorro-antd/message";
 
+interface ColorOption {
+  label: string;
+  value: string;
+  color: string;
+}
 @Component({
   selector: 'app-product-proiler-page',
   templateUrl: './product-proiler-page.component.html',
@@ -16,18 +24,22 @@ import {orderBuyerDetails, orderDetails} from "../../classes/orderDetails";
 export class ProductProilerPageComponent implements OnInit {
 
   constructor(private activateRoute:ActivatedRoute,private router:Router,private productService: ProductService,
-              private imageProcessingService:imageProcessingService,private orderProductService:OrderProductsService) { }
+              private imageProcessingService:imageProcessingService,private orderProductService:OrderProductsService,
+              private notification: NzNotificationService,private message: NzMessageService) { }
   id!:any;
+  price: Decimal = new Decimal(0.001);
   product!:ProductsDetails2[]
   orderDetails:orderDetails={
     product_id:BigInt('9007199254740991'),
     productName:"",
     orderSellerUsername:"",
     quantity: 1,
-    productPrice:0,
-    total: 0,
+    productPrice:this.price,
+    total: this.price,
+    product_description:"",
     orderSellerAddress:"0xB80ef9e783F06DADDE4d1bbd7B461D1c288250F1"
   }
+  outOfStock:boolean =false;
 
   ngOnInit(): void {
     this.activateRoute.paramMap.subscribe(paramMap => {
@@ -40,6 +52,9 @@ export class ProductProilerPageComponent implements OnInit {
         {
           console.log(response)
           this.product= response;
+          if(this.product[0].product_quantity == 0){
+            this.outOfStock=true;
+          }
 
         }
       )
@@ -55,19 +70,45 @@ export class ProductProilerPageComponent implements OnInit {
   @Output() dataEvent = new EventEmitter<string>();
 
   redirectToCheckOut() {
-    this.dataEvent.emit("Tester");
-    this.orderDetails.product_id = this.product[0].id_product;
-    this.orderDetails.productName =this.product[0].product_name;
-    this.orderDetails.orderSellerUsername=this.product[0].product_owner;
-    this.orderDetails.productPrice = this.product[0].product_price;
-    this.orderDetails.total = this.orderDetails.quantity*this.product[0].product_price
-    this.orderProductService.sendOrderDetails(this.orderDetails);
-    this.router.navigate(['/checkOutPage'])
-    // if(sessionStorage.getItem('username')!=null){
-    //   this.router.navigate(['/checkOutPage'])
-    // }else{
-    //   this.router.navigate(['/login'])
-    // }
+    if(this.outOfStock == false){
+      if(sessionStorage.getItem('username') == null) {
+        this.notification.create(
+          'error',
+          'You are not logged in',
+          'Please create and account to Continue'
+        );
+      }else{
+        this.dataEvent.emit("Tester");
+        this.orderDetails.product_id = this.product[0].id_product;
+        this.orderDetails.productName =this.product[0].product_name;
+        this.orderDetails.orderSellerUsername=this.product[0].product_owner;
+        this.orderDetails.productPrice = this.product[0].product_price;
+        this.orderDetails.total = new Decimal(this.orderDetails.quantity).times(this.product[0].product_price);
+        console.log(this.selectedColor);
+        if (this.selectedColor != null) {
+          this.orderDetails.product_description = this.selectedColor;
+          if(this.orderDetails.quantity > this.product[0].product_quantity){
+            this.notification.create(
+              'error',
+              'You have bought more than the avaiable stock',
+              'Please decrease your selected quantity'
+            );
+          }else{
+            console.log(this.orderDetails);
+            this.orderProductService.sendOrderDetails(this.orderDetails);
+            this.router.navigate(['/checkOutPage'])
+          }
+        }else{
+          this.message.error('Please select a colour');
+        }
+      }
+    }else{
+      this.notification.create(
+        'error',
+        'The Product is Out of Stock',
+        'Please revisit the product in a future date.'
+      );
+    }
   }
 
 
@@ -83,6 +124,14 @@ export class ProductProilerPageComponent implements OnInit {
       console.log("ERROR");
     }
   }
+
+  colorOptions: ColorOption[] = [
+    { label: 'Red', value: 'red', color: '#ff4d4f' },
+    { label: 'Green', value: 'green', color: '#52c41a' },
+    { label: 'Blue', value: 'blue', color: '#1890ff' },
+    { label: 'Yellow', value: 'yellow', color: '#fadb14' }
+  ];
+  selectedColor: string | null = null;
 
 
 }

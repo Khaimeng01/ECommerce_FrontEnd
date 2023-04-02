@@ -1,3 +1,6 @@
+import { Decimal } from 'decimal.js';
+
+
 export class  orderBuyerDetails{
   private _order_Seller_Username!:string
   private _order_delivery_Address!:string
@@ -10,8 +13,9 @@ export class  orderDetails{
   public productName!: string;
   public orderSellerUsername!:string;
   public quantity!: number;
-  public productPrice!:number;
-  public total!: number;
+  public productPrice!:Decimal;
+  public total!: Decimal;
+  public product_description!:string;
   public orderSellerAddress!:string;
 }
 
@@ -19,7 +23,7 @@ export class orderDetailsToAPI{
   public product_id!:bigint;
   public order_date!:Date;
   public order_productquantity!:number
-  public order_priceamount!:number
+  public order_priceamount!:Decimal
   public order_buyer_username!:string
   public order_seller_username!:string
   public order_delivery_address!:string
@@ -34,7 +38,7 @@ export class customer_orderPastHistory{
   public id_order!:number;
   public order_date!:Date;
   public product_id!:bigint;
-  public order_priceamount!:number
+  public order_priceamount!:Decimal
   public order_seller_username!:string
   public order_description!:string
   public order_status!:string
@@ -46,7 +50,7 @@ export class seller_orderHistory{
   public id_order!:number;
   public order_date!:Date;
   public product_id!:bigint;
-  public order_priceamount!:number
+  public order_priceamount!:Decimal
   public order_seller_username!:string
   public order_description!:string
   public order_status!:string

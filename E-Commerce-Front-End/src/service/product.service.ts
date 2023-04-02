@@ -47,5 +47,11 @@ export class ProductService {
     return this.http.put('http://localhost:8081/api/products/put', product, { params, responseType: 'text' });
   }
 
+  public filterProductTable(product_category:string,product_priceSortingType:string):Observable<ProductsDetails2[]>{
+    let params = new HttpParams().append('product_category', product_category);
+    params=params.append('product_priceSortingType',product_priceSortingType);
+    return this.http.get<ProductsDetails2[]>('http://localhost:8081/api/products/filterProductData',{params})
+  }
+
 
 }

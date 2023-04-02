@@ -42,4 +42,8 @@ export class HeaderComponent implements OnInit {
       this.loggedIn = false;
     }
   }
+
+  redirectToEdit(categories:string) {
+    this.router.navigate(['/productHomepage/'+categories]);
+  }
 }

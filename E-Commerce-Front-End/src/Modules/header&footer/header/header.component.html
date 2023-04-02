@@ -5,25 +5,34 @@
 
         <!--        Logo-->
         <ng-container *ngIf="userAccountSession.userRole === 'Buyer' || !loggedIn; else sellerLayout">
-          <a class="navbar-brand " href="#">CryptoCart</a>
+          <a class="navbar-brand text-xl " href="#">CryptoCart</a>
 
           <!--        Products-->
-          <a class="col-span-9" href="productHomepage">Products</a>
+          <a class="col-span-1 font-medium text-base text-center" href="productHomepage">Products</a>
+
+          <a class="col-span-1 font-medium text-base text-center" (click)="redirectToEdit('clothes')">Clothes</a>
+
+          <a class="col-span-1 font-medium text-base text-center"  (click)="redirectToEdit('electronics')">Electronics</a>
+
+          <a class="col-span-1 2xl:font-medium text-base text-center" (click)="redirectToEdit('Home&Living')">Home and Living</a>
+
+          <a class="col-span-1 font-medium text-base text-center"  (click)="redirectToEdit('shoes')"
+          >Shoes</a>
+
+          <a class="col-span-3 font-medium text-base " href="contactUs">Contact Us</a>
+
+          <div></div>
         </ng-container>
 
-        <ng-container *ngIf="!loggedIn; else LoggedIn">
+        <ng-container *ngIf="!loggedIn; else LoggedIn" >
           <div class="grid grid-cols-2">
-            <a routerLink="/login" class="text-center">
+            <a routerLink="/login" class="text-center text-base font-medium ">
               Login
             </a>
-            <a routerLink="register" class="text-center">
+            <a routerLink="register" class="text-center text-base font-medium ">
               Register
             </a>
           </div>
-<!--          <a routerLink="/login">-->
-<!--            <span class="material-symbols-outlined text-3xl">account_circle</span>-->
-<!--          </a>-->
-
         </ng-container>
 
       </nav>

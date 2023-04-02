@@ -37,7 +37,7 @@ export class SellerOrderHistoryComponent implements OnInit {
     },
     {
       title: 'Order Total',
-      compare: (a: seller_orderHistory, b: seller_orderHistory) => a.order_priceamount - b.order_priceamount,
+      compare: (a: seller_orderHistory, b: seller_orderHistory) => a.order_priceamount.cmp(b.order_priceamount),
       priority: 3,
       width:'119px'
     },

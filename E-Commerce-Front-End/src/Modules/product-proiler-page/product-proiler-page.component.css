@@ -17,9 +17,7 @@ h3 {
 .center {
   margin: auto;
   width: 70%;
-  /*height:80%;*/
-  border: 3px orangered;
-  /*padding: 10px;*/
+  height:auto;
 }
 
 
@@ -33,10 +31,10 @@ body {
 }
 .counter {
   width: 150px;
-  margin: auto;
+  /*margin: auto;*/
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /*align-items: left;*/
+  /*justify-content: center;*/
 }
 .counter input {
   width: 50px;
@@ -56,4 +54,8 @@ body {
   cursor: pointer;
   color: #0052cc;
   user-select: none;
+}
+
+nz-select {
+  width: 200px;
 }

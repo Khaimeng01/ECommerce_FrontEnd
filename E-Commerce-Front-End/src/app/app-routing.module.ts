@@ -26,6 +26,7 @@ import {SellerEditProductComponent} from "../Modules/Seller/seller-edit-product/
 import {
   SellerRegisterAccountComponent
 } from "../Modules/Seller/seller-register-account/seller-register-account.component";
+import {ContactUsComponent} from "../Modules/contact-us/contact-us.component";
 
 
 const routes: Routes = [
@@ -35,10 +36,12 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'homepage',component:HomepageComponent},
   {path:'productHomepage',component:ProductHomepageComponent},
+  {path:'productHomepage/:category',component:ProductHomepageComponent},
   {path:'productProfilePage/:id',component:ProductProilerPageComponent},
   {path:'registerProductComponent',component:RegisterProductComponent},
   {path:'checkOutPage',component:CheckOutPageComponent},
   {path:'sellerRegisterAccount',component:SellerRegisterAccountComponent},
+  {path:'contactUs',component:ContactUsComponent},
   {path:'profileManagementLayout',component:ProfileManagementLayoutComponent,
   children:[
     { path:'accountManagement',component:ProfileAccountManagementComponent},

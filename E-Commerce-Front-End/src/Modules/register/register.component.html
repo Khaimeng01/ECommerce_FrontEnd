@@ -2,20 +2,20 @@
 <div class="py-6 ">
   <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 " >
 <!--    <button (click)="handleIndexChange(1)">Click me</button>-->
-    <div class="grid grid-cols-4 ">
+    <div class="grid grid-cols-4 h-[50rem]">
 
       <!--    Need to check if there is an eror here-->
       <div class=" overflow-hidden rounded-l-lg rounded-bl-lg col-span-2">
-<!--        <img src="../../assets/images/pexels-cottonbro-studio-5076516.jpg" class="max-w-[23rem] 2xl:max-w-[25.1rem] overflow-hidden  " >-->
+        <img src="../../assets/images/register.jpg" class="overflow-hidden h-full" >
       </div>
 
       <div class="grid grid-rows-3 content-center max-h-[50rem] col-span-2 pl-10">
         <div class="row-span-1 ">
 
           <div class="pt-3 pb-8">
-            <h1>Get Started</h1>
+            <h1 class="font-bold text-xl">Get Started</h1>
             <br>
-            <p>Create your account now</p>
+            <p class="text-lg font-semibold">Create your account now</p>
           </div>
 
           <div>
@@ -84,7 +84,7 @@
                 <nz-form-control [nzSpan]="14" >
                   <label nz-checkbox formControlName="agree">
                   <span class="text-left">
-                    I have read the<a>agreement</a>
+                    I have read the <a>agreement</a>
                   </span>
                   </label>
                 </nz-form-control>
@@ -107,97 +107,6 @@
 </div>
 
 
-//TODO:Delete
-<!--<ng-template #sellerForm>-->
-<!--&lt;!&ndash;  <div *ngIf="switchValue==1">&ndash;&gt;-->
-<!--    <form  nz-form [formGroup]="sellerValidateForm" (ngSubmit)="sellerSubmitForm()" [nzLayout] ="'vertical'" >-->
-
-<!--      &lt;!&ndash;  Username&ndash;&gt;-->
-<!--      <nz-form-item>-->
-<!--        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerUsername" class="text-left">Username</nz-form-label>-->
-<!--        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">-->
-<!--          <input nz-input formControlName="sellerUsername" id="sellerUsername" class="w-80" />-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
-
-<!--      &lt;!&ndash;  //Email&ndash;&gt;-->
-<!--      <nz-form-item>-->
-<!--        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerEmail" class="text-left">E-mail</nz-form-label>-->
-<!--        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">-->
-<!--          <input nz-input formControlName="sellerEmail" id="sellerEmail" class="w-80" />-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
-
-<!--      &lt;!&ndash;  //Password&ndash;&gt;-->
-<!--      <nz-form-item>-->
-<!--        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPassword" class="text-left" nzRequired>Password</nz-form-label>-->
-<!--        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">-->
-<!--          <input-->
-<!--            nz-input-->
-<!--            type="password"-->
-<!--            id="sellerPassword"-->
-<!--            formControlName="sellerPassword"-->
-<!--            class="w-80"-->
-<!--          />-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
-
-<!--      &lt;!&ndash;  PhoneNumber&ndash;&gt;-->
-<!--      <nz-form-item>-->
-<!--        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPhoneNumber" class="text-left" nzRequired>Phone Number</nz-form-label>-->
-<!--        <nz-form-control-->
-<!--          [nzSm]="14"-->
-<!--          [nzXs]="24"-->
-<!--          [nzValidateStatus]="sellerValidateForm.controls['sellerPhoneNumber']"-->
-<!--          nzErrorTip="Please input your phone number!"-->
-
-<!--        >-->
-<!--          <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">-->
-<!--            <ng-template #addOnBeforeTemplate>-->
-<!--              <nz-select formControlName="sellerPhoneNumberPrefix" class="phone-select ">-->
-<!--                <nz-option nzLabel="+60" nzValue="+86"></nz-option>-->
-<!--              </nz-select>-->
-<!--            </ng-template>-->
-<!--            <input class="w-80" formControlName="sellerPhoneNumber" id="'sellerPhoneNumber'" nz-input  />-->
-<!--          </nz-input-group>-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
-
-<!--      &lt;!&ndash;  //Address&ndash;&gt;-->
-<!--      <nz-form-item>-->
-<!--        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerAddress" class="text-left">Address</nz-form-label>-->
-<!--        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">-->
-<!--          <input nz-input formControlName="sellerAddress" id="sellerAddress" class="w-80" />-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
-
-<!--      <nz-form-item>-->
-<!--        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerWalletAddress" class="text-left">Wallet Address</nz-form-label>-->
-<!--        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Wallet Address">-->
-<!--          <input nz-input formControlName="sellerWalletAddress" id="sellerWalletAddress" class="w-80" />-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
-
-
-<!--      <nz-form-item nz-row class="register-area">-->
-<!--        <nz-form-control [nzSpan]="14" [nzOffset]="6">-->
-<!--          <label nz-checkbox formControlName="sellerAgree">-->
-<!--                  <span class="text-left">-->
-<!--                    I have read the<a>agreement</a>-->
-<!--                  </span>-->
-<!--          </label>-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
-
-<!--      <nz-form-item nz-row class="register-area">-->
-<!--        <nz-form-control [nzSpan]="14" [nzOffset]="6" class="text-right">-->
-<!--          <button nz-button nzType="primary">Register</button>-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
-
-<!--    </form>-->
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-<!--</ng-template>-->
 
 
 

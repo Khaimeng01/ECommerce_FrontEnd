@@ -1,22 +1,158 @@
+<div class="h-fit">
+  <div class="grid grid-rows-12 gap-4">
 
-
-<p>Middle</p>
-<button class="primary" (click)="task1()">Button 1</button>
-<button class="primary" (click)="task2()">Button 2</button>
-
-<div class="grid grid-cols-5">
-  <div class="col-span-1"></div>
-  <div class="col-span-3">
-    <nz-carousel nzAutoPlay>
-      <div nz-carousel-content *ngFor="let index of array">
-        <img src="../../assets/images/download.jpeg" class="object-fill ">
+    <div class="pt-4" style="background: #ECECEC">
+      <div class="center " >
+        <div class="grid grid-cols-2">
+          <div class="grid grid-rows-3 gap-2">
+            <div>
+              <h1 class="text-6xl font-semibold">
+                Easy Order <br> Quick Delivery
+              </h1>
+            </div>
+            <div class="pt-2">
+              <p class="text-lg font-light subpixel-antialiased font-sans">
+                Selling and Buying Online using cryptocurrencies has never
+                been easier, faster or more reliable. Join and try the revolutionary way
+                of E-Commerce
+              </p>
+            </div>
+            <div class="">
+              <button class="bg-teal-400 h-16 w-44 text-lg text-white rounded-full"
+                      (click)="redirectToPages(1)">Register Now</button>
+            </div>
+          </div>
+          <div class=" overflow-hidden rounded-l-lg rounded-bl-lg">
+            <img [lazyLoad]="'./../assets/images/homepage_Sale.jpg'" class="rounded-full" >
+          </div>
+        </div>
       </div>
-    </nz-carousel>
+    </div>
+
+
+    <div>
+      <div class="grid grid-cols-9 w-auto pt-4 ">
+        <div class="col-start-2 col-span-5  ">
+          <div>
+            <h1 class="text-2xl font-semibold">Shop our Categories</h1>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-6 w-auto pt-4  pb-4">
+        <div class="col-start-2">
+          <div class="secondLayer h-32 flex items-center justify-center cursor-pointer"
+               style="background-image: url('./../assets/images/homepage_clothes_2.jpg');
+             background-size: cover; background-position: center; background-repeat: no-repeat;"
+               (click)="redirectToCategoriesPage('clothes')">
+            <p class="text-white text-xl" >
+              Clothes</p>
+          </div>
+        </div>
+        <div class="">
+          <div class="secondLayer bg-black h-32 flex items-center justify-center cursor-pointer"
+               style="background-image: url('./../assets/images/homepage_electronics.jpg');
+             background-size: cover; background-position: center; background-repeat: no-repeat;"
+               (click)="redirectToCategoriesPage('electronics')">
+            <p class="text-white text-xl">Electronics</p>
+          </div>
+        </div>
+        <div class="">
+          <div class="secondLayer bg-black h-32 flex items-center justify-center cursor-pointer"
+               style="background-image: url('./../assets/images/homepage_home&living.jpg');
+             background-size: cover; background-position: center; background-repeat: no-repeat;"
+               (click)="redirectToCategoriesPage('Home&Living')">
+            <p class="text-white text-xl">Home and Living</p>
+          </div>
+        </div>
+        <div class="">
+          <div class="secondLayer bg-black h-32 flex items-center justify-center cursor-pointer"
+               style="background-image: url('./../assets/images/homepage_shoes.jpg');
+             background-size: cover; background-position: center; background-repeat: no-repeat;"
+               (click)="redirectToCategoriesPage('shoes')">
+            <p class="text-white text-xl">Shoes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="pt-4" style="background: #ECECEC">
+      <div class="center ">
+        <div class="grid grid-cols-2 pt-5">
+          <div class="grid grid-rows-3 gap-2 h-fit">
+            <div>
+              <h1 class="text-6xl font-semibold">
+                Best Customer <br> Experience
+              </h1>
+            </div>
+            <div class="pt-2">
+              <p class="text-lg font-light subpixel-antialiased font-sans">
+                We provide the best customer experince to our users. There has never been easier,faster
+                or more better way to purcahse products online
+              </p>
+            </div>
+            <div class="flex items-center h-fit gap-x-2" (click)="redirectToPages(2)">
+              <a class="font-bold text-lg text-sky-400">Contact Us</a>
+              <span nz-icon nzType="arrow-right" nzTheme="outline" class="text-lg my-auto text-sky-400 cursor-pointer"></span>
+            </div>
+          </div>
+          <!--        <div class=" overflow-hidden rounded-l-lg rounded-bl-lg">-->
+          <!--          <p> Place image</p>-->
+          <!--          &lt;!&ndash;            <img [lazyLoad]="'./../assets/images/homepage_Sale_Image.jpg'" >&ndash;&gt;-->
+          <!--        </div>-->
+          <div class="grid-container pb-32">
+            <nz-card *ngFor="let item of items" nzHoverable class="grid-item">
+              <i nz-icon [nzType]="item.icon" nzTheme="outline" class="text-2xl pb-3"></i>
+              <p class="text-lg">{{ item.description }}</p>
+            </nz-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
   </div>
 </div>
 
+<!--<div class="col-start-2 col-span-5 grid grid-rows-2">-->
+<!--  <div>-->
+<!--    <h1 class="text-2xl font-semibold">Shop our Categories</h1>-->
+<!--  </div>-->
+<!--  <div class=" center grid grid-cols-4 h-auto">-->
+<!--    <div>-->
+<!--      <div class="">-->
+<!--        <div class="secondLayer bg-black h-28">-->
+<!--          <p class="text-white text-center">Clothes</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <p>Tester</p>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <p>Tester</p>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <p>Tester</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 
+<!--  <div class="grid grid-cols-5 pt-12">-->
+<!--    <div class="col-span-1"></div>-->
+<!--    <div class="col-span-3">-->
+<!--      <nz-carousel nzAutoPlay>-->
+<!--        <div nz-carousel-content *ngFor="let index of array">-->
+<!--          <img src="../../assets/images/download.jpeg" class="object-fill ">-->
+<!--        </div>-->
+<!--      </nz-carousel>-->
+<!--    </div>-->
+<!--  </div>-->
 <!--<footer class="text-center text-lg-start bg-light text-muted footer">-->
 <!--  &lt;!&ndash; Section: Social media &ndash;&gt;-->
 <!--  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">-->

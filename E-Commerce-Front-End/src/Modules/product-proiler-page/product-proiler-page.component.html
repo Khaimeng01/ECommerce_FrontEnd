@@ -3,38 +3,88 @@
     class="site-page-header"
     (nzBack)="onBack()"
     nzBackIcon
-    nzTitle="Title"
-    nzSubtitle="This is a subtitle"
+    nzTitle="Back"
   ></nz-page-header>
+
   <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 overflow-auto h-[31rem]" >
-    <div class="grid grid-cols-2 pt-4">
-      <div class="w-96 h-96 col-span-1">
+    <div class="grid grid-cols-2 p-4">
+
+<!--      <div class="w-96 col-span-1 pt-2 flex justify-center">-->
+<!--        <nz-carousel [nzEffect]="effect">-->
+<!--          <div nz-carousel-content *ngFor="let index of product[0].productImages">-->
+<!--            <img [src]='index.url' class="object-center max-h-full mx-auto">-->
+<!--          </div>-->
+<!--        </nz-carousel>-->
+<!--      </div>-->
+
+      <div class="w-96 col-span-1 pt-2 rounded-md ">
         <nz-carousel [nzEffect]="effect">
-          <div nz-carousel-content *ngFor="let index of product[0].productImages">
-            <img [src]='index.url' width="100px" height="100px" class="mx-auto" >
-          </div>
+            <div nz-carousel-content *ngFor="let index of product[0].productImages" class="rounded-md">
+              <img [src]='index.url' class="mx-auto my-auto py-3" style="max-height: 100%; object-fit: contain;">
+            </div>
         </nz-carousel>
       </div>
-      <div class="grid grid-row-6">
+
+      <div class="grid grid-row-9 gap-3">
+
+        <div class="">
+          <p class="text-3xl  font-semibold pb-2">{{product[0].product_name}}</p>
+          <p class="text-base  font-medium antialiased pb-2">{{product[0].product_category}}</p>
+          <p class="text-base font-normal font-sans antialiased">{{product[0].product_description}}</p>
+        </div>
+
+
+
+        <nz-divider></nz-divider>
+
         <div>
-
-          <p class="text-3xl font-mono font-semibold pb-2">{{product[0].product_name}}</p>
-          <p class="text-base font-light font-sans antialiased">{{product[0].product_description}}</p>
-        </div>
-        <p class="text-2xl font-medium">{{"$"+product[0].product_price}}</p>
-
-<!--        Quantiy Counter-->
-        <div class="counter">
-          <span class="down" (click)="decreaseCount()">-</span>
-          <input type="text" value="{{orderDetails.quantity}}">
-          <span class="up" (click)="increaseCount()">+</span>
+          <p class="text-2xl font-medium">{{"ETH "+product[0].product_price}}</p>
         </div>
 
+        <div>
+          <p class="py-2 font-medium">Select Colour </p>
+          <nz-select
+            [nzShowSearch]="true"
+            [nzAllowClear]="true"
+            [nzPlaceHolder]="'Select color'"
+            [(ngModel)]="selectedColor">
+            <nz-option
+              *ngFor="let colorOption of colorOptions"
+              [nzLabel]="colorOption.label"
+              [nzValue]="colorOption.value"
+              [nzCustomContent]="true">
+              <div style="display: flex; align-items: center; width: 100%;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; margin-right: 8px; background-color: {{colorOption.color}};">
+                </div>
+                <span>{{colorOption.label}}</span>
+              </div>
+            </nz-option>
+          </nz-select>
+        </div>
+
+        <div>
+          <!--        Quantiy Counter-->
+          <div class="counter py-4">
+<!--            <span nz-icon nzType="minus" nzTheme="outline" (click)="decreaseCount()" ></span>-->
+            <span class="down text-3xl" (click)="decreaseCount()">-</span>
+            <input type="text" value="{{orderDetails.quantity}}">
+            <span class="up" (click)="increaseCount()">+</span>
+          </div>
+        </div>
+
+<!--        <div class="rounded-full border border-gray-300 flex items-center px-3 py-1 w-fit">-->
+<!--          <button class="text-gray-600 focus:outline-none text-4xl" (click)="decreaseCount()">-->
+<!--            <span nz-icon nzType="minus" nzTheme="outline"></span>-->
+<!--          </button>-->
+<!--          <input type="text" value="{{orderDetails.quantity}}" class="w-10 text-center  mx-2">-->
+<!--          <button class="text-gray-600 focus:outline-none w-8 h-8" (click)="increaseCount()">+</button>-->
+<!--        </div>-->
 
 <!--        Buy Now Button-->
-        <div>
-          <button nz-button nzType="primary" (click)="redirectToCheckOut()">Buy now</button>
+        <div class="pt-3">
+          <button nz-button nzType="primary" (click)="redirectToCheckOut()" class="w-40 h-12 rounded-full">Buy now</button>
         </div>
+
       </div>
     </div>
   </div>

@@ -16,14 +16,14 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username" class="text-left">Username</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
-        <input nz-input formControlName="username" id="username" class="w-96"  />
+        <input nz-input formControlName="username" id="username" class="w-4/5"  />
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email" class="text-left">E-mail</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-        <input nz-input formControlName="email" id="email" class="w-96" />
+        <input nz-input formControlName="email" id="email" class="w-4/5" />
       </nz-form-control>
     </nz-form-item>
 
@@ -35,7 +35,7 @@
           type="password"
           id="password"
           formControlName="password"
-          class="w-96"
+          class="w-4/5"
         />
       </nz-form-control>
     </nz-form-item>
@@ -51,11 +51,11 @@
       >
         <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
           <ng-template #addOnBeforeTemplate>
-            <nz-select formControlName="phoneNumberPrefix" class="phone-select w-80" >
-              <nz-option class="test w-80" nzLabel="+60" nzValue="+86"></nz-option>
+            <nz-select formControlName="phoneNumberPrefix" class="phoneNumber w-32" >
+              <nz-option class="w-12" nzLabel="+60" nzValue="+60"></nz-option>
             </nz-select>
           </ng-template>
-          <input class="w-80" formControlName="phoneNumber" id="'phoneNumber'" nz-input  />
+          <input class="phoneNumber_Input" formControlName="phoneNumber" id="'phoneNumber'" nz-input  />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
@@ -63,13 +63,13 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address" class="text-left">Address</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
-        <input nz-input formControlName="address" id="address" class="w-96" />
+        <input nz-input formControlName="address" id="address" class="w-4/5" />
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item nz-row class="register-area">
-      <nz-form-control [nzSpan]="14" [nzOffset]="6" class="text-left">
-        <button nz-button nzType="primary">Edit Details</button>
+      <nz-form-control [nzSpan]="14" [nzOffset]="9" class="text-left pt-4">
+        <button nz-button nzType="primary" class="rounded-full ">Edit Details</button>
       </nz-form-control>
     </nz-form-item>
 
@@ -125,11 +125,11 @@
       >
         <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
           <ng-template #addOnBeforeTemplate>
-            <nz-select formControlName="sellerPhoneNumberPrefix" class="phoneNumber w-32  ">
-              <nz-option nzLabel="+60" nzValue="+60" class="w-32" ></nz-option>
+            <nz-select formControlName="sellerPhoneNumberPrefix" class="w-40">
+              <nz-option nzLabel="+60" nzValue="+60" class="" ></nz-option>
             </nz-select>
           </ng-template>
-          <input class="phoneNumber_Input" formControlName="sellerPhoneNumber" id="'sellerPhoneNumber'" nz-input  />
+          <input class="w-96" formControlName="sellerPhoneNumber" id="'sellerPhoneNumber'" nz-input  />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
@@ -151,7 +151,7 @@
 
 
     <nz-form-item nz-row class="register-area">
-      <nz-form-control [nzSpan]="14" [nzOffset]="6" class="text-right">
+      <nz-form-control [nzSpan]="14" [nzOffset]="9" class="text-left pt-4">
         <button nz-button nzType="primary">Edit Details</button>
       </nz-form-control>
     </nz-form-item>

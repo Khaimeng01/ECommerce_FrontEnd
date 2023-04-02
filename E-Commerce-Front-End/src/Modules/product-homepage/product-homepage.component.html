@@ -1,65 +1,53 @@
-
-
-<!--Card Component-->
-<div>
-  <button (click)="button1()">PRESS ME</button>
-</div>
-<div class="grid grid-cols-7 py -4 ">
+<div class="grid grid-cols-7 py-4 h-4/5 rounded-md">
   <div class="col-span-1">
   </div>
+  <div class="col-span-5 rounded-md"  style="background: #ECECEC;padding:30px;" >
 
-  <div class="col-span-5"  style="background: #ECECEC;padding:30px;" >
-
-    <div class="" style="background: whitesmoke">
+    <div class="rounded-md" style="background: whitesmoke">
       <div class="grid grid-cols-6">
 
         <!--        Category-->
         <div class=" col-span-2 p-4 ">
           <div class="grid grid-cols-4">
-            <p class="m-auto">Categories :</p>
-            <nz-select ngModel="lucy" [nzOptions]="categoriesOption" class="w-44 pl-2" ></nz-select>
+            <p class="m-auto font-medium">Categories :</p>
+            <nz-select [(ngModel)]="selectedCategoriesOption" [nzOptions]="categoriesOption" [nzPlaceHolder]="'Select Category'" class="w-44 pl-2" ></nz-select>
           </div>
         </div>
 
         <!--        Price-->
         <div class=" col-span-2 p-4 ">
           <div class="grid grid-cols-4">
-            <p class="m-auto">Price :</p>
-            <nz-select ngModel="lucy" [nzOptions]="priceOption" class="w-44" ></nz-select>
+            <p class="m-auto font-medium">Price :</p>
+            <nz-select [(ngModel)]="selectedPriceOption" [nzOptions]="priceOption" [nzPlaceHolder]="'Select Price'"class="w-44" ></nz-select>
           </div>
         </div>
-        <!--        <div class=" col-span-2 ">-->
-        <!--          <p class="pb-2">Price :</p>-->
-        <!--          <nz-select ngModel="lucy" [nzOptions]="listOfOption"></nz-select>-->
-        <!--        </div>-->
 
-        <!--        Search-->
-        <!--        <div class=" col-span-2 p-4 ">-->
-        <!--          <div class="grid grid-cols-4">-->
-        <!--            <p class="m-auto">Search :</p>-->
-        <!--            <nz-select ngModel="lucy" [nzOptions]="listOfOption"></nz-select>-->
-        <!--          </div>-->
-        <!--        </div>-->
-
-        <!--        <div class="col-span-2">-->
-        <!--          <p class="pb-2">Price :</p>-->
-        <!--          <nz-select ngModel="lucy" [nzOptions]="listOfOption"></nz-select>-->
-        <!--        </div>-->
+<!--        Apply Button-->
+        <div class="col-span-2 p-4 ">
+          <div class="grid grid-cols-2">
+            <div>
+              <button (click)="filterTable()" class="m-auto rounded-full bg-teal-400 text-white pl-4 hover:bg-teal-500" nz-button >APPLY</button>
+            </div>
+            <div>
+              <button (click)="resetFilter()" class="m-auto rounded-full bg-teal-400 text-white  hover:bg-teal-500" nz-button >RESET</button>
+            </div>
+          </div>
+        </div>
       </div>
+
+
     </div>
 
     <div nz-row [nzGutter]="4" class="gap-y-3 pt-3">
-
       <div nz-col [nzSpan]="4"  *ngFor="let products of product">
         <nz-card nzTitle={{products.product_name}}>
-          <div class="overflow-auto">
+          <div class="cursor-pointer">
             <app-product-box [routerLink]="['/productProfilePage',products.id_product]"
               [productList]="products">
             </app-product-box>
           </div>
         </nz-card>
       </div>
-
     </div>
   </div>
 </div>
