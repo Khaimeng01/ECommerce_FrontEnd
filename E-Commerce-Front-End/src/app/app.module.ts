@@ -63,6 +63,9 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzSpinModule} from "ng-zorro-antd/spin";
 import { NzImageService } from 'ng-zorro-antd/image';
+import {AuthGuardGuard} from "../guards/auth-guard.guard";
+import { UnauthorizedPageComponent } from '../Modules/unauthorized-page/unauthorized-page.component';
+import { DummyComponentComponent } from '../Modules/Seller/dummy-component/dummy-component.component';
 
 registerLocaleData(en);
 
@@ -88,7 +91,9 @@ registerLocaleData(en);
     SellerOrderHistoryComponent,
     SellerEditProductComponent,
     SellerRegisterAccountComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    UnauthorizedPageComponent,
+    DummyComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +133,7 @@ registerLocaleData(en);
     NzSkeletonModule,
     NzSpinModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US },DataService,NzMessageService,NzImageService],
+  providers: [{ provide: NZ_I18N, useValue: en_US },DataService,NzMessageService,NzImageService,AuthGuardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

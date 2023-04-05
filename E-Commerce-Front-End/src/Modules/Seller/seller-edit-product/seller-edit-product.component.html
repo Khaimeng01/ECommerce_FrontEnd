@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2  ">
+<div class="grid grid-cols-2" *ngIf="!editProductStatus">
   <div class="w-[32rem]">
 
     <div class="">
@@ -123,4 +123,19 @@
     <!--      </div>-->
   </div>
 
+</div>
+
+<div>
+  <nz-result *ngIf="editProductStatus"
+             nzStatus="success"
+             nzTitle="Successfully Added New Product for your Account"
+             nzSubTitle="Changes can be viewed at Product Table. May take so
+    me time to showcase"
+  >
+    <div nz-result-extra>
+      <button nz-button nzType="primary" (click)="redirectToEditProduct()">Edit Product</button>
+<!--      &lt;!&ndash;      <button nz-button [routerLink]="'sellerProductTableView'" >View Product Table</button>&ndash;&gt;-->
+      <button nz-button (click)="redirectToProductTable()" >View Product Table</button>
+    </div>
+  </nz-result>
 </div>

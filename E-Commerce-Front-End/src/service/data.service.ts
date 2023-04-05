@@ -32,6 +32,6 @@ export class DataService {
     const headers = { 'content-type': 'application/json'}
     console.log(editCustomerDetails);
     const body=JSON.stringify(editCustomerDetails);
-    return this.http.post('http://localhost:8081/api/cs/dataman/post',editCustomerDetails);
+    return this.http.post('http://localhost:8081/api/cs/dataman/post',editCustomerDetails,{responseType:'text'});
   }
 }

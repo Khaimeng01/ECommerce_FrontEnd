@@ -53,9 +53,13 @@ export class RegisterProductComponent implements OnInit {
     this.registerProductStatus=false;
     this.validateForm = this.fb.group({
       productName: [null, [Validators.required]],
-      productPrice: [null, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      // productPrice: [null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
-      productQuantity: [null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+      productPrice: [null, [Validators.required, Validators.pattern(/^\d+(\.\d{1,4})?$/),
+        Validators.min(0)]],
+      productQuantity: [null, [
+        Validators.required,
+        Validators.pattern(/^[1-9]\d*$/),
+        Validators.min(1)
+      ]],
       productCategory: [null, [Validators.required]],
       productDesc: [null, [Validators.required]],
     });
@@ -65,10 +69,11 @@ export class RegisterProductComponent implements OnInit {
   submitForm(): void {
     console.log("Test_0");
     if (this.validateForm.valid) {
+      console.log("Test_0 I MADE IT");
       if(this.numFilesUploaded == 0){
         this.messageService.error('There is no Images for this Product');
       }else{
-        console.log("Test_1"+this.validateForm.value.productCategory);
+        console.log("Test_1 I MADE IT");
         this.product.product_name = this.validateForm.value.productName;
         this.product.product_quantity = this.validateForm.value.productQuantity;
         this.product.product_price = this.validateForm.value.productPrice;
@@ -82,11 +87,10 @@ export class RegisterProductComponent implements OnInit {
       }
     } else {
       console.log("Failure");
-      this.messageService.error('Some of the product is not filled');
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
-          // control.updateValueAndValidity({ onlySelf: true });
+          control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
@@ -102,31 +106,31 @@ export class RegisterProductComponent implements OnInit {
   }
 
 
-  customRequestHandler = (args: NzUploadXHRArgs): Subscription => {
-    const file = args.file;
-
-    // Check if the file type is JPEG or PNG
-    if (file.type === 'image/jpeg' || file.type === 'image/png') {
-      // Process the file here
-      // If you need to upload the file, you can use args.action (URL), args.headers (headers), and args.file (file) properties
-
-      // Since we are not uploading the file in this example, we need to manually trigger the onSuccess callback
-      if (args.onSuccess) {
-        args.onSuccess({}, args.file, new ProgressEvent(''));
-      }
-    } else {
-      // Show an error message using NzMessageService
-      this.messageService.error('Only JPEG and PNG files are allowed.');
-
-      // Trigger the onError callback
-      if (args.onError) {
-        args.onError(new Error('Unsupported file type'), args.file);
-      }
-    }
-
-    // Return an empty Subscription object
-    return new Subscription();
-  };
+  // customRequestHandler = (args: NzUploadXHRArgs): Subscription => {
+  //   const file = args.file;
+  //
+  //   // Check if the file type is JPEG or PNG
+  //   if (file.type === 'image/jpeg' || file.type === 'image/png') {
+  //     // Process the file here
+  //     // If you need to upload the file, you can use args.action (URL), args.headers (headers), and args.file (file) properties
+  //
+  //     // Since we are not uploading the file in this example, we need to manually trigger the onSuccess callback
+  //     if (args.onSuccess) {
+  //       args.onSuccess({}, args.file, new ProgressEvent(''));
+  //     }
+  //   } else {
+  //     // Show an error message using NzMessageService
+  //     this.messageService.error('Only JPEG and PNG files are allowed.');
+  //
+  //     // Trigger the onError callback
+  //     if (args.onError) {
+  //       args.onError(new Error('Unsupported file type'), args.file);
+  //     }
+  //   }
+  //
+  //   // Return an empty Subscription object
+  //   return new Subscription();
+  // };
 
   onFileSelected(event: any) {
     // Check if the event has a 'fileList' property
@@ -162,8 +166,42 @@ export class RegisterProductComponent implements OnInit {
     }
   }
 
-  deleteImage(i:number) {
-    this.product.productImages.splice(i,1);
+  // deleteImage(i:number) {
+  //   this.product.productImages.splice(i,1);
+  //   this.numFilesUploaded--;
+  // }
+
+  // beforeUpload = (file: NzUploadFile): boolean => {
+  //   const allowedExtensions = ['jpg', 'jpeg', 'png'];
+  //   const extension = file.name?.split('.').pop()?.toLowerCase();
+  //   const isAllowedExtension = extension ? allowedExtensions.includes(extension) : false;
+  //
+  //   if (!isAllowedExtension) {
+  //     // Display an error message to the user
+  //     this.messageService.error('Only JPEG and PNG files are allowed.');
+  //     return false;
+  //   } else if (this.numFilesUploaded >= 4) {
+  //     // Display an error message to the user
+  //     this.messageService.error('Only a maximum of 4 files can be uploaded.');
+  //     return false;
+  //   } else {
+  //     this.numFilesUploaded++;
+  //     return true;
+  //   }
+  // }
+
+  deleteImage(i: number) {
+    // Get the unique key for the image being deleted
+    const file = this.product.productImages[i].file;
+    const uniqueKey = `${file.name}_${file.lastModified}`;
+
+    // Remove the unique key from the uniqueFiles Set
+    this.uniqueFiles.delete(uniqueKey);
+
+    // Remove the image from the product.productImages array
+    this.product.productImages.splice(i, 1);
+
+    // Decrement the numFilesUploaded counter
     this.numFilesUploaded--;
   }
 
@@ -171,10 +209,15 @@ export class RegisterProductComponent implements OnInit {
     const allowedExtensions = ['jpg', 'jpeg', 'png'];
     const extension = file.name?.split('.').pop()?.toLowerCase();
     const isAllowedExtension = extension ? allowedExtensions.includes(extension) : false;
+    const uniqueKey = `${file.name}_${file.lastModified}`;
 
     if (!isAllowedExtension) {
       // Display an error message to the user
       this.messageService.error('Only JPEG and PNG files are allowed.');
+      return false;
+    } else if (this.uniqueFiles.has(uniqueKey)) {
+      // Display an error message to the user
+      this.messageService.error('The image has already been uploaded.');
       return false;
     } else if (this.numFilesUploaded >= 4) {
       // Display an error message to the user
@@ -186,35 +229,15 @@ export class RegisterProductComponent implements OnInit {
     }
   }
 
-  // beforeUpload = (file: NzUploadFile): boolean => {
-  //   const allowedExtensions = ['jpg', 'jpeg', 'png'];
-  //   const extension = file.name?.split('.').pop()?.toLowerCase();
-  //   const isAllowedExtension = extension ? allowedExtensions.includes(extension) : false;
-  //   if (!isAllowedExtension) {
-  //     // Display an error message to the user
-  //     this.messageService.error('Only JPEG and PNG files are allowed.');
-  //   }
-  //   return isAllowedExtension;
-  // }
-
 
   redirectToProductTable() {
     this.router.navigate(['sellerLayout/sellerProductTableView']);
   }
 
-  // onClick(product: ProductsDetails): void {
-  //   const images = product.productImages.map((image) => {
-  //     return {
-  //       src: this.sanitizer.bypassSecurityTrustUrl(<string>image.url).toString(),
-  //       width: '200px',
-  //       height: '200px',
-  //       alt: product.product_name
-  //     };
-  //   });
-  //   this.nzImageService.preview(images, { nzZoom: 1.5, nzRotate: 0 });
-  // }
 
-
-
-
+  redirectToRegisterProduct() {
+    this.router.navigateByUrl('/dummy-route', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/sellerLayout/registerProductComponent']);
+    });
+  }
 }

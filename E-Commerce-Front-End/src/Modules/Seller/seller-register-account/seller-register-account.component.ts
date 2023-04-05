@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {manageSellerInfo} from "../../../classes/sellerClasses";
 import {SellerService} from "../../../service/seller-Services/seller.service";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-seller-register-account',
@@ -13,7 +15,9 @@ export class SellerRegisterAccountComponent implements OnInit {
   sellerValidateForm!: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private sellerService:SellerService) { }
+              private sellerService:SellerService,
+              private messageService: NzMessageService,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.sellerValidateForm = this.fb.group({
@@ -21,25 +25,43 @@ export class SellerRegisterAccountComponent implements OnInit {
       sellerEmail: [null, [Validators.email, Validators.required]],
       sellerPassword: [null, [Validators.required]],
       sellerPhoneNumberPrefix: ['+60'],
-      sellerPhoneNumber: [null, [Validators.required]],
+      sellerPhoneNumber: [null, [
+        Validators.required,
+        Validators.pattern(/^\d{9}$/),
+        Validators.min(1)
+      ]],
       sellerAddress: [null, [Validators.required]],
       sellerWalletAddress:[null,[Validators.required]],
-      sellerAgree: [false]
+      // sellerAgree: [false]
     });
   }
 
   submitForm() {
     if(this.sellerValidateForm.valid){
+      console.log("Inside");
       var sellerDetails:manageSellerInfo={
         seller_username:this.sellerValidateForm.value.sellerUsername,
         seller_password:this.sellerValidateForm.value.sellerPassword,
         seller_accountdetails:this.sellerValidateForm.value.sellerWalletAddress,
         seller_email:this.sellerValidateForm.value.sellerEmail,
         seller_address:this.sellerValidateForm.value.sellerAddress,
-        seller_phonenumber:(this.sellerValidateForm.value.sellerPhoneNumberPrefix+
-          this.sellerValidateForm.value.sellerPhoneNumber)
+        seller_phonenumber:this.sellerValidateForm.value.sellerPhoneNumber
       }
-      this.sellerService.registerSeller(sellerDetails).subscribe()
+      this.sellerService.registerSeller(sellerDetails).subscribe((response:any)=>
+        {
+          if(response==="Username has been used"){
+            this.messageService.error('Username has been used. Try another username');
+          }else if(response === "Success"){
+            this.router.navigate(['/login']);
+          }
+        }
+      )
+    }else{
+      console.log("Error")
+      Object.values(this.sellerValidateForm.controls).forEach(control => {
+        control.markAsDirty();
+        control.updateValueAndValidity({ onlySelf: true });
+      });
     }
   }
 }

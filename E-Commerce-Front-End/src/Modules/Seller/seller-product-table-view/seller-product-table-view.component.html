@@ -26,7 +26,7 @@
 <!--          <th>Product Price</th>-->
 <!--          <th>Product Quantity</th>-->
 <!--          <th class="text-center">Action</th>-->
-          <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+          <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" class="text-center">
             {{ column.title }}
           </th>
           <th class="text-center">Action</th>

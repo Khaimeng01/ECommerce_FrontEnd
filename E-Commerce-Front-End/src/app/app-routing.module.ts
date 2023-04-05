@@ -27,10 +27,12 @@ import {
   SellerRegisterAccountComponent
 } from "../Modules/Seller/seller-register-account/seller-register-account.component";
 import {ContactUsComponent} from "../Modules/contact-us/contact-us.component";
+import {SelllerGuard} from "../guards/selller.guard";
+import {UnauthorizedPageComponent} from "../Modules/unauthorized-page/unauthorized-page.component";
+import {DummyComponentComponent} from "../Modules/Seller/dummy-component/dummy-component.component";
 
 
 const routes: Routes = [
-  // {path:'',redirectTo:'/',pathMatch:'full'}
   {path:'',redirectTo:'/homepage',pathMatch:'full'},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
@@ -38,16 +40,17 @@ const routes: Routes = [
   {path:'productHomepage',component:ProductHomepageComponent},
   {path:'productHomepage/:category',component:ProductHomepageComponent},
   {path:'productProfilePage/:id',component:ProductProilerPageComponent},
-  {path:'registerProductComponent',component:RegisterProductComponent},
-  {path:'checkOutPage',component:CheckOutPageComponent},
+  {path:'registerProductComponent',component:RegisterProductComponent,canActivate:[SelllerGuard]},
+  {path:'checkOutPage',component:CheckOutPageComponent,canActivate: [AuthGuardGuard]},
   {path:'sellerRegisterAccount',component:SellerRegisterAccountComponent},
   {path:'contactUs',component:ContactUsComponent},
+  {path:'unauthorizedPage',component:UnauthorizedPageComponent},
   {path:'profileManagementLayout',component:ProfileManagementLayoutComponent,
   children:[
     { path:'accountManagement',component:ProfileAccountManagementComponent},
     {path:'pastOrderHistory',component:ProfilePastOrderHistoryComponent}
   ]},
-  {path: 'sellerLayout', component: SellerLayoutComponent,
+  {path: 'sellerLayout', component: SellerLayoutComponent,canActivate: [SelllerGuard], canActivateChild: [SelllerGuard],
    children:[
      {path:'sellerHomepage',component:SellerHomepageComponent},
      {path:'accountManagement',component:ProfileAccountManagementComponent},
@@ -55,9 +58,12 @@ const routes: Routes = [
      {path:'sellerOrderHistory',component: SellerOrderHistoryComponent},
      {path:'sellerProductTableView',component: SellerProductTableViewComponent},
      {path:"sellerEditProduct",component: SellerEditProductComponent},
-     {path:'',component: SellerHomepageComponent},
+     {path:'dummy-route',component: DummyComponentComponent},
+     { path: '**', redirectTo: 'sellerHomepage', pathMatch: 'full' },
+
    ]
-  }
+  },
+  { path: '**', redirectTo: '/unauthorizedPage', pathMatch: 'full' }
 
 ];
 

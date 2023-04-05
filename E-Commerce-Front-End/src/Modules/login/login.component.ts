@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
               return Promise.resolve(true);
             }
             if (this.a2.match("Incorrect Password")) {
-              this.message.error('Incorrect Password');
+              this.message.error('The Username / Password is Incorrect');
               return Promise.resolve(true);
             }
             if (this.a2.match("No user is found with this Username")) {

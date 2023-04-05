@@ -36,7 +36,9 @@ export class ProfileAccountManagementComponent implements OnInit {
       email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
       phoneNumberPrefix: ['+60'],
-      phoneNumber: [null, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]],
+      phoneNumber: [null, [Validators.required,
+        Validators.pattern(/^\d{9}$/),
+        Validators.min(1)]],
       address: [null, [Validators.required]],
     });
     this.sellerValidateForm = this.fb.group({
@@ -44,7 +46,9 @@ export class ProfileAccountManagementComponent implements OnInit {
       sellerEmail: [null, [Validators.email, Validators.required]],
       sellerPassword: [null, [Validators.required]],
       sellerPhoneNumberPrefix: ['+60'],
-      sellerPhoneNumber: [null, [Validators.required]],
+      sellerPhoneNumber: [null, [Validators.required,
+        Validators.pattern(/^\d{9}$/),
+        Validators.min(1)]],
       sellerAddress: [null, [Validators.required]],
       sellerWalletAddress:[null,[Validators.required]],
     });
@@ -113,6 +117,7 @@ export class ProfileAccountManagementComponent implements OnInit {
       }
       sessionStorage.setItem('username', editCustomerDetails.customer_username);
       this.buyerService.editDetails(editCustomerDetails,this.userAccountSession.username).subscribe();
+      this.editProfileStatus=true;
     }else{
       console.log("FAIL")
     }

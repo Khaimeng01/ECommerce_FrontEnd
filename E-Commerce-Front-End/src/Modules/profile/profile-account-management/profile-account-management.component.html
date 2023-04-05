@@ -125,11 +125,11 @@
       >
         <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
           <ng-template #addOnBeforeTemplate>
-            <nz-select formControlName="sellerPhoneNumberPrefix" class="w-40">
-              <nz-option nzLabel="+60" nzValue="+60" class="" ></nz-option>
+            <nz-select formControlName="sellerPhoneNumberPrefix" class="phoneNumber w-32">
+              <nz-option class="w-12"  nzLabel="+60" nzValue="+60" ></nz-option>
             </nz-select>
           </ng-template>
-          <input class="w-96" formControlName="sellerPhoneNumber" id="'sellerPhoneNumber'" nz-input  />
+          <input class="phoneNumber_Input_2" formControlName="sellerPhoneNumber" id="'sellerPhoneNumber'" nz-input  />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
@@ -168,7 +168,7 @@
   >
     <div nz-result-extra>
       <button nz-button nzType="primary" (click)="editProfileStatus=false;">Return to Profile Management</button>
-      <button nz-button [routerLink]="'sellerProductTableView'" >View Product Table</button>
+      <button  nz-button [routerLink]="'sellerProductTableView'"  *ngIf="userAccountSession.userRole=='Seller'">View Product Table</button>
     </div>
   </nz-result>
 </div>

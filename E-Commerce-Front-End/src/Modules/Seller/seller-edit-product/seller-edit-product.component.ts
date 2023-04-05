@@ -18,6 +18,7 @@ import { Decimal } from 'decimal.js';
 })
 export class SellerEditProductComponent implements OnInit {
 
+  editProductStatus=false;
   productId!:string;
   product!:ProductsDetails2[]
   test!:any[];
@@ -50,6 +51,7 @@ export class SellerEditProductComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.editProductStatus=false;
     this.route.queryParams.subscribe(params => {
       const productId = params['productId'];
       this.productId = params['productId'];
@@ -64,6 +66,7 @@ export class SellerEditProductComponent implements OnInit {
           this.product= response;
           this.test=response;
           this.editedProduct=this.product[0];
+          this.populateUniqueFiles(this.editedProduct.productImages); // Call the new method here
           this.validateForm.patchValue({
             productName:this.editedProduct.product_name,
             productPrice:this.editedProduct.product_price,
@@ -76,8 +79,13 @@ export class SellerEditProductComponent implements OnInit {
       )
     this.validateForm = this.fb.group({
       productName: [null, [Validators.required]],
-      productPrice: [null, [Validators.required]],
-      productQuantity: [null, [Validators.required]],
+      productPrice: [null, [Validators.required, Validators.pattern(/^\d+(\.\d{1,4})?$/),
+        Validators.min(0)]],
+      productQuantity: [null, [
+        Validators.required,
+        Validators.pattern(/^[1-9]\d*$/),
+        Validators.min(1)
+      ]],
       productCategory: [null, [Validators.required]],
       productDesc: [null, [Validators.required]],
     });
@@ -101,13 +109,17 @@ export class SellerEditProductComponent implements OnInit {
         console.log("EDITING");
         let idProduct = BigInt(this.productId);
         this.productService.editProduct(productFormData,idProduct).subscribe((productFormData)=>
-          {console.warn(productFormData)}
+          {
+            console.warn(productFormData)
+
+          }
         );
+        this.editProductStatus=true;
       }
       // addProducts(productFormData).subscribe((productFormData)=>
       //   {console.warn(productFormData)}
       // )
-      // this.registerProductStatus=true;
+      // this.editProductStatus=true;
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -118,6 +130,10 @@ export class SellerEditProductComponent implements OnInit {
     }
   }
 
+
+  private uniqueFiles = new Set<string>();
+  private numFilesUploaded = 0;
+
   prepareFormData(product:ProductsDetails):FormData{
     const formData = new FormData();
     formData.append('product',new Blob([JSON.stringify(product)],{type:'application/json'}));
@@ -127,8 +143,112 @@ export class SellerEditProductComponent implements OnInit {
     return formData;
   }
 
-  private uniqueFiles = new Set<string>();
+  // private populateUniqueFiles(images: FileHandle[]): void {
+  //   this.uniqueFiles.clear();
+  //   this.numFilesUploaded = 0;
+  //
+  //   for (const image of images) {
+  //     const file = image.file;
+  //     const uniqueKey = `${file.name}_${file.lastModified}`;
+  //     this.uniqueFiles.add(uniqueKey);
+  //     this.numFilesUploaded++;
+  //   }
+  // }
 
+  private populateUniqueFiles(images: FileHandle[]): void {
+    this.uniqueFiles.clear();
+    this.numFilesUploaded = 0;
+
+    for (const image of images) {
+      const uniqueKey = `${image.file.name}_${image.file.size}`;
+      this.uniqueFiles.add(uniqueKey);
+      this.numFilesUploaded++;
+    }
+  }
+
+  beforeUpload = (file: NzUploadFile): boolean => {
+    const allowedExtensions = ['jpg', 'jpeg', 'png'];
+    const extension = file.name?.split('.').pop()?.toLowerCase();
+    const isAllowedExtension = extension ? allowedExtensions.includes(extension) : false;
+    const uniqueKey = `${file.name}_${file.size}`;
+
+    if (!isAllowedExtension) {
+      // Display an error message to the user
+      this.messageService.error('Only JPEG and PNG files are allowed.');
+      return false;
+    } else if (this.uniqueFiles.has(uniqueKey)) {
+      // Display an error message to the user
+      this.messageService.error('The image has already been uploaded.');
+      return false;
+    } else if (this.numFilesUploaded >= 4) {
+      // Display an error message to the user
+      this.messageService.error('Only a maximum of 4 files can be uploaded.');
+      return false;
+    } else {
+      this.numFilesUploaded++;
+      return true;
+    }
+  }
+
+
+
+  // onFileSelected(event: any) {
+  //   // Check if the event has a 'fileList' property
+  //   if (event && event.fileList) {
+  //     // Iterate through the fileList
+  //     for (const fileItem of event.fileList) {
+  //       // Check if the fileItem has the 'originFileObj' property
+  //       if (fileItem.originFileObj) {
+  //         // Get the original file from the fileItem
+  //         const file = fileItem.originFileObj;
+  //
+  //         // Create a unique key based on the file's name and lastModified property
+  //         const uniqueKey = `${file.name}_${file.lastModified}`;
+  //
+  //         // Check if the uniqueFiles Set already contains the uniqueKey
+  //         if (!this.uniqueFiles.has(uniqueKey)) {
+  //           // Add the uniqueKey to the uniqueFiles Set
+  //           this.uniqueFiles.add(uniqueKey);
+  //
+  //           // Create a FileHandle object
+  //           const fileHandler: FileHandle = {
+  //             file: file,
+  //             url: this.sanitizer.bypassSecurityTrustUrl(
+  //               window.URL.createObjectURL(file)
+  //             )
+  //           };
+  //
+  //           // Push the FileHandle object into the product.productImages array
+  //           this.editedProduct.productImages.push(fileHandler);
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  //
+  // beforeUpload = (file: NzUploadFile): boolean => {
+  //   const allowedExtensions = ['jpg', 'jpeg', 'png'];
+  //   const extension = file.name?.split('.').pop()?.toLowerCase();
+  //   const isAllowedExtension = extension ? allowedExtensions.includes(extension) : false;
+  //
+  //   if (!isAllowedExtension) {
+  //     // Display an error message to the user
+  //     this.messageService.error('Only JPEG and PNG files are allowed.');
+  //     return false;
+  //   } else if (this.numFilesUploaded >= 4) {
+  //     // Display an error message to the user
+  //     this.messageService.error('Only a maximum of 4 files can be uploaded.');
+  //     return false;
+  //   } else {
+  //     this.numFilesUploaded++;
+  //     return true;
+  //   }
+  // }
+  //
+  // deleteImage(i:number) {
+  //   this.editedProduct.productImages.splice(i,1);
+  //   this.numFilesUploaded--;
+  // }
   onFileSelected(event: any) {
     // Check if the event has a 'fileList' property
     if (event && event.fileList) {
@@ -163,33 +283,56 @@ export class SellerEditProductComponent implements OnInit {
     }
   }
 
-  private numFilesUploaded = 0;
+  // beforeUpload = (file: NzUploadFile): boolean => {
+  //   const allowedExtensions = ['jpg', 'jpeg', 'png'];
+  //   const extension = file.name?.split('.').pop()?.toLowerCase();
+  //   const isAllowedExtension = extension ? allowedExtensions.includes(extension) : false;
+  //   const uniqueKey = `${file.name}_${file.lastModified}`;
+  //
+  //   if (!isAllowedExtension) {
+  //     // Display an error message to the user
+  //     this.messageService.error('Only JPEG and PNG files are allowed.');
+  //     return false;
+  //   } else if (this.uniqueFiles.has(uniqueKey)) {
+  //     // Display an error message to the user
+  //     this.messageService.error('The image has already been uploaded.');
+  //     return false;
+  //   } else if (this.numFilesUploaded >= 4) {
+  //     // Display an error message to the user
+  //     this.messageService.error('Only a maximum of 4 files can be uploaded.');
+  //     return false;
+  //   } else {
+  //     this.numFilesUploaded++;
+  //     return true;
+  //   }
+  // }
 
-  beforeUpload = (file: NzUploadFile): boolean => {
-    const allowedExtensions = ['jpg', 'jpeg', 'png'];
-    const extension = file.name?.split('.').pop()?.toLowerCase();
-    const isAllowedExtension = extension ? allowedExtensions.includes(extension) : false;
+  deleteImage(i: number) {
+    // Get the unique key for the image being deleted
+    const file = this.editedProduct.productImages[i].file;
+    const uniqueKey = `${file.name}_${file.size}`;
 
-    if (!isAllowedExtension) {
-      // Display an error message to the user
-      this.messageService.error('Only JPEG and PNG files are allowed.');
-      return false;
-    } else if (this.numFilesUploaded >= 4) {
-      // Display an error message to the user
-      this.messageService.error('Only a maximum of 4 files can be uploaded.');
-      return false;
-    } else {
-      this.numFilesUploaded++;
-      return true;
-    }
-  }
+    // Remove the unique key from the uniqueFiles Set
+    this.uniqueFiles.delete(uniqueKey);
 
-  deleteImage(i:number) {
-    this.editedProduct.productImages.splice(i,1);
+    // Remove the image from the product.productImages array
+    this.editedProduct.productImages.splice(i, 1);
+
+    // Decrement the numFilesUploaded counter
     this.numFilesUploaded--;
   }
 
   onBack() {
     this.router.navigate(['sellerLayout/sellerProductTableView'])
+  }
+
+  redirectToProductTable() {
+    this.router.navigate(['sellerLayout/sellerProductTableView']);
+  }
+
+  redirectToEditProduct() {
+    this.router.navigateByUrl('/dummy-route', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/sellerLayout/sellerEditProduct'],{ queryParams: { productId: this.productId }});
+    });
   }
 }

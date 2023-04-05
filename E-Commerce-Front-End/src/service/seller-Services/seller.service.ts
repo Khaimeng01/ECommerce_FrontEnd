@@ -15,7 +15,7 @@ export class SellerService {
   constructor(private http:HttpClient) { }
 
   public registerSeller(manageSellerInfo:manageSellerInfo):Observable<any>{
-    return this.http.post(this.apiServerUrl+"/post",manageSellerInfo);
+    return this.http.post(this.apiServerUrl+"/post",manageSellerInfo,{responseType:'text'});
   }
 
   public getSellerPersonalInformation(sellerUserName:string):Observable<seller[]>{

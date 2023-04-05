@@ -42,7 +42,7 @@
 
 <ng-template #LoggedIn>
   <a nz-dropdown [nzDropdownMenu]="menu">
-    <p>{{userAccountSession.username}}</p>
+    <p class="font-medium text-base">{{userAccountSession.username}}</p>
   </a>
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu nzSelectable>
@@ -53,7 +53,7 @@
 
         <li nz-menu-item>
           <a [routerLink]="['profileManagementLayout','pastOrderHistory']">
-            Past Order History
+            View Past Order History
           </a>
         </li>
       </ng-container>
