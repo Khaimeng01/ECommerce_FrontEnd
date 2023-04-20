@@ -56,7 +56,7 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productDesc" class="text-left">Description</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Description">
-            <nz-textarea-count [nzMaxCharacterCount]="2000">
+            <nz-textarea-count [nzMaxCharacterCount]="250">
               <textarea formControlName="productDesc" nz-input rows="2" placeholder="write any thing" id="productDesc"></textarea>
             </nz-textarea-count>
 
@@ -102,8 +102,6 @@
             <div></div>
             <div class="text-center">
               <a [href]="file.url" target="_blank" class="text-center">{{file.file.name}}</a>
-<!--              <a>{{file.file.name}}</a>-->
-<!--              <p class="text-center">{{file.file.name}}</p>-->
             </div>
             <div class="text-center">
               <span nz-icon nzType="delete" nzTheme="outline" (click)="deleteImage(i)" class="cursor-pointer hover:text-red-700" ></span>

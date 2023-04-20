@@ -4,6 +4,7 @@ import {manageSellerInfo} from "../../../classes/sellerClasses";
 import {SellerService} from "../../../service/seller-Services/seller.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Router} from "@angular/router";
+import {DataService} from "../../../service/data.service";
 
 @Component({
   selector: 'app-seller-register-account',
@@ -17,11 +18,11 @@ export class SellerRegisterAccountComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private sellerService:SellerService,
               private messageService: NzMessageService,
-              private router:Router) { }
+              private router:Router,private dataService:DataService) { }
 
   ngOnInit(): void {
     this.sellerValidateForm = this.fb.group({
-      sellerUsername: [null, [Validators.required]],
+      sellerUsername: [null, [Validators.required,this.dataService.noSpaceAtStart()]],
       sellerEmail: [null, [Validators.email, Validators.required]],
       sellerPassword: [null, [Validators.required]],
       sellerPhoneNumberPrefix: ['+60'],
@@ -30,8 +31,8 @@ export class SellerRegisterAccountComponent implements OnInit {
         Validators.pattern(/^\d{9}$/),
         Validators.min(1)
       ]],
-      sellerAddress: [null, [Validators.required]],
-      sellerWalletAddress:[null,[Validators.required]],
+      sellerAddress: [null, [Validators.required,this.dataService.noSpaceAtStart()]],
+      sellerWalletAddress:[null,[Validators.required,this.dataService.noSpaceAtStart()]],
       // sellerAgree: [false]
     });
   }
@@ -51,7 +52,10 @@ export class SellerRegisterAccountComponent implements OnInit {
         {
           if(response==="Username has been used"){
             this.messageService.error('Username has been used. Try another username');
-          }else if(response === "Success"){
+          }else if(response === "Email has been used"){
+            this.messageService.error('Email has been used. Try updating password or login into your account');
+          }
+          else if(response === "Success"){
             this.router.navigate(['/login']);
           }
         }
@@ -63,5 +67,9 @@ export class SellerRegisterAccountComponent implements OnInit {
         control.updateValueAndValidity({ onlySelf: true });
       });
     }
+  }
+
+  redirectToRegister() {
+    this.router.navigate(['register']);
   }
 }

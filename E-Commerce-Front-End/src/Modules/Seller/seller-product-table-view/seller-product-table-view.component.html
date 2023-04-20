@@ -14,18 +14,6 @@
       [nzData]="product">
       <thead >
         <tr class="text-center" >
-<!--          <th class="bg-black w-14"-->
-<!--            [nzSelections]="listOfSelection"-->
-<!--            [(nzChecked)]="checked"-->
-<!--            [nzIndeterminate]="indeterminate"-->
-<!--            (nzCheckedChange)="onAllChecked($event)"-->
-<!--          ></th>-->
-<!--          <th>No</th>-->
-<!--          <th>Product Name</th>-->
-<!--          <th>Product Category</th>-->
-<!--          <th>Product Price</th>-->
-<!--          <th>Product Quantity</th>-->
-<!--          <th class="text-center">Action</th>-->
           <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" class="text-center">
             {{ column.title }}
           </th>
@@ -35,8 +23,6 @@
       </thead>
       <tbody>
       <tr *ngFor="let data of sortTable.data;let i = index;" class="text-center">
-<!--        <td [nzChecked]="setOfCheckedId.has(i)" (nzCheckedChange)="onItemChecked(i, $event)"></td>-->
-<!--        <td>{{i+1}}</td>-->
         <td>{{data.id_product}}</td>
         <td>{{data.product_name}}</td>
         <td>{{data.product_category}}</td>
@@ -45,7 +31,7 @@
         <td>
           <div class="grid grid-cols-2">
             <div>
-              <a (click)="redirectToEdit(i)" class="hover:text-teal-500">
+              <a (click)="redirectToEdit(data.id_product)" class="hover:text-teal-500">
                 <span nz-icon nzType="edit" nzTheme="outline"></span>
               </a>
             </div>
@@ -54,17 +40,10 @@
                 nz-popconfirm
                 nzPopconfirmTitle="Are you sure to delete this product?"
                 nzPopconfirmPlacement="bottom"
-                (nzOnConfirm)="deleteSelectedProduct(i)"
+                (nzOnConfirm)="deleteSelectedProduct(data.id_product)"
                 class="hover:text-red-700">
                 <span nz-icon nzType="delete" nzTheme="outline"></span>
               </a>
-<!--              <button-->
-<!--                nz-popconfirm-->
-<!--                nzPopconfirmTitle="Are you sure to delete this product?"-->
-<!--                nzPopconfirmPlacement="bottom"-->
-<!--                (nzOnConfirm)="deleteSelectedProduct(i)">-->
-<!--                Delete-->
-<!--              </button>-->
             </div>
           </div>
         </td>

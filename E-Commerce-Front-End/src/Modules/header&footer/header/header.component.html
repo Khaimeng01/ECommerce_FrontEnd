@@ -10,14 +10,14 @@
           <!--        Products-->
           <a class="col-span-1 font-medium text-base text-center" href="productHomepage">Products</a>
 
-          <a class="col-span-1 font-medium text-base text-center" (click)="redirectToEdit('clothes')">Clothes</a>
+          <a class="col-span-1 font-medium text-base text-center" href="productHomepage/clothes">Clothes</a>
 
-          <a class="col-span-1 font-medium text-base text-center"  (click)="redirectToEdit('electronics')">Electronics</a>
+          <a class="col-span-1 font-medium text-base text-center"   href="productHomepage/electronics"
+             >Electronics</a>
 
-          <a class="col-span-1 2xl:font-medium text-base text-center" (click)="redirectToEdit('Home&Living')">Home and Living</a>
+          <a class="col-span-1 2xl:font-medium text-base text-center"  href="productHomepage/Home & Living">Home and Living</a>
 
-          <a class="col-span-1 font-medium text-base text-center"  (click)="redirectToEdit('shoes')"
-          >Shoes</a>
+          <a class="col-span-1 font-medium text-base text-center" href="productHomepage/Shoes">Shoes</a>
 
           <a class="col-span-3 font-medium text-base " href="contactUs">Contact Us</a>
 
@@ -58,8 +58,6 @@
         </li>
       </ng-container>
 
-<!--      <li nz-menu-item>3rd menu item</li>-->
-
       <li nz-menu-item nzDanger>
         <a (click)="loggedOut()">Log out</a>
       </li>
@@ -69,40 +67,6 @@
 
 <ng-template #sellerLayout>
   <a class="navbar-brand " href="sellerLayout">CryptoCart</a>
-  <a class=" col-span-9" href="productHomepage">Test 1</a>
+  <a class=" col-span-9" ></a>
 </ng-template>
 
-
-
-<!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--  <ul class="navbar-nav ">-->
-<!--    <div>-->
-<!--      <li class="nav-item active mr-auto">-->
-<!--        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-<!--    </div>-->
-
-<!--    <li class="nav-item">-->
-<!--      <a class="nav-link" href="#">Link</a>-->
-<!--    </li>-->
-<!--    <li class="nav-item dropdown">-->
-<!--      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--        Dropdown-->
-<!--      </a>-->
-<!--      <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--        <a class="dropdown-item" href="#">Action</a>-->
-<!--        <a class="dropdown-item" href="#">Another action</a>-->
-<!--        <div class="dropdown-divider"></div>-->
-<!--        <a class="dropdown-item" href="#">Something else here</a>-->
-<!--      </div>-->
-<!--    </li>-->
-
-<!--    <li class="nav-item">-->
-<!--      <a class="nav-link disabled" href="#">Disabled</a>-->
-<!--    </li>-->
-
-<!--    <li class="nav-item">-->
-<!--      <p>awa</p>-->
-<!--    </li>-->
-<!--  </ul>-->
-<!--</div>-->

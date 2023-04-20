@@ -6,7 +6,7 @@
         class="pageHeader"
         (nzBack)="onBack()"
         nzBackIcon
-        nzTitle="Edit Products"
+        nzTitle="Edit Product"
       >
       </nz-page-header>
       <p>Here you can add new product for your account</p>
@@ -60,7 +60,7 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productDesc" class="text-left">Description</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Description">
-          <nz-textarea-count [nzMaxCharacterCount]="2000">
+          <nz-textarea-count [nzMaxCharacterCount]="250">
             <textarea formControlName="productDesc" nz-input rows="2" placeholder="write any thing" id="productDesc"></textarea>
           </nz-textarea-count>
 

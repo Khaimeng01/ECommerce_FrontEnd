@@ -1,32 +1,24 @@
-
 <div class="py-6 ">
   <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 " >
     <div class="grid grid-cols-2 ">
 
-      <!--    Need to check if there is an eror here-->
       <div class=" overflow-hidden rounded-l-lg rounded-bl-lg">
-<!--        <img src="../../assets/images/pexels-cottonbro-studio-5076516.jpg" class="max-w-[23rem] 2xl:max-w-[25.1rem] overflow-hidden  " >-->
-<!--        <img [lazyLoad]="'./../assets/images/pexels-cottonbro-studio-5076516.jpg'" >-->
         <img [lazyLoad]="'./../assets/images/tester_2.jpg'" >
       </div>
 
       <div class="grid grid-rows-3 content-center max-h-[32rem]  ">
         <div class="row-span-1 ">
 
-          <!--        Switch-->
           <div class="text-right py-4 pr-4  ">
-            <!--          <nz-switch [(ngModel)]="switchValue" ></nz-switch>-->
             <nz-segmented [nzOptions]="options" (nzValueChange)="handleIndexChange($event)"></nz-segmented>
           </div>
 
-          <!--        Profile_Icon-->
           <div class="sizing_Profile">
             <span class="material-symbols-outlined sew">account_circle</span>
           </div>
 
           <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
 
-            <!--      Username-->
             <nz-form-item class="sizing">
               <nz-form-control nzErrorTip="Please input your username!">
                 <nz-input-group nzPrefixIcon="user">
@@ -35,8 +27,6 @@
               </nz-form-control>
             </nz-form-item>
 
-
-            <!--      Password-->
             <nz-form-item class="sizing">
               <nz-form-control nzErrorTip="Please input your Password!">
                 <nz-input-group nzPrefixIcon="lock">
@@ -45,7 +35,6 @@
               </nz-form-control>
             </nz-form-item>
 
-            <!--      Button-->
             <div class="sizing py-3 text-right">
               <button nz-button class="login-form-button login-form-margin text-right rounded-full " [nzType]="'primary'">Login</button>
             </div>
@@ -54,11 +43,13 @@
               <a (click)="redirectToRegister()" class="text-center">Don't have an Account? Sign Up Now !</a>
             </div>
 
+            <div class="text-center text-bold pt-3">
+              <a routerLink="/forgetPassword" class="text-center">Forgot Password</a>
+            </div>
+
           </form>
         </div>
-
       </div>
-
     </div>
   </div>
 </div>

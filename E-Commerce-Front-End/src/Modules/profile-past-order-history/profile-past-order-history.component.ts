@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BuyerService} from "../../service/buyer-Services/buyer.service";
-import {customer_orderPastHistory} from "../../classes/orderDetails";
+import {customer_orderPastHistory, seller_orderHistory} from "../../classes/orderDetails";
 import {loginCustomer2} from "../../classes/loginCustomer";
 
 interface Person {
@@ -28,30 +28,49 @@ export class ProfilePastOrderHistoryComponent implements OnInit {
       (response:customer_orderPastHistory[])=>{
         console.log(response[0]);
         this.customer_orderPastHistoryList = response
-        console.log(this.customer_orderPastHistoryList[0].order_date);
       }
     )
   }
 
-  listOfData: Person[] = [
+
+  listOfColumn = [
     {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
+      title: 'Order ID',
+      compare: (a:customer_orderPastHistory , b:customer_orderPastHistory) => a.id_order - b.id_order,
+      priority: false,
+      width:'10px'
     },
     {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
+      title: 'Order Date',
+      compare: (a: customer_orderPastHistory, b: customer_orderPastHistory) => new Date(a.order_date).toISOString().localeCompare(new Date(b.order_date).toISOString()),
+      priority: 1,
+      width:'10px'
     },
     {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    }
+      title: 'Product Name',
+      compare: (a: customer_orderPastHistory, b: customer_orderPastHistory) => Number(a.product_id) - Number(b.product_id),
+      priority: 2,
+      width:'114px'
+    },
+    {
+      title: 'Order Total',
+      compare: (a: customer_orderPastHistory, b: customer_orderPastHistory) =>
+        Number(a.order_priceamount.toString()) - Number(b.order_priceamount.toString()),
+      priority: 3,
+      width:'119px'
+    },
+    {
+      title: 'Seller Username',
+      compare: (a: customer_orderPastHistory, b: customer_orderPastHistory) =>  a.order_seller_username.localeCompare(b.order_seller_username),
+      priority: 4,
+      width:'2px'
+    },
+    {
+      title: 'Order Status',
+      compare: (a: customer_orderPastHistory, b: customer_orderPastHistory) =>  a.order_status.localeCompare(b.order_status),
+      priority: 5,
+      width:'100px'
+    },
   ];
 
   openWebsite(webAddress:string) {

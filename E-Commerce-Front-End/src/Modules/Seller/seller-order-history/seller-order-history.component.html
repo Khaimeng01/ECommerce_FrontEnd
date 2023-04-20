@@ -8,7 +8,7 @@
 
     <nz-divider></nz-divider>
 
-    <nz-table #sortTable [nzData]="seller_orderPastList"  class="rounded-lg">
+    <nz-table #sortTable [nzData]="seller_orderPastList"  [nzShowPagination]="false" class="rounded-lg" >
       <thead>
       <tr class="text-center" >
         <th *ngFor="let column of listOfColumn"
@@ -26,28 +26,19 @@
         <th>
           Transaction Link
         </th>
-<!--        <th>Order ID</th>-->
-<!--        <th>Order Date</th>-->
-<!--        <th>Product ID</th>-->
-<!--        <th>Order Total</th>-->
-<!--        <th>Buyer Username</th>-->
-<!--        <th>Seller Username</th>-->
-<!--        <th>Order Description</th>-->
-<!--        <th>Order Status</th>-->
-<!--        <th>Transaction Link</th>-->
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let data of sortTable.data" class="text-left">
-        <td>{{data.id_order}}</td>
-        <td>{{data.order_date}}</td>
-        <td>{{ data.product_id}}</td>
-        <td>{{ data.order_priceamount}}</td>
-        <td>{{data.order_buyer_username}}</td>
-        <td>{{ data.order_seller_username}}</td>
-        <td>{{ data.order_description}}</td>
-        <td>{{ data.order_status}}</td>
-        <td>
+        <td class="text-center">{{data.id_order}}</td>
+        <td class="text-center">{{data.order_date}}</td>
+        <td class="text-center">{{ data.product_id}}</td>
+        <td class="text-center">{{ data.order_priceamount}}</td>
+        <td class="text-center">{{data.order_buyer_username}}</td>
+        <td class="text-center">{{ data.order_seller_username}}</td>
+        <td class="text-center">{{ data.order_description}}</td>
+        <td class="text-center">{{ data.order_status}}</td>
+        <td class="text-center">
           <a (click)="openWebsite(data.order_transaction_record)" class="hover:text-sky-400">
             Click Here
           </a>

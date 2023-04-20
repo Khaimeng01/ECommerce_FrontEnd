@@ -37,4 +37,18 @@ export class SellerService {
 
 
 
+  public getSellerStatus(sellerUsername:string):Observable<any>{
+    let params = new HttpParams().append('seller_username',sellerUsername);
+    return this.http.get(this.apiServerUrl+"/findIfAccountExists",{params,responseType:'text'})
+  }
+
+  public updatePassword(sellerUsername:string,sellerPassword:string):Observable<any>{
+    let params = new HttpParams().append('seller_username',sellerUsername);
+    params= params.append('seller_password',sellerPassword);
+    return this.http.get(this.apiServerUrl+"/updatePassword",{params,responseType:'text'})
+
+  }
+
+
+
 }

@@ -38,6 +38,7 @@ export class customer_orderPastHistory{
   public id_order!:number;
   public order_date!:Date;
   public product_id!:bigint;
+  public product_name!:string;
   public order_priceamount!:Decimal
   public order_seller_username!:string
   public order_description!:string

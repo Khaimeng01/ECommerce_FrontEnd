@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
       this.validateForm = this.fb.group({
-        username: [null, [Validators.required]],
+        username: [null, [Validators.required,this.dataService.noSpaceAtStart()]],
         email: [null, [Validators.email, Validators.required]],
         password: [null, [Validators.required]],
         phoneNumberPrefix: ['+60'],
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(/^\d{9}$/),
           Validators.min(1)
         ]],
-        address: [null, [Validators.required]]
+        address: [null, [Validators.required,this.dataService.noSpaceAtStart()]]
         // agree: [false]
       });
     }
@@ -52,7 +52,9 @@ export class RegisterComponent implements OnInit {
         {
           if(response==="Username has been used"){
             this.messageService.error('Username has been used. Try another username');
-          }else if(response === "Success"){
+          }else if (response==="Email has been used"){
+            this.messageService.error('Email has been used. Try updating password or login into your account');
+          } else if(response === "Success"){
             this.router.navigate(['/login']);
           }
         }
@@ -65,6 +67,10 @@ export class RegisterComponent implements OnInit {
         control.updateValueAndValidity({ onlySelf: true });
       });
     }
+  }
+
+  redirectToRegister() {
+    this.router.navigate(['sellerRegisterAccount']);
   }
 
 

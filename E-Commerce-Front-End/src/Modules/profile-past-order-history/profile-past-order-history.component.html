@@ -1,29 +1,41 @@
 <div>
   <div class="rounded-lg">
-    <nz-table #basicTable [nzData]="customer_orderPastHistoryList" class="rounded-lg">
+
+    <div class="grid grid-rows-2 gap-y-2">
+      <h1 class="text-2xl">View Past Order History</h1>
+      <p class="text-sm">Here you can view all your order history for your account</p>
+    </div>
+
+    <nz-divider></nz-divider>
+
+    <nz-table #sortTable [nzData]="customer_orderPastHistoryList" class="rounded-lg" [nzShowPagination]="false">
       <thead>
       <tr class="text-center">
-        <th>Order ID</th>
-        <th>Order Date</th>
-        <th>Product ID</th>
-        <th>Order Total</th>
-        <th>Order Seller Username</th>
+        <th *ngFor="let column of listOfColumn"
+            [nzSortFn]="column.compare" [nzSortPriority]="column.priority"
+            class="bg-slate-700">
+          {{ column.title }}
+        </th>
         <th>Order Description</th>
-        <th>Order Status</th>
         <th>Transaction Link</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let data of customer_orderPastHistoryList " class="text-left">
-        <td>{{data.id_order}}</td>
+      <tr *ngFor="let data of sortTable.data" class="text-left">
+        <td class="text-center">{{data.id_order}}</td>
         <td>{{data.order_date}}</td>
-        <td>{{ data.order_priceamount}}</td>
-        <td>{{ data.product_id}}</td>
-        <td>{{ data.order_seller_username}}</td>
-        <td>{{ data.order_description}}</td>
-        <td>{{ data.order_status}}</td>
-        <td>
-          <a (click)="openWebsite(data.order_transaction_record)">
+        <td class="text-center">
+          <a [routerLink]="['/productProfilePage',data.product_id]">
+            {{data.product_name}}
+          </a>
+         </td>
+<!--        <td class="text-center">{{ data.product_id}}</td>-->
+        <td class="text-center">{{ data.order_priceamount}}</td>
+        <td class="text-center">{{ data.order_seller_username}}</td>
+        <td class="text-center">{{ data.order_status}}</td>
+        <td class="text-center">{{ data.order_description}}</td>
+        <td class="text-center">
+          <a (click)="openWebsite(data.order_transaction_record)" class=" text-center hover:text-blue">
             Click Here
           </a>
         </td>

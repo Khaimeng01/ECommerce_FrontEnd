@@ -43,7 +43,6 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  redirectToEdit(categories:string) {
-    this.router.navigate(['/productHomepage/'+categories]);
-  }
+
+
 }

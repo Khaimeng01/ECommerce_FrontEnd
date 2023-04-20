@@ -28,9 +28,6 @@ export class ProfileAccountManagementComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.editProfileStatus=false;
-    await this.obtainCustomerUsername_Role();
-    await this.obtainCustomerPersonalInformation(this.userAccountSession.username);
-    console.log("TEST_2")
     this.buyerValidateForm = this.fb.group({
       username: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
@@ -52,6 +49,10 @@ export class ProfileAccountManagementComponent implements OnInit {
       sellerAddress: [null, [Validators.required]],
       sellerWalletAddress:[null,[Validators.required]],
     });
+    await this.obtainCustomerUsername_Role();
+    await this.obtainCustomerPersonalInformation(this.userAccountSession.username);
+    console.log("TEST_2")
+
   }
 
   public async obtainCustomerPersonalInformation(username:string){
@@ -68,7 +69,8 @@ export class ProfileAccountManagementComponent implements OnInit {
             password:this.buyerPersonalInformation[0].customer_password,
             email:this.buyerPersonalInformation[0].customer_email,
             phoneNumber:this.buyerPersonalInformation[0].customer_phonenumber,
-            address:this.buyerPersonalInformation[0].customer_address
+            address:this.buyerPersonalInformation[0].customer_address,
+            phoneNumberPrefix:'+60'
           })
         }
       )

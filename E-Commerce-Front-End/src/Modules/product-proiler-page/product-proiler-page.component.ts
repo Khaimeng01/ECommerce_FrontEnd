@@ -28,7 +28,9 @@ export class ProductProilerPageComponent implements OnInit {
               private notification: NzNotificationService,private message: NzMessageService) { }
   id!:any;
   price: Decimal = new Decimal(0.001);
-  product!:ProductsDetails2[]
+  product!:ProductsDetails2[];
+  selectedColor: string | null = null;
+  outOfStock:boolean =false;
   orderDetails:orderDetails={
     product_id:BigInt('9007199254740991'),
     productName:"",
@@ -39,7 +41,13 @@ export class ProductProilerPageComponent implements OnInit {
     product_description:"",
     orderSellerAddress:"0xB80ef9e783F06DADDE4d1bbd7B461D1c288250F1"
   }
-  outOfStock:boolean =false;
+  colorOptions: ColorOption[] = [
+    { label: 'Red', value: 'red', color: '#ff4d4f' },
+    { label: 'Green', value: 'green', color: '#52c41a' },
+    { label: 'Blue', value: 'blue', color: '#1890ff' },
+    { label: 'Yellow', value: 'yellow', color: '#fadb14' }
+  ];
+
 
   ngOnInit(): void {
     this.activateRoute.paramMap.subscribe(paramMap => {
@@ -75,7 +83,7 @@ export class ProductProilerPageComponent implements OnInit {
         this.notification.create(
           'error',
           'You are not logged in',
-          'Please create and account to Continue'
+          'Please create an account to Continue'
         );
       }else{
         this.dataEvent.emit("Tester");
@@ -90,7 +98,7 @@ export class ProductProilerPageComponent implements OnInit {
           if(this.orderDetails.quantity > this.product[0].product_quantity){
             this.notification.create(
               'error',
-              'You have bought more than the avaiable stock',
+              'You have bought more than the available stock',
               'Please decrease your selected quantity'
             );
           }else{
@@ -125,13 +133,7 @@ export class ProductProilerPageComponent implements OnInit {
     }
   }
 
-  colorOptions: ColorOption[] = [
-    { label: 'Red', value: 'red', color: '#ff4d4f' },
-    { label: 'Green', value: 'green', color: '#52c41a' },
-    { label: 'Blue', value: 'blue', color: '#1890ff' },
-    { label: 'Yellow', value: 'yellow', color: '#fadb14' }
-  ];
-  selectedColor: string | null = null;
+
 
 
 }

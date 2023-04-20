@@ -30,6 +30,7 @@ import {ContactUsComponent} from "../Modules/contact-us/contact-us.component";
 import {SelllerGuard} from "../guards/selller.guard";
 import {UnauthorizedPageComponent} from "../Modules/unauthorized-page/unauthorized-page.component";
 import {DummyComponentComponent} from "../Modules/Seller/dummy-component/dummy-component.component";
+import {ForgetPasswordComponent} from "../Modules/forget-password/forget-password.component";
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'homepage',component:HomepageComponent},
+  {path:'forgetPassword',component:ForgetPasswordComponent},
   {path:'productHomepage',component:ProductHomepageComponent},
   {path:'productHomepage/:category',component:ProductHomepageComponent},
   {path:'productProfilePage/:id',component:ProductProilerPageComponent},
@@ -45,7 +47,8 @@ const routes: Routes = [
   {path:'sellerRegisterAccount',component:SellerRegisterAccountComponent},
   {path:'contactUs',component:ContactUsComponent},
   {path:'unauthorizedPage',component:UnauthorizedPageComponent},
-  {path:'profileManagementLayout',component:ProfileManagementLayoutComponent,
+  {path:'profileManagementLayout',component:ProfileManagementLayoutComponent,canActivate: [AuthGuardGuard],
+    canActivateChild: [AuthGuardGuard],
   children:[
     { path:'accountManagement',component:ProfileAccountManagementComponent},
     {path:'pastOrderHistory',component:ProfilePastOrderHistoryComponent}

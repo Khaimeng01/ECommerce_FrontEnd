@@ -10,18 +10,18 @@ import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-interface Person {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
+// interface Person {
+//   key: string;
+//   name: string;
+//   age: number;
+//   address: string;
+// }
 
-interface orderAmount {
-  productName: string;
-  quantity: number;
-  total: number;
-}
+// interface orderAmount {
+//   productName: string;
+//   quantity: number;
+//   total: number;
+// }
 
 
 @Component({
@@ -36,12 +36,15 @@ export class CheckOutPageComponent implements OnInit {
   validateForm!: FormGroup;
   walletStatus:Boolean=false;
   price: Decimal = new Decimal(0.001);
+  listOfData: orderDetails[] = [];
+  checkOutStatus=false;
+  checkOutStatus_2=false;
+  private formData = { addressTo: '', amount: '', keyword: '', message: '' };
   customerDatabase={
     order_Buyer_Username:"",
     order_Delivery_Address:"",
     order_Buyer_ContactNumber:""
   };
-
   orderDetails:orderDetails={
     product_id:BigInt('9007199254740991'),
     productName:"",
@@ -53,33 +56,23 @@ export class CheckOutPageComponent implements OnInit {
     orderSellerAddress:"0xB80ef9e783F06DADDE4d1bbd7B461D1c288250F1"
   }
 
-  listOfData: orderDetails[] = [];
-  checkOutStatus=false;
-  checkOutStatus_2=false;
-
-
-  private formData = { addressTo: '', amount: '', keyword: '', message: '' };
-
   constructor(private fb: FormBuilder,private orderProductService:OrderProductsService,
               private transactionService:TransactionService,private router:Router,
               private message: NzMessageService) { }
 
   async ngOnInit(): Promise<void> {
-    await  this.obtainOrderData()
-    this.customerUsername = sessionStorage.getItem('username');
-    this.walletStatus = this.transactionService.checkIfAccountConnect();
-    await this.obtainOrderBuyerDetails(this.customerUsername)
     this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
+      username: [{value: '', disabled: true}, [Validators.required]],
       phoneNumberPrefix: ['+60'],
       phoneNumber: [null, [Validators.required]],
       address: [null, [Validators.required]],
     });
-    console.log('validateForm:', this.validateForm);
+    await  this.obtainOrderData()
+    this.customerUsername = sessionStorage.getItem('username');
+    this.walletStatus = this.transactionService.checkIfAccountConnect();
+    await this.obtainOrderBuyerDetails(this.customerUsername)
   }
 
-  // this.orderDetails = this.orderProductService.orderDetails
-  // this.listOfData.add(this.orderDetails);
 
   async obtainOrderData(): Promise<void>{
     this.orderDetails = this.orderProductService.orderDetails;
@@ -96,7 +89,7 @@ export class CheckOutPageComponent implements OnInit {
         order_date:new Date(),
         order_productquantity:this.orderDetails.quantity,
         order_priceamount:this.orderDetails.total,
-        order_buyer_username:this.validateForm.value.username,
+        order_buyer_username:this.customerUsername,
         order_seller_username:this.orderDetails.orderSellerUsername,
         order_delivery_address:this.validateForm.value.address,
         order_buyer_contact_number:this.validateForm.value.phoneNumber,
@@ -111,7 +104,6 @@ export class CheckOutPageComponent implements OnInit {
       let transactionLink = await this.transactionService.sendTransaction(this.formData);
       customerOrderDetails.order_transaction_record=transactionLink;
       customerOrderDetails.order_status="TRUE";
-      console.log("DATA"+customerOrderDetails);
       this.orderProductService.registerCustomerOrder(customerOrderDetails).subscribe();
       this.checkOutStatus_2=false;
       this.checkOutStatus=true;

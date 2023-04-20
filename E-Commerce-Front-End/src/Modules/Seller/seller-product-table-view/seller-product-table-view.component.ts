@@ -7,6 +7,7 @@ import {ProductsDetails, ProductsDetails2} from "../../../classes/productsDetail
 import {concatMap} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import Decimal from 'decimal.js';
 interface ItemData {
   id: number;
   name: string;
@@ -121,9 +122,8 @@ export class SellerProductTableViewComponent implements OnInit {
   //   // location.reload();
   // }
 
-  deleteSelectedProduct(i:number){
-    console.log(i)
-    let selectedProduct_Id = this.product[i].id_product;
+  deleteSelectedProduct(i: bigint){
+    let selectedProduct_Id = i;
     this.productService.deleteProduct(selectedProduct_Id).subscribe(
       (response:any)=>{
         console.log("RESPONSE IS HERE"+response);
@@ -162,7 +162,7 @@ export class SellerProductTableViewComponent implements OnInit {
     },
     {
       title: 'Product Price',
-      compare: (a: ProductsDetails2, b: ProductsDetails2) => a.product_price.cmp(b.product_price),
+      compare: (a: ProductsDetails2, b: ProductsDetails2) => new Decimal(a.product_price).cmp(new Decimal(b.product_price)),
       priority: 2
     },
     {
@@ -179,8 +179,11 @@ export class SellerProductTableViewComponent implements OnInit {
   ];
 
 
-  redirectToEdit(i: number) {
-    let productId = this.product[i].id_product;
+  redirectToEdit(i: bigint) {
+    console.log(i);
+    // const number =
+    // console.log(number);
+    let productId = Number(i);
     this.router.navigate(['sellerLayout/sellerEditProduct'],
       { queryParams: { productId: productId }});
   }

@@ -29,4 +29,16 @@ export class BuyerService {
     return this.http.get<customer_orderPastHistory[]>("http://localhost:8081/api/order/get/orderCustomerPastOrders",{params});
   }
 
+  public getCustomerStatus(customerUsername:string):Observable<any>{
+    let params = new HttpParams().append('customer_username',customerUsername);
+    return this.http.get("http://localhost:8081/api/cs/dataman/findIfAccountExists",{params,responseType:'text'})
+  }
+
+  public updatePassword(customerUsername:string,customerPassword:string):Observable<any>{
+    let params = new HttpParams().append('customer_username',customerUsername);
+    params= params.append('customer_password',customerPassword);
+    return this.http.get("http://localhost:8081/api/cs/dataman/updatePassword",{params,responseType:'text'})
+
+  }
+
 }

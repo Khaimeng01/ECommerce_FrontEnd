@@ -1,8 +1,4 @@
 <div *ngIf="!editProfileStatus">
-<!--  <nz-page-header-->
-<!--    class="site-page-header" (nzBack)="onBack()" nzBackIcon nzTitle="Account Settings"-->
-<!--  ></nz-page-header>-->
-
   <div class="grid grid-rows-2 gap-y-2">
     <h1 class="text-2xl">User Information</h1>
     <p class="text-sm">Here you can edit your account Information for yourself.The changes will be display</p>
@@ -76,9 +72,6 @@
   </form>
 </div>
 
-<!--  <div *ngIf="!userAccountSession.userRole == 'Buyer'">-->
-<!--    -->
-<!--  </div>-->
 </div>
 
 <ng-template #sellerForm>
@@ -152,7 +145,7 @@
 
     <nz-form-item nz-row class="register-area">
       <nz-form-control [nzSpan]="14" [nzOffset]="9" class="text-left pt-4">
-        <button nz-button nzType="primary">Edit Details</button>
+        <button nz-button nzType="primary" class="rounded-full ">Edit Details</button>
       </nz-form-control>
     </nz-form-item>
 
