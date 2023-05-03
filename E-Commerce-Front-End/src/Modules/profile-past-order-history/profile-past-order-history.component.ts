@@ -1,14 +1,12 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To allow user to view their past order history
+
 import { Component, OnInit } from '@angular/core';
 import {BuyerService} from "../../service/buyer-Services/buyer.service";
 import {customer_orderPastHistory, seller_orderHistory} from "../../classes/orderDetails";
 import {loginCustomer2} from "../../classes/loginCustomer";
 
-interface Person {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
 
 @Component({
   selector: 'app-profile-past-order-history',
@@ -20,19 +18,6 @@ export class ProfilePastOrderHistoryComponent implements OnInit {
     username:""
   };
   customer_orderPastHistoryList!:customer_orderPastHistory[];
-  constructor(private buyerService:BuyerService) { }
-
-  ngOnInit(): void {
-    this.userAccountSession.username= sessionStorage.getItem('username');
-    this.buyerService.getCustomerOrderPastHistory(this.userAccountSession.username).subscribe(
-      (response:customer_orderPastHistory[])=>{
-        console.log(response[0]);
-        this.customer_orderPastHistoryList = response
-      }
-    )
-  }
-
-
   listOfColumn = [
     {
       title: 'Order ID',
@@ -72,6 +57,18 @@ export class ProfilePastOrderHistoryComponent implements OnInit {
       width:'100px'
     },
   ];
+
+
+  constructor(private buyerService:BuyerService) { }
+
+  ngOnInit(): void {
+    this.userAccountSession.username= sessionStorage.getItem('username');
+    this.buyerService.getCustomerOrderPastHistory(this.userAccountSession.username).subscribe(
+      (response:customer_orderPastHistory[])=>{
+        this.customer_orderPastHistoryList = response
+      }
+    )
+  }
 
   openWebsite(webAddress:string) {
     window.open('https://goerli.etherscan.io/tx/'+webAddress, '_blank');

@@ -2,7 +2,6 @@
   <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 " >
     <div class="grid grid-cols-4 h-[50rem]">
 
-      <!--    Images-->
       <div class=" overflow-hidden rounded-l-lg rounded-bl-lg col-span-2">
         <img src="../../assets/images/register.jpg" class="overflow-hidden h-full" >
       </div>
@@ -11,7 +10,7 @@
         <div class="row-span-1 ">
 
           <div class="pt-3 pb-8">
-            <h1 class="font-bold text-xl" >Get Started as a Buyer</h1>
+            <h1 class="font-bold text-xl" >Get Started as a Seller</h1>
             <br>
             <p class="text-lg font-semibold">Create your account now</p>
             <p (click)="redirectToRegister()" class="cursor-pointer hover:text-blue">If you wish to register as a Buyer. Click Here</p>
@@ -20,7 +19,6 @@
           <div>
             <form  nz-form [formGroup]="sellerValidateForm" (ngSubmit)="submitForm()" [nzLayout] ="'vertical'" >
 
-              <!--  Username-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerUsername" class="text-left">Username</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
@@ -28,7 +26,6 @@
                 </nz-form-control>
               </nz-form-item>
 
-              <!--  //Email-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerEmail" class="text-left">E-mail</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
@@ -36,7 +33,6 @@
                 </nz-form-control>
               </nz-form-item>
 
-              <!--  //Password-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPassword" class="text-left" nzRequired>Password</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
@@ -50,7 +46,6 @@
                 </nz-form-control>
               </nz-form-item>
 
-              <!--  PhoneNumber-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPhoneNumber" class="text-left" nzRequired>Phone Number</nz-form-label>
                 <nz-form-control
@@ -70,7 +65,6 @@
                 </nz-form-control>
               </nz-form-item>
 
-              <!--  //Address-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerAddress" class="text-left">Address</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Address">
@@ -85,16 +79,6 @@
                 </nz-form-control>
               </nz-form-item>
 
-
-<!--              <nz-form-item nz-row class="register-area">-->
-<!--                <nz-form-control [nzSpan]="14" >-->
-<!--                  <label nz-checkbox formControlName="sellerAgree">-->
-<!--                  <span class="text-left">-->
-<!--                    I have read the<a>agreement</a>-->
-<!--                  </span>-->
-<!--                  </label>-->
-<!--                </nz-form-control>-->
-<!--              </nz-form-item>-->
 
               <nz-form-item nz-row class="register-area">
                 <nz-form-control [nzSpan]="14" [nzOffset]="3" class="text-right">

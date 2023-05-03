@@ -68,6 +68,7 @@ import { UnauthorizedPageComponent } from '../Modules/unauthorized-page/unauthor
 import { DummyComponentComponent } from '../Modules/Seller/dummy-component/dummy-component.component';
 import { ForgetPasswordComponent } from '../Modules/forget-password/forget-password.component';
 import {NzStepsModule} from "ng-zorro-antd/steps";
+import { SuccesfullPageComponent } from '../Modules/succesfull-page/succesfull-page.component';
 
 registerLocaleData(en);
 
@@ -96,7 +97,8 @@ registerLocaleData(en);
     ContactUsComponent,
     UnauthorizedPageComponent,
     DummyComponentComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    SuccesfullPageComponent
   ],
     imports: [
         BrowserModule,

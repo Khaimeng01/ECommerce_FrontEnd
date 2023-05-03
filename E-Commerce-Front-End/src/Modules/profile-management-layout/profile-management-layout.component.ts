@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: The profile management layout
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({

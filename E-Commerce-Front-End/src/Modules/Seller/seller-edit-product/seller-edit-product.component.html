@@ -13,16 +13,8 @@
     </div>
 
     <nz-divider></nz-divider>
-
-<!--    <div class="pb-4">-->
-<!--&lt;!&ndash;      <h1 class="text-xl">Edit Product </h1>&ndash;&gt;-->
-<!--      <p>Here you can add new product for your account</p>-->
-<!--      <hr>-->
-<!--    </div>-->
-
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
-      <!--  ProductName-->
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productName" class="text-left">Product Name</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input product Name">
@@ -30,8 +22,6 @@
         </nz-form-control>
       </nz-form-item>
 
-
-      <!--    Product_Price-->
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productPrice" class="text-left">Product Price</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid ProductPrice!">
@@ -39,8 +29,6 @@
         </nz-form-control>
       </nz-form-item>
 
-
-      <!--  //Product_Quantuty-->
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productQuantity" class="text-left">Product Quantity</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
@@ -48,7 +36,6 @@
         </nz-form-control>
       </nz-form-item>
 
-      <!--        Product_Category-->
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productCategory" class="text-left">Product Category</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input ">
@@ -56,7 +43,6 @@
         </nz-form-control>
       </nz-form-item>
 
-      <!--        Product_Description-->
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productDesc" class="text-left">Description</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Description">
@@ -64,7 +50,6 @@
             <textarea formControlName="productDesc" nz-input rows="2" placeholder="write any thing" id="productDesc"></textarea>
           </nz-textarea-count>
 
-          <!--            <input nz-input formControlName="productDesc" id="productDesc" />-->
         </nz-form-control>
       </nz-form-item>
 
@@ -80,8 +65,7 @@
   <div class="grid grid-rows-2">
 
     <div class="text-center ">
-      <!--              <input type="file" multiple value="select" #selectFile-->
-      <!--                     (change)="onFileSelected($event)">-->
+
       <nz-upload
         nzType="drag"
         [nzMultiple]="true"
@@ -106,8 +90,6 @@
           <div></div>
           <div class="text-center">
             <a [href]="file.url" target="_blank" class="text-center">{{file.file.name}}</a>
-            <!--              <a>{{file.file.name}}</a>-->
-            <!--              <p class="text-center">{{file.file.name}}</p>-->
           </div>
           <div class="text-center">
             <span nz-icon nzType="delete" nzTheme="outline" (click)="deleteImage(i)" class="cursor-pointer hover:text-red-700" ></span>
@@ -116,11 +98,6 @@
       </div>
     </div>
 
-    <!--      <div class="grid-flow-col" *ngFor="let file of product.productImages">-->
-    <!--        <div class="">-->
-    <!--          <img [src]="file.url">-->
-    <!--        </div>-->
-    <!--      </div>-->
   </div>
 
 </div>
@@ -134,7 +111,6 @@
   >
     <div nz-result-extra>
       <button nz-button nzType="primary" (click)="redirectToEditProduct()">Edit Product</button>
-<!--      &lt;!&ndash;      <button nz-button [routerLink]="'sellerProductTableView'" >View Product Table</button>&ndash;&gt;-->
       <button nz-button (click)="redirectToProductTable()" >View Product Table</button>
     </div>
   </nz-result>

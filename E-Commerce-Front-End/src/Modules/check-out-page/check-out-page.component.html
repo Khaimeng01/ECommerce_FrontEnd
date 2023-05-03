@@ -23,7 +23,6 @@
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()"
                   [nzLayout]="'vertical'">
 
-              <!--  Username-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username" class="text-left text-2xl  font-medium" style="font-size: 20px;">
                   Username
@@ -34,7 +33,6 @@
               </nz-form-item>
 
 
-              <!--  PhoneNumber-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" class="text-left font-medium" nzRequired>Phone Number</nz-form-label>
                 <nz-form-control
@@ -54,7 +52,6 @@
                 </nz-form-control>
               </nz-form-item>
 
-              <!--  //Website-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address" class="text-left font-medium">Address</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
@@ -66,7 +63,7 @@
               <nz-form-item nz-row class="register-area">
                 <nz-form-control [nzSpan]="14" [nzOffset]="8" class="text-right">
                   <button  nz-button nzType="primary" class="rounded-full">Buy Now</button>
-                  <!--                <button *ngIf="!walletStatus" nz-button nzType="primary" (click)="connectToMetamask()">Connect to Metamask</button>-->
+
                 </nz-form-control>
               </nz-form-item>
 

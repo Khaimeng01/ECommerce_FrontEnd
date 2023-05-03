@@ -1,3 +1,9 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: The service for Buyer related function/services (To communicate with Backend or other Components)
+
+
+
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";

@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: The service for Transaction related function/services (To communicate with Smart Contract or other Components)
+
 import { Injectable } from '@angular/core';
 import {contractABI, contractAddress} from "../utils/constants";
 import {ethers} from "ethers";
@@ -31,12 +35,8 @@ export class TransactionService {
     try {
       if (!this.ethereum) return alert('Please install MetaMask.');
       const accounts = await this.ethereum.request({ method: 'eth_accounts' });
-
       if (accounts.length) {
-        console.log("Success_1")
         this._currentAccount.next(accounts[0]);
-      } else {
-        console.log('No accounts found');
       }
     } catch (error) {
     }
@@ -88,7 +88,6 @@ export class TransactionService {
           this.stage_1 = true;
           continueLoop = false;
         } catch (error) {
-          console.error(error);
         }
       }
 

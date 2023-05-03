@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To show user the table filled with products
+
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from "../../service/product.service";
 import {ProductsDetails, ProductsDetails2} from "../../classes/productsDetails";
@@ -16,22 +20,22 @@ export class ProductHomepageComponent implements OnInit {
 
   product!:ProductsDetails2[]
   validateForm!: FormGroup;
-
   selectedCategoriesOption = '';
+  categoriesParam!:any;
+  selectedPriceOption = '';
+
   categoriesOption = [
     { label: 'Clothes', value: 'Clothes' },
     { label: 'Electronics', value: 'Electronics' },
     { label: 'Home & Living', value: 'Home & Living' },
     { label: 'Shoes', value: 'Shoes' },
   ];
-
-  selectedPriceOption = '';
   priceOption = [
     { label: 'Price: Low to High', value: 'ASCENDING' },
     { label: 'Price: High to Low', value: 'DESCENDING' },
   ];
 
-  categoriesParam!:any;
+
 
   constructor(private productService:ProductService,
               private imageProcessingService:imageProcessingService,
@@ -41,28 +45,9 @@ export class ProductHomepageComponent implements OnInit {
 
   ngOnInit():void{
     this.activateRoute.paramMap.subscribe(paramMap => {
-      // Get the category parameter from the URL
       this.categoriesParam = paramMap.get('category');
-
-      // Call a function to update the component data or state
       this.updateComponent();
     });
-    // await this.obtainCategoriesParam();
-    // if(this.categoriesParam==null){
-    //   console.log("Inside");
-    //   this.productService.getProducts()
-    //     .pipe(
-    //       map((x:ProductsDetails2[],i)=> x.map((product:ProductsDetails2)=> this.imageProcessingService.createImages(product))))
-    //     .subscribe((response:ProductsDetails2[])=>
-    //       {
-    //         console.log(response)
-    //         this.product= response;
-    //       }
-    //     )
-    // }else{
-    //   this.selectedCategoriesOption=this.categoriesParam;
-    //   this.filterTable();
-    // }
   }
 
   private updateComponent() {
@@ -73,7 +58,6 @@ export class ProductHomepageComponent implements OnInit {
         )
         .subscribe((response: ProductsDetails2[]) => {
           this.product = response;
-          console.log(response);
         });
     } else {
       this.selectedCategoriesOption = this.categoriesParam;
@@ -83,21 +67,16 @@ export class ProductHomepageComponent implements OnInit {
 
 
   productProfilePage(product_ID: bigint){
-    console.log(product_ID);
     this.router.navigate(['/productProfilePage'])
-    // this.router.navigate('/123', { state: { product_ID: product_ID } });
   }
 
   filterTable() {
-    console.log(this.selectedPriceOption);
-    console.log(this.selectedCategoriesOption);
     this.productService.filterProductTable(this.selectedCategoriesOption,this.selectedPriceOption)
       .pipe(
         map((x:ProductsDetails2[],i)=> x.map((product:ProductsDetails2)=> this.imageProcessingService.createImages(product))))
       .subscribe(
       (response:ProductsDetails2[])=>
       {
-        console.log(response)
         this.product= response;
       }
     )
@@ -111,17 +90,9 @@ export class ProductHomepageComponent implements OnInit {
         map((x:ProductsDetails2[],i)=> x.map((product:ProductsDetails2)=> this.imageProcessingService.createImages(product))))
       .subscribe((response:ProductsDetails2[])=>
         {
-          console.log(response)
           this.product= response;
         }
       )
   }
 
-  // redirectToRegister() {
-  //   if(this.switchValue==0){
-  //     this.router.navigate(['register']);
-  //   }else{
-  //     this.router.navigate(['sellerRegisterAccount']);
-  //   }
-  // }
 }

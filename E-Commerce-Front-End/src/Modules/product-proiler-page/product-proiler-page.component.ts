@@ -1,3 +1,8 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To show user a more in detaied version of the product information
+
+
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router'
 import {ProductService} from "../../service/product.service";
@@ -23,14 +28,15 @@ interface ColorOption {
 })
 export class ProductProilerPageComponent implements OnInit {
 
-  constructor(private activateRoute:ActivatedRoute,private router:Router,private productService: ProductService,
-              private imageProcessingService:imageProcessingService,private orderProductService:OrderProductsService,
-              private notification: NzNotificationService,private message: NzMessageService) { }
+
   id!:any;
   price: Decimal = new Decimal(0.001);
   product!:ProductsDetails2[];
   selectedColor: string | null = null;
   outOfStock:boolean =false;
+  array = [1, 2, 3, 4];
+  effect = 'scrollx';
+  @Output() dataEvent = new EventEmitter<string>();
   orderDetails:orderDetails={
     product_id:BigInt('9007199254740991'),
     productName:"",
@@ -48,6 +54,10 @@ export class ProductProilerPageComponent implements OnInit {
     { label: 'Yellow', value: 'yellow', color: '#fadb14' }
   ];
 
+  constructor(private activateRoute:ActivatedRoute,private router:Router,private productService: ProductService,
+              private imageProcessingService:imageProcessingService,private orderProductService:OrderProductsService,
+              private notification: NzNotificationService,private message: NzMessageService) { }
+
 
   ngOnInit(): void {
     this.activateRoute.paramMap.subscribe(paramMap => {
@@ -58,7 +68,6 @@ export class ProductProilerPageComponent implements OnInit {
         map((x:ProductsDetails2[],i)=> x.map((product:ProductsDetails2)=> this.imageProcessingService.createImages(product))))
       .subscribe((response:ProductsDetails2[])=>
         {
-          console.log(response)
           this.product= response;
           if(this.product[0].product_quantity == 0){
             this.outOfStock=true;
@@ -72,10 +81,7 @@ export class ProductProilerPageComponent implements OnInit {
     this.router.navigate(['/productHomepage'])
   }
 
-  array = [1, 2, 3, 4];
-  effect = 'scrollx';
 
-  @Output() dataEvent = new EventEmitter<string>();
 
   redirectToCheckOut() {
     if(this.outOfStock == false){
@@ -92,7 +98,6 @@ export class ProductProilerPageComponent implements OnInit {
         this.orderDetails.orderSellerUsername=this.product[0].product_owner;
         this.orderDetails.productPrice = this.product[0].product_price;
         this.orderDetails.total = new Decimal(this.orderDetails.quantity).times(this.product[0].product_price);
-        console.log(this.selectedColor);
         if (this.selectedColor != null) {
           this.orderDetails.product_description = this.selectedColor;
           if(this.orderDetails.quantity > this.product[0].product_quantity){
@@ -102,7 +107,6 @@ export class ProductProilerPageComponent implements OnInit {
               'Please decrease your selected quantity'
             );
           }else{
-            console.log(this.orderDetails);
             this.orderProductService.sendOrderDetails(this.orderDetails);
             this.router.navigate(['/checkOutPage'])
           }
@@ -119,8 +123,6 @@ export class ProductProilerPageComponent implements OnInit {
     }
   }
 
-
-
   increaseCount() {
     this.orderDetails.quantity = this.orderDetails.quantity+1;
   }
@@ -128,8 +130,6 @@ export class ProductProilerPageComponent implements OnInit {
   decreaseCount() {
     if(this.orderDetails.quantity>=2){
       this.orderDetails.quantity = this.orderDetails.quantity-1;
-    }else{
-      console.log("ERROR");
     }
   }
 

@@ -1,10 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To allow user to edit and view their profile information
+
+
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {loginCustomer, loginCustomer2, loginCustomerSession} from "../../../classes/loginCustomer";
 import {BuyerService} from "../../../service/buyer-Services/buyer.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SellerService} from "../../../service/seller-Services/seller.service";
 import {editSellerInfo, seller} from "../../../classes/sellerClasses";
-
+import {NavigationExtras, Router} from "@angular/router";
+import {HeaderService} from "../../../service/header.service";
 @Component({
   selector: 'app-profile-account-management',
   templateUrl: './profile-account-management.component.html',
@@ -23,7 +29,8 @@ export class ProfileAccountManagementComponent implements OnInit {
   sellerValidateForm!: FormGroup;
   buyerPersonalInformation!:loginCustomer2[]
   sellerPersonalInformation!:seller[];
-  constructor(private buyerService:BuyerService,private fb: FormBuilder,private sellerService:SellerService) { }
+  constructor(private buyerService:BuyerService,private fb: FormBuilder,private sellerService:SellerService,
+              private router:Router,private cdRef: ChangeDetectorRef,private headerService: HeaderService) { }
 
 
   async ngOnInit(): Promise<void> {
@@ -51,19 +58,13 @@ export class ProfileAccountManagementComponent implements OnInit {
     });
     await this.obtainCustomerUsername_Role();
     await this.obtainCustomerPersonalInformation(this.userAccountSession.username);
-    console.log("TEST_2")
-
   }
 
   public async obtainCustomerPersonalInformation(username:string){
-    console.log("LAI_3"+this.userAccountSession.userRole);
     if(this.userAccountSession.userRole == "Buyer"){
       this.buyerService.getCustomerPersonalInformation(username).subscribe(
         (response:loginCustomer2[])=>{
-          console.log(response[0].customer_username);
           this.buyerPersonalInformation = response;
-          console.log(this.buyerPersonalInformation[0].customer_username);
-          console.log("TEST_1")
           this.buyerValidateForm.patchValue({
             username:this.buyerPersonalInformation[0].customer_username,
             password:this.buyerPersonalInformation[0].customer_password,
@@ -77,7 +78,6 @@ export class ProfileAccountManagementComponent implements OnInit {
     }else{
       this.sellerService.getSellerPersonalInformation(username).subscribe(
         (response:seller[])=>{
-          console.log(response);
           this.sellerPersonalInformation = response;
           this.sellerValidateForm.patchValue({
             sellerUsername: this.sellerPersonalInformation[0].seller_username,
@@ -95,21 +95,13 @@ export class ProfileAccountManagementComponent implements OnInit {
   }
 
   public async obtainCustomerUsername_Role(){
-    console.log("LAI_0");
     this.userAccountSession.username= sessionStorage.getItem('username');
-    console.log("LAI_1");
     this.userAccountSession.userRole= sessionStorage.getItem('role');
-    console.log("LAI_2"+this.userAccountSession.userRole);
   }
 
-  onBack(): void {
-    console.log('onBack');
-  }
 
   submitForm(): void {
-
     if(this.buyerValidateForm.valid){
-      console.log("SUCCESS")
       var editCustomerDetails:loginCustomer2={
         customer_username:this.buyerValidateForm.value.username,
         customer_password:this.buyerValidateForm.value.password,
@@ -117,23 +109,19 @@ export class ProfileAccountManagementComponent implements OnInit {
         customer_address:this.buyerValidateForm.value.address,
         customer_phonenumber:this.buyerValidateForm.value.phoneNumber
       }
-      sessionStorage.setItem('username', editCustomerDetails.customer_username);
+      this.userAccountSession.username= sessionStorage.getItem('username');
       this.buyerService.editDetails(editCustomerDetails,this.userAccountSession.username).subscribe();
-      this.editProfileStatus=true;
-    }else{
-      console.log("FAIL")
+      sessionStorage.setItem('username', editCustomerDetails.customer_username);
+      this.router.navigate(['/profileManagementLayout/successfulPage']).then(() => {
+        this.headerService.triggerReload();
+      });
+      // this.editProfileStatus=true;
     }
-
-
   }
 
 
   sellerSubmitForm() {
-    console.log("PRINT OUT THIS"+this.sellerValidateForm.value.sellerWalletAddress);
-    console.log("PRINT OUT THIS 2"+this.sellerValidateForm.value.sellerUsername);
-
     if (this.sellerValidateForm.valid) {
-      console.log("Inside");
       var editSellerDetails:editSellerInfo={
         seller_username:this.sellerValidateForm.value.sellerUsername,
         seller_password:this.sellerValidateForm.value.sellerPassword,
@@ -142,11 +130,12 @@ export class ProfileAccountManagementComponent implements OnInit {
         seller_phonenumber:this.sellerValidateForm.value.sellerPhoneNumber,
         seller_accountdetails:this.sellerValidateForm.value.sellerWalletAddress
       }
+      this.userAccountSession.username= sessionStorage.getItem('username');
+      this.sellerService.editSellerPersonalInformation(editSellerDetails,this.userAccountSession.username).subscribe();
       sessionStorage.setItem('username', editSellerDetails.seller_username);
-      this.sellerService.editSellerPersonalInformation(editSellerDetails,editSellerDetails.seller_username).subscribe();
-      this.editProfileStatus=true;
-    }else{
-      console.log("Failing");
+      this.router.navigate(['/sellerLayout/successfulPage']).then(() => {
+        this.headerService.triggerReload();
+      });
     }
   }
 }

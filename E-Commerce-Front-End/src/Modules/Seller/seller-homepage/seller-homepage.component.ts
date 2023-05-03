@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: The homepage for Sellers
+
 import { Component, OnInit } from '@angular/core';
 import {seller_orderHistory} from "../../../classes/orderDetails";
 import {SellerService} from "../../../service/seller-Services/seller.service";
@@ -30,12 +34,8 @@ export class SellerHomepageComponent implements OnInit {
     this.sellerService.getSellerOrderHistory(userName).subscribe(
       (response:seller_orderHistory[])=>{
         this.seller_orderPastList = response;
-        console.log(this.seller_orderPastList);
         this.numberOfSales= this.seller_orderPastList.length
-
-        // Move the for loop inside the callback function
         for(let i = 0; i < this.seller_orderPastList.length; i++) {
-          console.log(i);
           let currentOrder = this.seller_orderPastList[i];
           this.salesProfit = this.salesProfit.plus(currentOrder.order_priceamount);
         }
@@ -45,12 +45,5 @@ export class SellerHomepageComponent implements OnInit {
   }
 
 
-
-
-
-
-  selectChange(select: Date): void {
-    console.log(`Select value: ${select}`);
-  }
 
 }

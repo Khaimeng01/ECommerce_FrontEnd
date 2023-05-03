@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: The footer of each page
+
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 
@@ -15,7 +19,11 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userAccountSession.userRole= sessionStorage.getItem('role');
+    if(sessionStorage.getItem('role')==null){
+      this.userAccountSession.userRole="Buyer"
+    }else{
+      this.userAccountSession.userRole= sessionStorage.getItem('role');
+    }
   }
 
 

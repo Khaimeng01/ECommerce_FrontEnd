@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To allow user to register for a CryptoCart account as a Seller
+
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {manageSellerInfo} from "../../../classes/sellerClasses";
@@ -33,13 +37,11 @@ export class SellerRegisterAccountComponent implements OnInit {
       ]],
       sellerAddress: [null, [Validators.required,this.dataService.noSpaceAtStart()]],
       sellerWalletAddress:[null,[Validators.required,this.dataService.noSpaceAtStart()]],
-      // sellerAgree: [false]
     });
   }
 
   submitForm() {
     if(this.sellerValidateForm.valid){
-      console.log("Inside");
       var sellerDetails:manageSellerInfo={
         seller_username:this.sellerValidateForm.value.sellerUsername,
         seller_password:this.sellerValidateForm.value.sellerPassword,
@@ -61,7 +63,6 @@ export class SellerRegisterAccountComponent implements OnInit {
         }
       )
     }else{
-      console.log("Error")
       Object.values(this.sellerValidateForm.controls).forEach(control => {
         control.markAsDirty();
         control.updateValueAndValidity({ onlySelf: true });

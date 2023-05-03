@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: The service for Orders related function/services (To communicate with Backend or other Components)
+
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -5,11 +9,7 @@ import {loginCustomer} from "../classes/loginCustomer";
 import {ProductsDetails, ProductsDetails2} from "../classes/productsDetails";
 import {orderDetails, orderDetailsToAPI} from "../classes/orderDetails";
 
-// interface orderAmount {
-//   productName: string;
-//   quantity: number;
-//   total: number;
-// }
+
 
 @Injectable({
   providedIn: 'root'

@@ -56,14 +56,12 @@ export class SellerEditProductComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const productId = params['productId'];
       this.productId = params['productId'];
-      console.log(productId); // Output: 123
     });
     this.productService.getSpecifcProduct(BigInt(this.productId))
       .pipe(
         map((x:ProductsDetails2[],i)=> x.map((product:ProductsDetails2)=> this.imageProcessingService.createImages(product))))
       .subscribe((response:ProductsDetails2[])=>
         {
-          console.log(response)
           this.product= response;
           this.test=response;
           this.editedProduct=this.product[0];
@@ -93,21 +91,17 @@ export class SellerEditProductComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log("Test_0");
     if (this.validateForm.valid) {
       if(this.numFilesUploaded == 0){
         this.messageService.error('There is no Images for this Product');
       }else{
-        console.log("Test_1"+this.validateForm.value.productCategory);
-        console.log("Test_2");
+
         this.editedProduct.product_name = this.validateForm.value.productName;
         this.editedProduct.product_quantity = this.validateForm.value.productQuantity;
         this.editedProduct.product_price = this.validateForm.value.productPrice;
         this.editedProduct.product_category = this.validateForm.value.productCategory;
         this.editedProduct.product_description= this.validateForm.value.productDesc;
         const productFormData = this.prepareFormData(this.editedProduct)
-        // Change to Edit
-        console.log("EDITING");
         let idProduct = BigInt(this.productId);
         this.productService.editProduct(productFormData,idProduct).subscribe((productFormData)=>
           {
@@ -196,7 +190,6 @@ export class SellerEditProductComponent implements OnInit {
 
     const status = file.status;
     if (status !== 'uploading') {
-      console.log(file, fileList);
       const uniqueKey = `${file.name}_${file.size}`;
       if (!this.uniqueFiles.has(uniqueKey)) {
         const fileHandler: FileHandle = {
@@ -215,11 +208,6 @@ export class SellerEditProductComponent implements OnInit {
         this.uniqueFiles.add(uniqueKey);
       }
 
-    }
-    if (status === 'done') {
-      console.log(`${file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      console.log(`${file.name} file upload failed.`);
     }
 
   }

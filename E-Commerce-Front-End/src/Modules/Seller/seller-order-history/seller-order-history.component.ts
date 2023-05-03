@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To allow Seller to View their orders
+
 import { Component, OnInit } from '@angular/core';
 import {customer_orderPastHistory, seller_orderHistory} from "../../../classes/orderDetails";
 import {SellerService} from "../../../service/seller-Services/seller.service";

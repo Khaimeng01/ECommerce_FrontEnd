@@ -1,4 +1,3 @@
-<!--<div class=" shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2">-->
 <div class="grid grid-cols-2  "*ngIf="!registerProductStatus">
     <div class="w-[32rem]">
 
@@ -11,7 +10,6 @@
 
       <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
-        <!--  ProductName-->
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productName" class="text-left">Product Name</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input product Name">
@@ -19,15 +17,6 @@
           </nz-form-control>
         </nz-form-item>
 
-        <!--  //Product_Owner-->
-<!--        <nz-form-item>-->
-<!--          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productOwner" class="text-left" >Product Owner</nz-form-label>-->
-<!--          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">-->
-<!--            <input nz-input formControlName="productOwner" id="productOwner" />-->
-<!--          </nz-form-control>-->
-<!--        </nz-form-item>-->
-
-        <!--    Product_Price-->
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productPrice" class="text-left">Product Price</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input product price">
@@ -36,7 +25,6 @@
         </nz-form-item>
 
 
-        <!--  //Product_Quantuty-->
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productQuantity" class="text-left">Product Quantity</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input product quantity">
@@ -44,7 +32,6 @@
           </nz-form-control>
         </nz-form-item>
 
-<!--        Product_Category-->
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productCategory" class="text-left">Product Category</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input product category ">
@@ -52,7 +39,6 @@
           </nz-form-control>
         </nz-form-item>
 
-<!--        Product_Description-->
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="productDesc" class="text-left">Description</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Description">
@@ -60,7 +46,6 @@
               <textarea formControlName="productDesc" nz-input rows="2" placeholder="write any thing" id="productDesc"></textarea>
             </nz-textarea-count>
 
-<!--            <input nz-input formControlName="productDesc" id="productDesc" />-->
           </nz-form-control>
         </nz-form-item>
 
@@ -76,8 +61,6 @@
     <div class="grid grid-rows-2">
 
       <div class="text-center ">
-<!--              <input type="file" multiple value="select" #selectFile-->
-<!--                     (change)="onFileSelected($event)">-->
           <nz-upload
             nzType="drag"
             [nzMultiple]="true"
@@ -110,11 +93,6 @@
         </div>
       </div>
 
-<!--      <div class="grid-flow-col" *ngFor="let file of product.productImages">-->
-<!--        <div class="">-->
-<!--          <img [src]="file.url">-->
-<!--        </div>-->
-<!--      </div>-->
     </div>
 
 </div>
@@ -127,13 +105,8 @@
   >
     <div nz-result-extra>
       <button nz-button nzType="primary" (click)="redirectToRegisterProduct()">Register New Product</button>
-<!--      <button nz-button [routerLink]="'sellerProductTableView'" >View Product Table</button>-->
       <button nz-button (click)="redirectToProductTable()" >View Product Table</button>
     </div>
   </nz-result>
 </div>
 
-<!--  Image_Button-->
-
-
-<!--</div>-->

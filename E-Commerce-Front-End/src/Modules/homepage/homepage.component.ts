@@ -16,27 +16,10 @@ import {Router} from "@angular/router";
 })
 export class HomepageComponent implements OnInit {
 
-  // constructor() { }
-
-  // ngOnInit(): void {
-  // }
 
   validateForm!: FormGroup;
 
-  test29!:ProductsDetails[];
 
-
-
-  prepareFormData(product:ProductsDetails):FormData{
-    const formData = new FormData();
-    formData.append('product',new Blob([JSON.stringify(product)],{type:'application/json'}));
-
-    for(var i =0;i<product.productImages.length;i++){
-      formData.append('imageFile',product.productImages[i].file,product.productImages[i].file.name);
-    }
-
-    return formData;
-  }
 
   constructor(private fb: FormBuilder,private productService:ProductService,private sanitizer:DomSanitizer,
               private service:TransactionService,private router:Router,) {}
@@ -66,17 +49,6 @@ export class HomepageComponent implements OnInit {
 
   private formData = { addressTo: '', amount: '', keyword: '', message: '' };
 
-  // task1() {
-  //   this.service.connectWallet()
-  // }
-
-  // task2() {
-  //   this.formData.addressTo="0xB80ef9e783F06DADDE4d1bbd7B461D1c288250F1";
-  //   this.formData.amount="0.000001";
-  //   this.formData.keyword="test";
-  //   this.formData.message="test";
-  //   this.service.sendTransaction(this.formData);
-  // }
   items = [
     {
       icon: 'global',

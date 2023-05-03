@@ -1,3 +1,8 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: The service for Product related function/services (To communicate with Backend or other Components)
+
+
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -15,9 +20,6 @@ export class ProductService {
   constructor(private http:HttpClient) { }
 
   public addProducts(product:FormData):Observable<any>{
-    // const headers = { 'content-type': 'application/json'}
-    // console.log(customerDetails);
-    // const body=JSON.stringify(customerDetails);
     return this.http.post<any>('http://localhost:8081/api/products/addNewProduct',product);
   }
 
@@ -41,9 +43,7 @@ export class ProductService {
   }
 
   public editProduct(product: FormData, id_product: bigint): Observable<any> {
-    console.log("Test_4");
     let params = new HttpParams().append('id_product', id_product.toString());
-    console.log("Test_5");
     return this.http.put('http://localhost:8081/api/products/put', product, { params, responseType: 'text' });
   }
 

@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To showcase unauthorized page to users who enter the page without the appropriate credentials
+
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 
@@ -13,17 +17,7 @@ export class UnauthorizedPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // redirectToHomepage() {
-  //   const username = sessionStorage.getItem('username');
-  //   const role = sessionStorage.getItem('role');
-  //   if(role ==="Buyer"){
-  //     this.router.navigate(['/homepage']);
-  //   }else if (role==="Seller"){
-  //     this.router.navigate(['/sellerLayout/sellerHomepage']);
-  //   }else{
-  //     this.router.navigate(['/homepage']);
-  //   }
-  // }
+
   redirectToHomepage(): void {
     const username = sessionStorage.getItem('username');
     const role = sessionStorage.getItem('role');

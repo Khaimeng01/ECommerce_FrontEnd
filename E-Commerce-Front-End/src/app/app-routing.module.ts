@@ -31,6 +31,7 @@ import {SelllerGuard} from "../guards/selller.guard";
 import {UnauthorizedPageComponent} from "../Modules/unauthorized-page/unauthorized-page.component";
 import {DummyComponentComponent} from "../Modules/Seller/dummy-component/dummy-component.component";
 import {ForgetPasswordComponent} from "../Modules/forget-password/forget-password.component";
+import {SuccesfullPageComponent} from "../Modules/succesfull-page/succesfull-page.component";
 
 
 const routes: Routes = [
@@ -51,7 +52,8 @@ const routes: Routes = [
     canActivateChild: [AuthGuardGuard],
   children:[
     { path:'accountManagement',component:ProfileAccountManagementComponent},
-    {path:'pastOrderHistory',component:ProfilePastOrderHistoryComponent}
+    {path:'pastOrderHistory',component:ProfilePastOrderHistoryComponent},
+    {path:'successfulPage',component: SuccesfullPageComponent},
   ]},
   {path: 'sellerLayout', component: SellerLayoutComponent,canActivate: [SelllerGuard], canActivateChild: [SelllerGuard],
    children:[
@@ -62,8 +64,8 @@ const routes: Routes = [
      {path:'sellerProductTableView',component: SellerProductTableViewComponent},
      {path:"sellerEditProduct",component: SellerEditProductComponent},
      {path:'dummy-route',component: DummyComponentComponent},
+     {path:'successfulPage',component: SuccesfullPageComponent},
      { path: '**', redirectTo: 'sellerHomepage', pathMatch: 'full' },
-
    ]
   },
   { path: '**', redirectTo: '/unauthorizedPage', pathMatch: 'full' }

@@ -3,11 +3,9 @@
     <div class="mx-4 ">
       <nav class="navbar navbar-expand-lg navbar-light  bg-teal-300 grid grid-cols-12">
 
-        <!--        Logo-->
         <ng-container *ngIf="userAccountSession.userRole === 'Buyer' || !loggedIn; else sellerLayout">
           <a class="navbar-brand text-xl " href="#">CryptoCart</a>
 
-          <!--        Products-->
           <a class="col-span-1 font-medium text-base text-center" href="productHomepage">Products</a>
 
           <a class="col-span-1 font-medium text-base text-center" href="productHomepage/clothes">Clothes</a>

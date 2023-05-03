@@ -3,7 +3,6 @@
   width: 70%;
   height:auto;
   border: 3px orangered;
-  /*padding: 10px;*/
 }
 
 
@@ -11,27 +10,13 @@
   width:100px
 }
 
-/*.center_2 {*/
-/*  margin: auto;*/
-/*  width: 70%;*/
-/*  height:auto;*/
-/*  !*height:64%;*!*/
-/*  border: 3px orangered;*/
-/*  !*padding: 10px;*!*/
-/*}*/
 
 .center_2 {
   width: 70%;
-  /*border: 3px solid orangered;*/
-  /*background-color: slateblue;*/
+
 }
 
-/*.parent{*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*  height: 100%; !* set the height of the parent container to 100% *!*/
-/*}*/
+
 
 .phoneNumber_Input{
   width:200px

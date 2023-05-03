@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: The service for Data related function/services (To communicate with Backend or other Components)
+
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -19,9 +23,6 @@ export class DataService {
     return this.http.get('http://localhost:8081/api/cs/dataman/get/userAuthentication',{params,responseType:'text'});
   }
 
-  // public getLoginDetails2():Observable<any>{
-  //   return this.http.get<any>('http://localhost:8081/api/a1/get25');
-  // }
 
   public getSellerLoginDetails(userName:string,password:string):Observable<any>{
     let params = new HttpParams().append('seller_username',userName);

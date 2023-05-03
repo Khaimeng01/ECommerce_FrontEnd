@@ -1,28 +1,15 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To allow users to check out and purchase their desired products
+
 import {Component, Input, OnInit} from '@angular/core';
-
-
 import {OrderProductsService} from "../../service/orderProducts.service";
-
 import {orderDetails, orderDetailsToAPI} from "../../classes/orderDetails";
 import {TransactionService} from "../../service/transaction.service";
 import {Decimal} from "decimal.js";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-
-// interface Person {
-//   key: string;
-//   name: string;
-//   age: number;
-//   address: string;
-// }
-
-// interface orderAmount {
-//   productName: string;
-//   quantity: number;
-//   total: number;
-// }
-
 
 @Component({
   selector: 'app-check-out-page',
@@ -130,7 +117,7 @@ export class CheckOutPageComponent implements OnInit {
   }
 
   onBack(): void {
-    this.router.navigate(['/productHomepage'])
+    this.router.navigate(['/productProfilePage/'+this.orderDetails.product_id])
   }
 
 

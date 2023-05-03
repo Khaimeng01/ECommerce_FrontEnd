@@ -1,14 +1,13 @@
 // Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
 // Program Name   	: E_Commerce_Front_END
 // Description     	: To allow users to login into the website
-// First Written on 	:
-// Edited on		: Wednesday, 12-4-2023
+
 
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../../service/data.service";
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {NavigationExtras, Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 @Component({
   selector: 'app-login',
@@ -64,7 +63,7 @@ export class LoginComponent implements OnInit {
             return Promise.resolve(true);
           },(error:HttpErrorResponse)=>{
             alert(error.message);
-            console.log(error.message);
+
           }
         )
       }else{

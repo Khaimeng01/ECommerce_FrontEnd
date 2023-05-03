@@ -77,7 +77,6 @@
 <ng-template #sellerForm>
   <form  nz-form [formGroup]="sellerValidateForm" (ngSubmit)="sellerSubmitForm()" [nzLayout] ="'vertical'" >
 
-    <!--  Username-->
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerUsername" class="text-left">Username</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input username">
@@ -85,7 +84,6 @@
       </nz-form-control>
     </nz-form-item>
 
-    <!--  //Email-->
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerEmail" class="text-left">E-mail</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
@@ -93,7 +91,6 @@
       </nz-form-control>
     </nz-form-item>
 
-    <!--  //Password-->
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPassword" class="text-left" nzRequired>Password</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
@@ -107,7 +104,6 @@
       </nz-form-control>
     </nz-form-item>
 
-    <!--  PhoneNumber-->
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sellerPhoneNumber" class="text-left" nzRequired>Phone Number</nz-form-label>
       <nz-form-control
@@ -127,7 +123,6 @@
       </nz-form-control>
     </nz-form-item>
 
-    <!--  //Address-->
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sellerAddress" class="text-left">Address</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Address">
@@ -152,16 +147,16 @@
   </form>
 </ng-template>
 
-<div>
-  <nz-result *ngIf="editProfileStatus"
-             nzStatus="success"
-             nzTitle="Successfully Edited your details for your Account"
-             nzSubTitle="Changes can be viewed at Profile Management Component
-    me time to showcase"
-  >
-    <div nz-result-extra>
-      <button nz-button nzType="primary" (click)="editProfileStatus=false;">Return to Profile Management</button>
-      <button  nz-button [routerLink]="'sellerProductTableView'"  *ngIf="userAccountSession.userRole=='Seller'">View Product Table</button>
-    </div>
-  </nz-result>
-</div>
+<!--<div>-->
+<!--  <nz-result *ngIf="editProfileStatus"-->
+<!--             nzStatus="success"-->
+<!--             nzTitle="Successfully Edited your details for your Account"-->
+<!--             nzSubTitle="Changes can be viewed at Profile Management Component-->
+<!--    me time to showcase"-->
+<!--  >-->
+<!--    <div nz-result-extra>-->
+<!--      <button nz-button nzType="primary" (click)="editProfileStatus=false;">Return to Profile Management</button>-->
+<!--      <button  nz-button [routerLink]="'sellerProductTableView'"  *ngIf="userAccountSession.userRole=='Seller'">Return to Seller Homepage</button>-->
+<!--    </div>-->
+<!--  </nz-result>-->
+<!--</div>-->

@@ -1,3 +1,7 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To allow users to update their password if they have forgotten
+
 import { Component, OnInit } from '@angular/core';
 import {BuyerService} from "../../service/buyer-Services/buyer.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -19,6 +23,7 @@ export class ForgetPasswordComponent implements OnInit {
   validateForm!: FormGroup;
   updateValidateForm!: FormGroup;
   options = ['Buyer', 'Seller'];
+
   constructor(private buyerService:BuyerService,private fb: FormBuilder,private router:Router,
               private message: NzMessageService,private dataService:DataService,private sellerService:SellerService) { }
 
@@ -38,7 +43,6 @@ export class ForgetPasswordComponent implements OnInit {
         this.buyerService.getCustomerStatus(this.validateForm.value.userName).subscribe((response:any)=>
           {
             if(response=="Account Does Exits"){
-              console.log("Success");
               this.currentValue=1;
             }else{
               this.message.error('The Username does not exits. Try again and make sure you choose the correct user type');
@@ -48,7 +52,6 @@ export class ForgetPasswordComponent implements OnInit {
       }else{
         this.sellerService.getSellerStatus(this.validateForm.value.userName).subscribe((response:any)=>{
           if(response=="Account Does Exits"){
-            console.log("Success");
             this.currentValue=1;
           }else{
             this.message.error('The Username does not exits. Try again and make sure you choose the correct user type');
@@ -98,7 +101,6 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   handleIndexChange(e: number): void {
-    console.log(e);
     this.switchValue=e;
   }
 }

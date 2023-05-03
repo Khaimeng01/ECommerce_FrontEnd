@@ -1,5 +1,8 @@
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To allow user to register for a CryptoCart account either as a Buyer
+
 import { Component, OnInit } from '@angular/core';
-import {NzFormTooltipIcon} from "ng-zorro-antd/form";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {loginCustomer} from "../../classes/loginCustomer";
 import {DataService} from "../../service/data.service";
@@ -13,8 +16,7 @@ import {Router} from "@angular/router";
 })
 export class RegisterComponent implements OnInit {
 
-    validateForm!: FormGroup;
-
+  validateForm!: FormGroup;
 
   constructor(private fb: FormBuilder,private dataService:DataService,
               private messageService: NzMessageService,private router:Router) {}
@@ -31,7 +33,6 @@ export class RegisterComponent implements OnInit {
           Validators.min(1)
         ]],
         address: [null, [Validators.required,this.dataService.noSpaceAtStart()]]
-        // agree: [false]
       });
     }
 
@@ -47,7 +48,6 @@ export class RegisterComponent implements OnInit {
         customer_address:this.validateForm.value.address,
         customer_phonenumber:this.validateForm.value.phoneNumber
       }
-      console.log(object_name);
       this.dataService.registerCustomer(object_name).subscribe((response:any)=>
         {
           if(response==="Username has been used"){
@@ -61,7 +61,6 @@ export class RegisterComponent implements OnInit {
       )
 
     } else {
-      console.log("Failure")
       Object.values(this.validateForm.controls).forEach(control => {
         control.markAsDirty();
         control.updateValueAndValidity({ onlySelf: true });
@@ -72,7 +71,5 @@ export class RegisterComponent implements OnInit {
   redirectToRegister() {
     this.router.navigate(['sellerRegisterAccount']);
   }
-
-
 
 }

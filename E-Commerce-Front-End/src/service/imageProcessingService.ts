@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
+// Programmer Name 	: Mr. Lai Khai Meng , TP055753 , APU3F2209CS
+// Program Name   	: E_Commerce_Front_END
+// Description     	: To Process Images / Images Services
 
+import { Injectable } from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import {ProductsDetails, ProductsDetails2} from "../classes/productsDetails";
 import {FileHandle} from "../classes/fileHandle";

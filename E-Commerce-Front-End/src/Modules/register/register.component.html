@@ -1,10 +1,9 @@
-<!--Error is the first div-->
+
 <div class="py-6 ">
   <div class ="center shadow-2xl shadow-cyan-500  rounded-md border-black ring-green-50 ring-2 bg-gray-100 " >
-<!--    <button (click)="handleIndexChange(1)">Click me</button>-->
+
     <div class="grid grid-cols-4 h-[50rem]">
 
-      <!--    Need to check if there is an eror here-->
       <div class=" overflow-hidden rounded-l-lg rounded-bl-lg col-span-2">
         <img src="../../assets/images/register.jpg" class="overflow-hidden h-full" >
       </div>
@@ -30,7 +29,6 @@
               </nz-form-item>
 
 
-              <!--  //Email-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email" class="text-left">E-mail</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
@@ -39,7 +37,6 @@
               </nz-form-item>
 
 
-              <!--  //Password-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" class="text-left" nzRequired>Password</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
@@ -53,7 +50,6 @@
                 </nz-form-control>
               </nz-form-item>
 
-              <!--  PhoneNumber-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" class="text-left" nzRequired>Phone Number</nz-form-label>
                 <nz-form-control
@@ -72,26 +68,12 @@
                 </nz-form-control>
               </nz-form-item>
 
-              <!--  //Address-->
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address" class="text-left">Address</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Address">
                   <input nz-input formControlName="address" id="address" class="w-80" />
                 </nz-form-control>
               </nz-form-item>
-
-
-<!--              <nz-form-item nz-row class="register-area">-->
-<!--                <nz-form-control [nzSpan]="14" >-->
-<!--                  <label nz-checkbox formControlName="agree">-->
-<!--                  <span class="text-left">-->
-<!--                    I have read the <a>agreement</a>-->
-<!--                  </span>-->
-<!--                  </label>-->
-<!--                </nz-form-control>-->
-<!--              </nz-form-item>-->
-
-
 
               <nz-form-item nz-row class="register-area">
                 <nz-form-control [nzSpan]="14" [nzOffset]="3" class="text-right">

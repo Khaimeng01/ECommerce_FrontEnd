@@ -55,17 +55,13 @@
         </div>
 
         <div>
-          <!--        Quantiy Counter-->
           <div class="counter py-4">
-<!--            <span nz-icon nzType="minus" nzTheme="outline" (click)="decreaseCount()" ></span>-->
             <span class="down text-3xl" (click)="decreaseCount()">-</span>
             <input type="text" value="{{orderDetails.quantity}}">
             <span class="up" (click)="increaseCount()">+</span>
           </div>
         </div>
 
-
-<!--        Buy Now Button-->
         <div class="pt-3">
           <button nz-button nzType="primary" (click)="redirectToCheckOut()" class="w-40 h-12 rounded-full">Buy now</button>
         </div>
