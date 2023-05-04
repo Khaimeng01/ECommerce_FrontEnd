@@ -115,7 +115,6 @@ export class ProfileAccountManagementComponent implements OnInit {
       this.router.navigate(['/profileManagementLayout/successfulPage']).then(() => {
         this.headerService.triggerReload();
       });
-      // this.editProfileStatus=true;
     }
   }
 
