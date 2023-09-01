@@ -65,7 +65,7 @@ export class SellerEditProductComponent implements OnInit {
           this.product= response;
           this.test=response;
           this.editedProduct=this.product[0];
-          this.populateUniqueFiles(this.editedProduct.productImages); // Call the new method here
+          this.populateUniqueFiles(this.editedProduct.productImages);
           this.validateForm.patchValue({
             productName:this.editedProduct.product_name,
             productPrice:this.editedProduct.product_price,
@@ -73,6 +73,7 @@ export class SellerEditProductComponent implements OnInit {
             productCategory:this.editedProduct.product_category,
             productDesc:this.editedProduct.product_description
           })
+          //Potato
 
         }
       )

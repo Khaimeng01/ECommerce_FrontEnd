@@ -83,7 +83,7 @@ export class ProfileAccountManagementComponent implements OnInit {
             sellerUsername: this.sellerPersonalInformation[0].seller_username,
             sellerEmail: this.sellerPersonalInformation[0].seller_email,
             sellerPassword: this.sellerPersonalInformation[0].seller_password,
-            sellerPhoneNumberPrefix:['+60'],
+            sellerPhoneNumberPrefix:'+60',
             sellerPhoneNumber: this.sellerPersonalInformation[0].seller_phonenumber,
             sellerAddress: this.sellerPersonalInformation[0].seller_address,
             sellerWalletAddress:this.sellerPersonalInformation[0].seller_accountdetails

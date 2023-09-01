@@ -45,8 +45,8 @@
         nzErrorTip="Please input your phone number!"
 
       >
-        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-          <ng-template #addOnBeforeTemplate>
+        <nz-input-group [nzAddOnBefore]="buyerAddOnBeforeTemplate">
+          <ng-template #buyerAddOnBeforeTemplate>
             <nz-select formControlName="phoneNumberPrefix" class="phoneNumber w-32" >
               <nz-option class="w-12" nzLabel="+60" nzValue="+60"></nz-option>
             </nz-select>
@@ -112,8 +112,8 @@
         [nzValidateStatus]="sellerValidateForm.controls['sellerPhoneNumber']"
         nzErrorTip="Please input your phone number!"
       >
-        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-          <ng-template #addOnBeforeTemplate>
+        <nz-input-group [nzAddOnBefore]="addOnSellerBeforeTemplate">
+          <ng-template #addOnSellerBeforeTemplate>
             <nz-select formControlName="sellerPhoneNumberPrefix" class="phoneNumber w-32">
               <nz-option class="w-12"  nzLabel="+60" nzValue="+60" ></nz-option>
             </nz-select>
@@ -147,16 +147,4 @@
   </form>
 </ng-template>
 
-<!--<div>-->
-<!--  <nz-result *ngIf="editProfileStatus"-->
-<!--             nzStatus="success"-->
-<!--             nzTitle="Successfully Edited your details for your Account"-->
-<!--             nzSubTitle="Changes can be viewed at Profile Management Component-->
-<!--    me time to showcase"-->
-<!--  >-->
-<!--    <div nz-result-extra>-->
-<!--      <button nz-button nzType="primary" (click)="editProfileStatus=false;">Return to Profile Management</button>-->
-<!--      <button  nz-button [routerLink]="'sellerProductTableView'"  *ngIf="userAccountSession.userRole=='Seller'">Return to Seller Homepage</button>-->
-<!--    </div>-->
-<!--  </nz-result>-->
-<!--</div>-->
+

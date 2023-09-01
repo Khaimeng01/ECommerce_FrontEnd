@@ -63,6 +63,7 @@ export class CheckOutPageComponent implements OnInit {
 
   async obtainOrderData(): Promise<void>{
     this.orderDetails = this.orderProductService.orderDetails;
+    console.log(this.orderDetails);
     this.listOfData[0]=this.orderDetails
   }
 

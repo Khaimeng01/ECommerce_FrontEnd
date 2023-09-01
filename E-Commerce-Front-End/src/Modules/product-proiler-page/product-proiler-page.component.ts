@@ -97,7 +97,12 @@ export class ProductProilerPageComponent implements OnInit {
         this.orderDetails.productName =this.product[0].product_name;
         this.orderDetails.orderSellerUsername=this.product[0].product_owner;
         this.orderDetails.productPrice = this.product[0].product_price;
-        this.orderDetails.total = new Decimal(this.orderDetails.quantity).times(this.product[0].product_price);
+        console.log('Quantity:', this.orderDetails.quantity);
+        console.log('Product Price:', this.product[0].product_price);
+        const quantityDecimal = new Decimal(this.orderDetails.quantity);
+        const priceDecimal = new Decimal(this.product[0].product_price);
+        const total = quantityDecimal.times(priceDecimal);
+        this.orderDetails.total = total
         if (this.selectedColor != null) {
           this.orderDetails.product_description = this.selectedColor;
           if(this.orderDetails.quantity > this.product[0].product_quantity){
